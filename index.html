@@ -76,90 +76,6 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-GO语言学习记录Day1" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/16/GO%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95Day1/" class="article-date">
-  <time class="dt-published" datetime="2025-09-16T14:52:18.588Z" itemprop="datePublished">2025-09-16</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="Go语言教程"><a href="#Go语言教程" class="headerlink" title="Go语言教程"></a>Go语言教程</h1><h2 id="一-Go-语言简介"><a href="#一-Go-语言简介" class="headerlink" title="一. Go 语言简介"></a>一. Go 语言简介</h2><p>即Golang, 是Google公司于2009年11月公布的编程语言</p>
-<p>优点：Go语言不仅拥有静态编译语言的安全和高性能，而且又达到了动态语言开发速度和易维护性。有人形容 Go语言:Go&#x3D;C+Python，说明Go语言既有C语言程序的运行速度，又能达到 Python 语言的快速开发。</p>
-<h2 id="二-Go语言成功的项目"><a href="#二-Go语言成功的项目" class="headerlink" title="二. Go语言成功的项目"></a>二. Go语言成功的项目</h2><p>nsq, docker, packer等等……</p>
-<h2 id="三-Go语言环境搭建"><a href="#三-Go语言环境搭建" class="headerlink" title="三. Go语言环境搭建"></a>三. Go语言环境搭建</h2><h3 id="1-下载安装Golang"><a href="#1-下载安装Golang" class="headerlink" title="1.下载安装Golang"></a>1.下载安装Golang</h3><p>网址：<a target="_blank" rel="noopener" href="https://go.dev/dl/%EF%BC%88%E9%9C%80%E8%A6%81%E6%A2%AF%E5%AD%90%EF%BC%89">https://go.dev/dl/（需要梯子）</a></p>
-<h3 id="2-安装过程"><a href="#2-安装过程" class="headerlink" title="2.安装过程"></a>2.安装过程</h3><p>没有特别需要注意的，点下一步即可</p>
-<h3 id="3-验证是否安装成功"><a href="#3-验证是否安装成功" class="headerlink" title="3.验证是否安装成功"></a>3.验证是否安装成功</h3><p>在终端运行<code>go version</code>命令</p>
-<p><img src="/../image/1a5e9783376f144e6641af5f96862d53.png"></p>
-<p>看到版本好即为安装成功</p>
-<h3 id="3-1查看go环境"><a href="#3-1查看go环境" class="headerlink" title="3.1查看go环境"></a>3.1查看go环境</h3><p>运行<code>go env</code>初入门不需要配置环境等，查看终端是否显示环境信息即可</p>
-<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250916212454_28_5.png"></p>
-<p>说明:Go1.11版本之后无需手动配置环境变量，使用go mod管理项目，也不需要非得把项目放到GOPATH指定目录下，你可以在你磁盘的任何位置新建一个项目。<br>Go1.13 以后可以彻底不要 GOPATH了</p>
-<h2 id="4-Go语言开发工具Vscode配置"><a href="#4-Go语言开发工具Vscode配置" class="headerlink" title="4. Go语言开发工具Vscode配置"></a>4. Go语言开发工具Vscode配置</h2><h3 id="1-下载安装Vscode"><a href="#1-下载安装Vscode" class="headerlink" title="1.下载安装Vscode"></a>1.下载安装Vscode</h3><p><a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a> 无需梯子</p>
-<p>安装无特殊说明，点击下一步即可</p>
-<h3 id="2-汉化vscode"><a href="#2-汉化vscode" class="headerlink" title="2.汉化vscode"></a>2.汉化vscode</h3><p>由于默认的vscode是英文的，在拓展项中搜索language，选择中文简体，点击标蓝字体install安装</p>
-<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250916213141_29_5.png"></p>
-<p>注意：安装成功之后，右下角会有一个弹窗询问你是否要更改语言，选择是，vscode会自动重启，这时候界面就是中文的了，如果没有显示，可以先卸载再次安装，等弹窗出现</p>
-<h3 id="3-安装Go语言插件"><a href="#3-安装Go语言插件" class="headerlink" title="3. 安装Go语言插件"></a>3. 安装Go语言插件</h3><p>Go语言插件可以作为提示帮助我们写代码</p>
-<p>按照安装语言包的流程，可以拿来安装Go语言插件，我们在拓展框里搜索Go，排名第一的就是该插件</p>
-<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250916214605_30_5.png"></p>
-<h3 id="4-项目新建"><a href="#4-项目新建" class="headerlink" title="4.项目新建"></a>4.项目新建</h3><p>在任意位置新建文件夹，注意命名不要出现中文和空格</p>
-<p>比如我选择在d盘新建一个go_demo的文件用于开发</p>
-<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250916215130_31_5.png"></p>
-<p>打开vscode，选择左上角的文件，选择打开文件夹</p>
-<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250916215531_32_5.png"></p>
-<p>选择刚才新创建的文件夹，选择信任此文件夹。</p>
-<p>在该文件夹下选择新建文件，命名随意，注意后缀带上.go</p>
-<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250916215812_33_5.png"></p>
-<p>可以在main.go中写下自己的第一行代码，比如</p>
-<p><code>package main</code></p>
-<p><code>import (</code></p>
-<p>  <code>&quot;fmt&quot;</code></p>
-<p><code>)</code></p>
-<p><code>func main() &#123;</code></p>
-<p>  <code>fmt.Println(&quot;你好 golang&quot;)</code></p>
-<p><code>&#125;</code></p>
-<p>选择在终端运行，在终端中输入<code>go run main.go</code></p>
-<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250916221606_34_5.png"></p>
-<p>该代码打印了括号中的一句话 你好 golang。笔者也是首次接触golang，遇到了两个麻烦，分享解决方法：</p>
-<p>1.Println的P没有大写</p>
-<p>此时终端会报错expected ‘package’, found ‘EOF’</p>
-<p>2.没有保存main.go文件就运行</p>
-<p>此时终端同样报错expected ‘package’, found ‘EOF’</p>
-<p>查找资料后发现，go语言对大小写区分很严格，而且文件必须要保存之后才能运行，笔者没有保存就运行，电脑会自动运行原程序，而原来程序是我们新建的文件，自然无法运行</p>
-<p>此外，vscode的右下角会提示需要安装某些安装包，直接选择安装即可</p>
-<p>由于某种不可预测的原因，在输出里可能会出现这样的报错代码</p>
-<p> “stderr”: “go: github.com&#x2F;haya14busa&#x2F;goplay&#x2F;cmd&#x2F;<a href="mailto:&#x67;&#111;&#112;&#x6c;&#97;&#x79;&#x40;&#x76;&#x31;&#46;&#x30;&#46;&#x30;">goplay@v1.0.0</a>: github.com&#x2F;haya14busa&#x2F;goplay&#x2F;cmd&#x2F;<a href="mailto:&#x67;&#111;&#x70;&#x6c;&#97;&#x79;&#64;&#118;&#49;&#x2e;&#48;&#46;&#x30;">goplay@v1.0.0</a>: Get &quot;<a target="_blank" rel="noopener" href="https://proxy.golang.org/github.com/haya14busa/goplay/cmd/goplay/@v/v1.0.0.info/">https://proxy.golang.org/github.com/haya14busa/goplay/cmd/goplay/@v/v1.0.0.info\</a>“: dial tcp 142.250.217.113:443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.\n”</p>
-<p>表明此时安装包未安装成功</p>
-<p>解决方法：</p>
-<p>使用国内 Go 模块代理</p>
-<p>打开cmd,运行：</p>
-<p><code>go env -w GO111MODULE=on</code><br><code>go env -w GOPROXY=https://goproxy.cn,direct</code></p>
-<p>再重新安装<code>gopls</code>运行：</p>
-<p><code>go install golang.org/x/tools/gopls@latest</code></p>
-<p>可以检测是否安装成功：</p>
-<p><code>gopls version</code></p>
-<p>若显示版本号，就说明安装成功了，此时重启vscode，再任意go文件里输入.fmt，看是否有提示比如Println这种的，有则说明成功了，此时保存文件时，go会自动删除没有声明的变量，大家也可以通过这个来判断</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/16/GO%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95Day1/" data-id="cmfmoc7qv0000kgd1c8l2gnx4" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
     <article id="post-my-new-post" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/09/15/my-new-post/" class="article-date">
@@ -187,7 +103,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/15/my-new-post/" data-id="cmflaylco00023gd16qp6dmtx" data-title="my new post" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2025/09/15/my-new-post/" data-id="cmfmonscq00013gd16qno2ipa" data-title="my new post" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -218,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/15/test/" data-id="cmflaylcm00013gd10zen9zfy" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2025/09/15/test/" data-id="cmfmonscr00023gd1b9fc4tck" data-title="" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -269,7 +185,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/15/hello-world/" data-id="cmflaylci00003gd1ffmd2rre" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2025/09/15/hello-world/" data-id="cmfmonscn00003gd101z9016w" data-title="Hello World" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -324,10 +240,6 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
-        
-          <li>
-            <a href="/2025/09/16/GO%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95Day1/">(no title)</a>
-          </li>
         
           <li>
             <a href="/2025/09/15/my-new-post/">my new post</a>
