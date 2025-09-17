@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Day3 | reason的学习记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. 变量类型变量(Variable)的功能是存储数据。不同的变量保存的数据类型可能会不一样。经过半个多世纪的发展，编程语言已经基本形成了一套固定的类型，常见变量的数据类型有:整型、浮点型、布尔型等。Go 语言中的每一个变量都有自己的类型，并且变量必须经过声明才能开始使用 2. GO 语言中变量的声明Go 语言变量名由字母、数字、下划线组成，其中首个字符不能为数字。Go 语言中关键字和保留字都不能">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day3">
+<meta property="og:url" content="http://example.com/2025/09/17/Day3/index.html">
+<meta property="og:site_name" content="reason的学习记录">
+<meta property="og:description" content="1. 变量类型变量(Variable)的功能是存储数据。不同的变量保存的数据类型可能会不一样。经过半个多世纪的发展，编程语言已经基本形成了一套固定的类型，常见变量的数据类型有:整型、浮点型、布尔型等。Go 语言中的每一个变量都有自己的类型，并且变量必须经过声明才能开始使用 2. GO 语言中变量的声明Go 语言变量名由字母、数字、下划线组成，其中首个字符不能为数字。Go 语言中关键字和保留字都不能">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-17T12:22:43.000Z">
+<meta property="article:modified_time" content="2025-09-17T13:45:53.977Z">
+<meta property="article:author" content="reason">
+<meta property="article:tag" content="Go变量，常量，变量命名规则">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="reason的学习记录" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">reason的学习记录</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle"> </a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Day3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/17/Day3/" class="article-date">
+  <time class="dt-published" datetime="2025-09-17T12:22:43.000Z" itemprop="datePublished">2025-09-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Day3
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-变量类型"><a href="#1-变量类型" class="headerlink" title="1. 变量类型"></a>1. 变量类型</h1><p>变量(Variable)的功能是存储数据。不同的变量保存的数据类型可能会不一样。经过半个多世纪的发展，编程语言已经基本形成了一套固定的类型，常见变量的数据类型有:整型、浮点型、布尔型等。<br>Go 语言中的每一个变量都有自己的类型，并且变量必须经过声明才能开始使用</p>
+<h1 id="2-GO-语言中变量的声明"><a href="#2-GO-语言中变量的声明" class="headerlink" title="2. GO 语言中变量的声明"></a>2. GO 语言中变量的声明</h1><p>Go 语言变量名由字母、数字、下划线组成，其中首个字符不能为<strong>数字</strong>。Go 语言中关键字和保留字都不能用作变量名。<br>Go 语言中的变量需要声明后才能使用，同一作用域内<strong>不支持重复声明</strong>。 并且 Go 语言的变量声明后必须使用。</p>
+<p>需要说明的是，只是不支持重复声明，但仍可以重新赋值，如：</p>
+<p>  <code>a := 1</code></p>
+<p>  <code>a = 2</code></p>
+<p>  <code>fmt.Println(a)</code></p>
+<p>此时打印出的结果正常显示2</p>
+<p>如果打印代码</p>
+<p>  <code>a := 1</code></p>
+<p>  <code>a := 2</code></p>
+<p>  <code>fmt.Println(a)</code></p>
+<p>此时便会报错</p>
+<h2 id="2-1-var变量声明"><a href="#2-1-var变量声明" class="headerlink" title="2.1 var变量声明"></a>2.1 var变量声明</h2><h3 id="2-1-1-单变量赋值"><a href="#2-1-1-单变量赋值" class="headerlink" title="2.1.1 单变量赋值"></a>2.1.1 单变量赋值</h3><p>格式： var 变量名称 类型 如 <code>var uername string</code> ，类型可以省略。</p>
+<p>在未进行赋值时，打印值为空</p>
+<p>  <code>var username string = &quot;张三&quot;</code></p>
+<p>  <code>fmt.Println(username)</code></p>
+<p>赋值之后，可正常打印出张三</p>
+<p>也可以这样定义</p>
+<p><code>var usename string</code></p>
+<p><code>username = &quot;张三&quot;</code></p>
+<p>注意，此时变量类型不能省略，否则会报错</p>
+<h3 id="2-1-2-多变量赋值"><a href="#2-1-2-多变量赋值" class="headerlink" title="2.1.2 多变量赋值"></a>2.1.2 多变量赋值</h3><h4 id="多变量同种类型"><a href="#多变量同种类型" class="headerlink" title="多变量同种类型"></a>多变量同种类型</h4><p>例如：</p>
+<p><code>var a1,a2 string</code></p>
+<p><code>a1=&quot;aaa&quot;</code></p>
+<p><code>a2=&quot;aaaaa&quot;</code></p>
+<p><code>fmt.Println(a1,a2)</code></p>
+<p>输出可以正常打印出 aaa aaaaa,注意，因为声明了a1 a2均为字符串，不可以对a1 a2赋值其他类型的数据</p>
+<h4 id="多变量不同类型"><a href="#多变量不同类型" class="headerlink" title="多变量不同类型"></a>多变量不同类型</h4><p>例如：</p>
+<p>  <code>var (</code></p>
+<p>​    <code>name string</code></p>
+<p>​    <code>age  int</code></p>
+<p>​    <code>sex  string</code></p>
+<p>  <code>)</code></p>
+<p>  <code>name = &quot;张三&quot;</code></p>
+<p>  <code>age = 20</code></p>
+<p>  <code>sex = &quot;男&quot;</code></p>
+<p>  <code>fmt.Println(name, age, sex)</code></p>
+<p>可以正常打印出张三 20 男</p>
+<h3 id="2-2-短变量声明法"><a href="#2-2-短变量声明法" class="headerlink" title="2.2 短变量声明法"></a>2.2 短变量声明法</h3><p>格式：变量名：&#x3D;表达式 例如 <code>username := &quot;张三&quot;</code></p>
+<p>短变量只能用于局部变量声明，不能用于全局变量声明，即在func main里面的短变量可以正常引用，但不能引用func main外的全局变量，需要声明全局变量可以用上面的var方法</p>
+<p>短变量声明法声明多个变量，例如</p>
+<p>  <code>a, b, c := 1, 2, 3</code></p>
+<p>  <code>a, b, c := 1, 2, &quot;三&quot;</code></p>
+<p>上面两种声明方法都是正确的，说明短变量声明法声明多个变量可以声明不同类型的，十分方便</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/17/Day3/" data-id="cmfo1c4d6000078d14r1u4ara" data-title="Day3" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" rel="tag">Go变量，常量，变量命名规则</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/09/17/Day2/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">GO语言学习记录Day2</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" rel="tag">Go变量，常量，变量命名规则</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/" style="font-size: 10px;">Go变量，常量，变量命名规则</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">九月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/09/17/Day3/">Day3</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/17/Day2/">GO语言学习记录Day2</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/16/Day1/">Go语言学习记录Day1</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 reason<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
