@@ -14,7 +14,7 @@
 <meta property="og:description" content="1. 变量类型变量(Variable)的功能是存储数据。不同的变量保存的数据类型可能会不一样。经过半个多世纪的发展，编程语言已经基本形成了一套固定的类型，常见变量的数据类型有:整型、浮点型、布尔型等。Go 语言中的每一个变量都有自己的类型，并且变量必须经过声明才能开始使用 2. GO 语言中变量的声明Go 语言变量名由字母、数字、下划线组成，其中首个字符不能为数字。Go 语言中关键字和保留字都不能">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-09-17T12:22:43.000Z">
-<meta property="article:modified_time" content="2025-09-17T13:50:04.798Z">
+<meta property="article:modified_time" content="2025-09-19T14:45:33.739Z">
 <meta property="article:author" content="reason">
 <meta property="article:tag" content="Go变量，常量，变量命名规则">
 <meta name="twitter:card" content="summary">
@@ -144,6 +144,38 @@
 <p>  <code>a, b, c := 1, 2, 3</code></p>
 <p>  <code>a, b, c := 1, 2, &quot;三&quot;</code></p>
 <p>上面两种声明方法都是正确的，说明短变量声明法声明多个变量可以声明不同类型的，十分方便</p>
+<h1 id="3-匿名变量声明"><a href="#3-匿名变量声明" class="headerlink" title="3. 匿名变量声明"></a>3. 匿名变量声明</h1><h2 id="3-1-什么是匿名变量"><a href="#3-1-什么是匿名变量" class="headerlink" title="3.1 什么是匿名变量"></a>3.1 什么是匿名变量</h2><p>在 <strong>Go 语言</strong> 里，匿名变量（也叫 <strong>空白标识符</strong>，<code>_</code>）就是一个特殊的标识符，用来 <strong>占位但不使用</strong></p>
+<h2 id="3-2-匿名变量演示"><a href="#3-2-匿名变量演示" class="headerlink" title="3.2 匿名变量演示"></a>3.2 匿名变量演示</h2><h3 id="3-2-1-func函数语法示例"><a href="#3-2-1-func函数语法示例" class="headerlink" title="3.2.1 func函数语法示例"></a>3.2.1 func函数语法示例</h3><p><code>func 函数名(参数列表) (返回值列表) &#123;</code><br>    <code>// 函数体</code><br>    <code>return 返回值</code><br><code>&#125;</code></p>
+<p>函数名按照命名规则即可，该函数需要两个括号，前面一个括号表示输入，后面一个括号表示输出</p>
+<p>例如：</p>
+<p><code>package main</code></p>
+<p><code>import &quot;fmt&quot;</code></p>
+<p><code>// 定义函数：输入参数 (长和宽)，输出参数 (面积和周长)</code><br><code>func calcRectangle(length float64, width float64) (float64, float64) &#123;</code><br>	<code>area := length * width            // 面积</code><br>	<code>perimeter := 2 * (length + width) // 周长</code><br>	<code>return area, perimeter</code><br><code>&#125;</code></p>
+<p><code>func main() &#123;</code><br>	<code>// 调用函数时传入参数</code><br>	<code>a, p := calcRectangle(5, 3)</code></p>
+<pre><code>fmt.Println(&quot;面积:&quot;, a)
+fmt.Println(&quot;周长:&quot;, p)
+</code></pre>
+<p>}</p>
+<p>注意：第一个括号里填的是输入的数据，比如目标是计算面积和周长，你需要输入长和宽，后面必须注明数据类型，输出的括号同样如此。</p>
+<p>在引用时，go给了几种选择：</p>
+<h4 id="1-全部接收（标准用法）"><a href="#1-全部接收（标准用法）" class="headerlink" title="1. 全部接收（标准用法）"></a>1. <strong>全部接收（标准用法）</strong></h4><p>函数返回两个值时，你可以用两个变量来接收：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">name, age := getUserinfo()</span><br><span class="line">fmt.Println(&quot;姓名:&quot;, name, &quot;年龄:&quot;, age)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="2-只接收其中一部分（用匿名变量-丢弃）"><a href="#2-只接收其中一部分（用匿名变量-丢弃）" class="headerlink" title="2. 只接收其中一部分（用匿名变量 _ 丢弃）"></a>2. <strong>只接收其中一部分（用匿名变量 <code>_</code> 丢弃）</strong></h4><p>如果你只关心一个结果，可以把另一个丢给 <code>_</code>：</p>
+<p>匿名变量不存在重复声明的问题，也即前面有匿名变量，后面依旧可以使用</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">name, _ := getUserinfo()  // 只要姓名</span><br><span class="line">fmt.Println(&quot;姓名:&quot;, name)</span><br><span class="line"></span><br><span class="line">_, age := getUserinfo()   // 只要年龄</span><br><span class="line">fmt.Println(&quot;年龄:&quot;, age)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h4 id="3-不接收（直接调用但忽略结果）"><a href="#3-不接收（直接调用但忽略结果）" class="headerlink" title="3. 不接收（直接调用但忽略结果）"></a>3. <strong>不接收（直接调用但忽略结果）</strong></h4><p>函数返回值可以完全不接收：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getUserinfo()  // 返回值被丢弃，不赋值给任何变量</span><br></pre></td></tr></table></figure>
+
+<p>这种情况很少见，但合法。</p>
+<hr>
+<h4 id="4-立即使用（不命名变量，直接嵌套在表达式中）"><a href="#4-立即使用（不命名变量，直接嵌套在表达式中）" class="headerlink" title="4. 立即使用（不命名变量，直接嵌套在表达式中）"></a>4. <strong>立即使用（不命名变量，直接嵌套在表达式中）</strong></h4><p>你也可以直接把函数调用放在需要的地方：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">fmt.Println(getUserinfo())  </span><br><span class="line">// 输出: zhangsan 10</span><br></pre></td></tr></table></figure>
+
+<p>注意：这种情况下，<code>fmt.Println</code> 会自动打印两个返回值，中间加空格。</p>
 
       
     </div>
