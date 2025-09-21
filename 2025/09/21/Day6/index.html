@@ -6,15 +6,15 @@
   
   <title>GO语言教程Day6 | reason的学习记录</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="1. 浮点型Go 语言支持两种浮点型数：float32 和 float64。这两种浮点型数据格式遵循 IEEE 754 标准：float32 的浮点数的最大范围约为 3.4e38，可以使用常量定义：math.MaxFloat32。 float64 的浮点数的最大范围约为 1.8e308，可以使用一个常量定义：math.MaxFloat64。">
+  <meta name="description" content="1. 浮点型Go 语言支持两种浮点型数：float32 和 float64。这两种浮点型数据格式遵循 IEEE 754 标准：float32 的浮点数的最大范围约为 3.4e38，可以使用常量定义：math.MaxFloat32。 float64 的浮点数的最大范围约为 1.8e308，可以使用一个常量定义：math.MaxFloat64。   var num float32 &#x3D; 3.14   f">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GO语言教程Day6">
 <meta property="og:url" content="http://example.com/2025/09/21/Day6/index.html">
 <meta property="og:site_name" content="reason的学习记录">
-<meta property="og:description" content="1. 浮点型Go 语言支持两种浮点型数：float32 和 float64。这两种浮点型数据格式遵循 IEEE 754 标准：float32 的浮点数的最大范围约为 3.4e38，可以使用常量定义：math.MaxFloat32。 float64 的浮点数的最大范围约为 1.8e308，可以使用一个常量定义：math.MaxFloat64。">
+<meta property="og:description" content="1. 浮点型Go 语言支持两种浮点型数：float32 和 float64。这两种浮点型数据格式遵循 IEEE 754 标准：float32 的浮点数的最大范围约为 3.4e38，可以使用常量定义：math.MaxFloat32。 float64 的浮点数的最大范围约为 1.8e308，可以使用一个常量定义：math.MaxFloat64。   var num float32 &#x3D; 3.14   f">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-09-21T12:57:27.000Z">
-<meta property="article:modified_time" content="2025-09-21T13:00:18.223Z">
+<meta property="article:modified_time" content="2025-09-21T13:37:17.950Z">
 <meta property="article:author" content="reason">
 <meta property="article:tag" content="GO语言基本数据类型 浮点型 布尔型">
 <meta name="twitter:card" content="summary">
@@ -101,6 +101,29 @@
     <div class="e-content article-entry" itemprop="articleBody">
       
         <h1 id="1-浮点型"><a href="#1-浮点型" class="headerlink" title="1. 浮点型"></a>1. 浮点型</h1><p>Go 语言支持两种浮点型数：float32 和 float64。这两种浮点型数据格式遵循 IEEE 754 标准：<br>float32 的浮点数的最大范围约为 3.4e38，可以使用常量定义：math.MaxFloat32。 float64 的<br>浮点数的最大范围约为 1.8e308，可以使用一个常量定义：math.MaxFloat64。</p>
+<p>  <code>var num float32 = 3.14</code></p>
+<p>  <code>fmt.Printf(&quot;num的值是%v----%f,num的类型是%T\n&quot;, num, num, num)</code></p>
+<p>  <code>fmt.Println(unsafe.Sizeof(num))</code></p>
+<p>%f默认保留六位小数，并且进行四舍五入，根据输出结果可知。float32占用4个字节</p>
+<p>  <code>var num float64 = 3.14</code></p>
+<p>  <code>fmt.Printf(&quot;num的值是%v----%f,num的类型是%T\n&quot;, num, num, num)</code></p>
+<p>  <code>fmt.Println(unsafe.Sizeof(num))</code></p>
+<p>运行此代码可知，float64占用了8个字节</p>
+<p>  <code>var num float32 = 3.1415926</code></p>
+<p>  <code>fmt.Printf(&quot;%.4f&quot;, num)</code></p>
+<p>%.nf也可用类似的方法保留任意n位的小数</p>
+<h3 id="Go-语言中浮点数默认是-float64"><a href="#Go-语言中浮点数默认是-float64" class="headerlink" title="Go 语言中浮点数默认是 float64"></a>Go 语言中浮点数默认是 float64</h3><p><code>num := 1.1</code></p>
+<p><code>fmt.Printf(&quot;值：%v--类型:%T&quot;, num, num) //值：1.1--类型:float64</code></p>
+<p>和操作系统的位数同样相关</p>
+<h3 id="科学计数法表示浮点类型"><a href="#科学计数法表示浮点类型" class="headerlink" title="科学计数法表示浮点类型"></a>科学计数法表示浮点类型</h3><p>  <code>var num float32 = 3.14e2</code></p>
+<p>  <code>fmt.Println(num)</code></p>
+<p>表示3.14乘以10的平方，当然，e的后面同样可以接负数次方</p>
+<h3 id="Golang中精度丢失的问题"><a href="#Golang中精度丢失的问题" class="headerlink" title="Golang中精度丢失的问题"></a>Golang中精度丢失的问题</h3><p>几乎所有的编程语言都有精度丢失这个问题，这是典型的二进制浮点数精度损失问题，在定<br>长条件下，二进制小数和十进制小数互转可能有精度丢失。</p>
+<p>  <code>var num float64 = 1129.6</code></p>
+<p>  <code>fmt.Println(num * 100)</code></p>
+<p>输出结果为：112959.99999999999</p>
+<p>解决方法：使用第三方包来解决精度问题</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/shopspring/decimal">https://github.com/shopspring/decimal</a></p>
 
       
     </div>
