@@ -152,92 +152,101 @@
 <h3 id="一次定义多行字符串字符串"><a href="#一次定义多行字符串字符串" class="headerlink" title="一次定义多行字符串字符串"></a>一次定义多行字符串字符串</h3><p>双引号一次只能定义一行的字符串，如果字符串是多行，就必须使用反引号字符：</p>
 <p>  <code>str1 := </code>This is&#96; </p>
 <p>  <code>a str</code></p>
-<pre><code>
-`fmt.Println(str1)`
-
-可以正常输出This is 
-      a str
-
-使用tab键上面的键，即反引号来定义多行字符串
-
-### 字符串的常用操作
-
-| 函数/用法                              | 功能说明                              | 示例                                                   | 返回值/结果              |
-| -------------------------------------- | ------------------------------------- | ------------------------------------------------------ | ------------------------ |
-| `len(str)`                             | 获取字符串长度（字节数）              | `len(&quot;hello&quot;)`                                         | `5`                      |
-| `+` 或 `fmt.Sprintf`                   | 字符串拼接                            | `&quot;Go&quot; + &quot;Lang&quot;` / `fmt.Sprintf(&quot;%s-%s&quot;, &quot;Go&quot;, &quot;Lang&quot;)` | `&quot;GoLang&quot;` / `&quot;Go-Lang&quot;` |
-| `strings.Split(s, sep)`                | 按分隔符切分字符串，返回切片          | `strings.Split(&quot;a,b,c&quot;, &quot;,&quot;)`                          | `[]string&#123;&quot;a&quot;,&quot;b&quot;,&quot;c&quot;&#125;`  |
-| `strings.Contains(s, substr)`          | 判断是否包含子串                      | `strings.Contains(&quot;hello&quot;, &quot;he&quot;)`                      | `true`                   |
-| `strings.HasPrefix(s, prefix)`         | 判断是否有指定前缀                    | `strings.HasPrefix(&quot;golang&quot;, &quot;go&quot;)`                    | `true`                   |
-| `strings.HasSuffix(s, suffix)`         | 判断是否有指定后缀                    | `strings.HasSuffix(&quot;test.txt&quot;, &quot;.txt&quot;)`                | `true`                   |
-| `strings.Index(s, substr)`             | 子串首次出现的位置（找不到返回 `-1`） | `strings.Index(&quot;banana&quot;, &quot;na&quot;)`                        | `2`                      |
-| `strings.LastIndex(s, substr)`         | 子串最后出现的位置                    | `strings.LastIndex(&quot;banana&quot;, &quot;na&quot;)`                    | `4`                      |
-| `strings.Join(a []string, sep string)` | 将切片用分隔符拼接成字符串            | `strings.Join([]string&#123;&quot;a&quot;,&quot;b&quot;,&quot;c&quot;&#125;, &quot;-&quot;)`             | `&quot;a-b-c&quot;`                |
-
-### 求字符串的长度 len
-
-`str1 := &quot;你好&quot;`
-
-`fmt.Println(len(str1))`
-
-运行以上代码，输出结果6。由于**一个汉字占用3个字节**，所以输出结果为6，如果str:=&quot;aaaa&quot;，则输出结果会变为4，因为一个英语单词只占用1个字节。
-
-### 拼接字符串 +/fmt.sprintf
-
-`str1 := &quot;你&quot; + &quot;好&quot;`
-
-`fmt.Println(str1)`
-
-+号在字符串中表示拼接操作，而在数值运算中表示加法相加
-
-当进行多行的拼接操作时，+号跟在字符串的后面，此时打印也在同一行，例如：
-
-`str := &quot;反引号间换行将被作为字符串中的换行&quot; +`
-
-​    `&quot;，但是所有的转义字符均无效&quot; +`
-
-​    `&quot;，文本将会原样输出。&quot;`
-
-fmt.Println(str)
-
-此时代码可以正常输出反引号间换行将被作为字符串中的换行，但是所有的转义字符均无效，文本将会原样输出。
-
-`str1 := &quot;你好&quot;`
-
-`str2 := &quot;golang&quot;`
-
-`str3 := fmt.Sprintf(&quot;%v %v&quot;, str1, str2)`
-
-`fmt.Println(str3)`
-
-注意，str定义时不使用printf因为printf是一个打印的操作，而sprintf用来定义时候使用
-
-### 字符串的分割 Split
-
-使用split前，需要引入strings包。运行如下代码
-
-`var a = &quot;123-456-789&quot;`
-
-`arr := strings.Split(a, &quot;-&quot;)`
-
-`fmt.Println(arr)`
-
-运行结果为[123 456 789]，split语法为，第一个位置表示要切个的字符串名称，第二个空格二表示按什么元素来切割，最后的结果实则是一个切片，但可以简单理解为得到了一个数组
-
-### 字符串的装引 join
-
-可以把一个切片连接为字符串，join的语法为第一个位置表示要装引的切片，第二个位置为用什么来连接，例如：
-
-`var a = &quot;123-456-789&quot;`
-
-`arr := strings.Split(a, &quot;-&quot;)`
-
-`str := strings.Join(arr, &quot;*&quot;)`
-
-`fmt.Printf(&quot;内容是%v,类型是%T&quot;, str, str)`
-
-最后得到的输出为`内容是123*456*789,类型是string`
-</code></pre>
+<p>  <code>fmt.Println(str1)</code></p>
+<p>可以正常输出This is<br>        a str</p>
+<p>使用tab键上面的键，即反引号来定义多行字符串</p>
+<h3 id="字符串的常用操作"><a href="#字符串的常用操作" class="headerlink" title="字符串的常用操作"></a>字符串的常用操作</h3><table>
+<thead>
+<tr>
+<th>函数&#x2F;用法</th>
+<th>功能说明</th>
+<th>示例</th>
+<th>返回值&#x2F;结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>len(str)</code></td>
+<td>获取字符串长度（字节数）</td>
+<td><code>len(&quot;hello&quot;)</code></td>
+<td><code>5</code></td>
+</tr>
+<tr>
+<td><code>+</code> 或 <code>fmt.Sprintf</code></td>
+<td>字符串拼接</td>
+<td><code>&quot;Go&quot; + &quot;Lang&quot;</code> &#x2F; <code>fmt.Sprintf(&quot;%s-%s&quot;, &quot;Go&quot;, &quot;Lang&quot;)</code></td>
+<td><code>&quot;GoLang&quot;</code> &#x2F; <code>&quot;Go-Lang&quot;</code></td>
+</tr>
+<tr>
+<td><code>strings.Split(s, sep)</code></td>
+<td>按分隔符切分字符串，返回切片</td>
+<td><code>strings.Split(&quot;a,b,c&quot;, &quot;,&quot;)</code></td>
+<td><code>[]string&#123;&quot;a&quot;,&quot;b&quot;,&quot;c&quot;&#125;</code></td>
+</tr>
+<tr>
+<td><code>strings.Contains(s, substr)</code></td>
+<td>判断是否包含子串</td>
+<td><code>strings.Contains(&quot;hello&quot;, &quot;he&quot;)</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>strings.HasPrefix(s, prefix)</code></td>
+<td>判断是否有指定前缀</td>
+<td><code>strings.HasPrefix(&quot;golang&quot;, &quot;go&quot;)</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>strings.HasSuffix(s, suffix)</code></td>
+<td>判断是否有指定后缀</td>
+<td><code>strings.HasSuffix(&quot;test.txt&quot;, &quot;.txt&quot;)</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>strings.Index(s, substr)</code></td>
+<td>子串首次出现的位置（找不到返回 <code>-1</code>）</td>
+<td><code>strings.Index(&quot;banana&quot;, &quot;na&quot;)</code></td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td><code>strings.LastIndex(s, substr)</code></td>
+<td>子串最后出现的位置</td>
+<td><code>strings.LastIndex(&quot;banana&quot;, &quot;na&quot;)</code></td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td><code>strings.Join(a []string, sep string)</code></td>
+<td>将切片用分隔符拼接成字符串</td>
+<td><code>strings.Join([]string&#123;&quot;a&quot;,&quot;b&quot;,&quot;c&quot;&#125;, &quot;-&quot;)</code></td>
+<td><code>&quot;a-b-c&quot;</code></td>
+</tr>
+</tbody></table>
+<h3 id="求字符串的长度-len"><a href="#求字符串的长度-len" class="headerlink" title="求字符串的长度 len"></a>求字符串的长度 len</h3><p>  <code>str1 := &quot;你好&quot;</code></p>
+<p>  <code>fmt.Println(len(str1))</code></p>
+<p>运行以上代码，输出结果6。由于<strong>一个汉字占用3个字节</strong>，所以输出结果为6，如果str:&#x3D;”aaaa”，则输出结果会变为4，因为一个英语单词只占用1个字节。</p>
+<h3 id="拼接字符串-fmt-sprintf"><a href="#拼接字符串-fmt-sprintf" class="headerlink" title="拼接字符串 +&#x2F;fmt.sprintf"></a>拼接字符串 +&#x2F;fmt.sprintf</h3><p>  <code>str1 := &quot;你&quot; + &quot;好&quot;</code></p>
+<p>  <code>fmt.Println(str1)</code></p>
+<p>+号在字符串中表示拼接操作，而在数值运算中表示加法相加</p>
+<p>当进行多行的拼接操作时，+号跟在字符串的后面，此时打印也在同一行，例如：</p>
+<p>  <code>str := &quot;反引号间换行将被作为字符串中的换行&quot; +</code></p>
+<p><code>&quot;，但是所有的转义字符均无效&quot; +</code></p>
+<p><code>&quot;，文本将会原样输出。&quot;</code></p>
+<p>  <code>fmt.Println(str)</code></p>
+<p>此时代码可以正常输出反引号间换行将被作为字符串中的换行，但是所有的转义字符均无效，文本将会原样输出。</p>
+<p>  <code>str1 := &quot;你好&quot;</code></p>
+<p>  <code>str2 := &quot;golang&quot;</code></p>
+<p>  <code>str3 := fmt.Sprintf(&quot;%v %v&quot;, str1, str2)</code></p>
+<p>  <code>fmt.Println(str3)</code></p>
+<p>注意，str定义时不使用printf因为printf是一个打印的操作，而sprintf用来定义时候使用</p>
+<h3 id="字符串的分割-Split"><a href="#字符串的分割-Split" class="headerlink" title="字符串的分割 Split"></a>字符串的分割 Split</h3><p>使用split前，需要引入strings包。运行如下代码</p>
+<p>  <code>var a = &quot;123-456-789&quot;</code></p>
+<p>  <code>arr := strings.Split(a, &quot;-&quot;)</code></p>
+<p>  <code>fmt.Println(arr)</code></p>
+<p>运行结果为[123 456 789]，split语法为，第一个位置表示要切个的字符串名称，第二个空格二表示按什么元素来切割，最后的结果实则是一个切片，但可以简单理解为得到了一个数组</p>
+<h3 id="字符串的装引-join"><a href="#字符串的装引-join" class="headerlink" title="字符串的装引 join"></a>字符串的装引 join</h3><p>可以把一个切片连接为字符串，join的语法为第一个位置表示要装引的切片，第二个位置为用什么来连接，例如：</p>
+<p>  <code>var a = &quot;123-456-789&quot;</code></p>
+<p>  <code>arr := strings.Split(a, &quot;-&quot;)</code></p>
+<p>  <code>str := strings.Join(arr, &quot;*&quot;)</code></p>
+<p>  <code>fmt.Printf(&quot;内容是%v,类型是%T&quot;, str, str)</code></p>
+<p>最后得到的输出为<code>内容是123*456*789,类型是string</code></p>
 
       
     </div>
