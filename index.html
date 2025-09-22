@@ -122,6 +122,38 @@
 <p>输出结果为：112959.99999999999</p>
 <p>解决方法：使用第三方包来解决精度问题</p>
 <p><a target="_blank" rel="noopener" href="https://github.com/shopspring/decimal">https://github.com/shopspring/decimal</a></p>
+<h3 id="int类型转换为float类型"><a href="#int类型转换为float类型" class="headerlink" title="int类型转换为float类型"></a>int类型转换为float类型</h3><p>  <code>a := 10</code></p>
+<p>  <code>b := float64(a)</code></p>
+<p>  <code>fmt.Printf(&quot;b的类型是%T&quot;, b)</code></p>
+<p>运行这个代码，将a转化为float类型，但是转化过程中可能会产生精度的丢失</p>
+<h3 id="float类型转换为int类型"><a href="#float类型转换为int类型" class="headerlink" title="float类型转换为int类型"></a>float类型转换为int类型</h3><p>  <code>var a float32 = 12.34</code></p>
+<p>  <code>b := int(a)</code></p>
+<p>  <code>fmt.Printf(&quot;b的类型是%T,数值是%v&quot;, b, b)</code></p>
+<p>运行上面代码，得到的输出是 b的类型是int,数值是<strong>12</strong>。可以看到，转化的过程相当于一个截取的过程，只取到整数部分，因此不建议将float转化为int</p>
+<h1 id="2-布尔数据"><a href="#2-布尔数据" class="headerlink" title="2. 布尔数据"></a>2. 布尔数据</h1><p>GO语言中以bool类型进行声明布尔型数据，布尔型数据只有True和false两个值</p>
+<p>注意：</p>
+<p>1.布尔类型变量的默认值为false</p>
+<p>2.GO语言中不允许将整型强制转换为布尔型</p>
+<p>3.布尔型<strong>无法</strong>参与数值运算，也<strong>无法</strong>于其他类型进行转换</p>
+<p>  <code>var flag bool = true</code></p>
+<p>  <code>fmt.Printf(&quot;flag的数值是%v,flag的类型是%T&quot;, flag, flag)</code></p>
+<p>可以的到其输出结果为flag的数值是true,flag的类型是bool</p>
+<p>也可运行如下代码：</p>
+<p>  <code>var b bool</code></p>
+<p>  <code>fmt.Printf(&quot;b的类型是%T&quot;, b)</code></p>
+<p>得到的结果为b的类型是bool，由此可知，bool的默认值为false。与此相关，string的默认值为空，int的默认值为0，float类型数据默认值同样是0，只是位数不同。</p>
+<p><strong>GO语言不允许将整型转化为布尔型，下面演示</strong>：</p>
+<p>  <code>var b int = 1</code></p>
+<p>  <code>if b &#123;</code></p>
+<p>​    <code>fmt.Println(&quot;True&quot;)</code></p>
+<p><code>&#125;</code></p>
+<p>此时输出会报错 non-boolean condition in if statement</p>
+<p>如果改为</p>
+<p>  <code>var b = true</code></p>
+<p>  <code>if b &#123;</code></p>
+<p>​    <code>fmt.Println(&quot;True&quot;)</code></p>
+<p>  <code>&#125;</code></p>
+<p>则输出正常打印出True</p>
 
       
     </div>
