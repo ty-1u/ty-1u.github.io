@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>GO语言教程Day8 | reason的学习记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1.byte和rune类型组成每个字符串的元素叫”字符“，可以通过便利字符串元素获得字符，字符用单引号(‘’)包裹 如何定义一个字符字符属于int类型 var a &#x3D;&#39;a&#39; 这么定义是正确的 var a &#x3D;&#39;aa&#39; 这么定义是错误的，byte类型只能含有一个元素   var a &#x3D; &#39;a&#39;   fmt.Printf(&quot;类型是%T,字符是%v">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GO语言教程Day8">
+<meta property="og:url" content="http://example.com/2025/09/23/Day8/index.html">
+<meta property="og:site_name" content="reason的学习记录">
+<meta property="og:description" content="1.byte和rune类型组成每个字符串的元素叫”字符“，可以通过便利字符串元素获得字符，字符用单引号(‘’)包裹 如何定义一个字符字符属于int类型 var a &#x3D;&#39;a&#39; 这么定义是正确的 var a &#x3D;&#39;aa&#39; 这么定义是错误的，byte类型只能含有一个元素   var a &#x3D; &#39;a&#39;   fmt.Printf(&quot;类型是%T,字符是%v">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-23T13:23:03.000Z">
+<meta property="article:modified_time" content="2025-09-23T15:07:03.572Z">
+<meta property="article:author" content="reason">
+<meta property="article:tag" content="byte类型和rune类型">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="reason的学习记录" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">reason的学习记录</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle"> </a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Day8" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/23/Day8/" class="article-date">
+  <time class="dt-published" datetime="2025-09-23T13:23:03.000Z" itemprop="datePublished">2025-09-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      GO语言教程Day8
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-byte和rune类型"><a href="#1-byte和rune类型" class="headerlink" title="1.byte和rune类型"></a>1.byte和rune类型</h1><p>组成每个字符串的元素叫”字符“，可以通过便利字符串元素获得字符，字符用单引号(‘’)包裹</p>
+<h3 id="如何定义一个字符"><a href="#如何定义一个字符" class="headerlink" title="如何定义一个字符"></a>如何定义一个字符</h3><p>字符属于int类型</p>
+<p><code>var a =&#39;a&#39;</code> 这么定义是正确的</p>
+<p><code>var a =&#39;aa&#39;</code> 这么定义是错误的，byte类型只能含有一个元素</p>
+<p>  <code>var a = &#39;a&#39;</code></p>
+<p>  <code>fmt.Printf(&quot;类型是%T,字符是%v&quot;, a, a)</code></p>
+<p>得到的结果是类型是int32,字符是97</p>
+<p>可见，默认输出的结果是a对应的ASCII码的值，类型是int32</p>
+<h4 id="如何原样输出a"><a href="#如何原样输出a" class="headerlink" title="如何原样输出a?"></a>如何原样输出a?</h4><p>使用%c来原样输出a：</p>
+<p>  var a &#x3D; ‘a’</p>
+<p>  fmt.Printf(“类型是%T,字符是%c”, a, a)</p>
+<h4 id="Go-语言的字符有以下两种："><a href="#Go-语言的字符有以下两种：" class="headerlink" title="Go 语言的字符有以下两种："></a>Go 语言的字符有以下两种：</h4><ol>
+<li>uint8 类型，或者叫 byte 型，代表了 ASCII 码的一个字符。</li>
+<li>rune 类型，代表一个 UTF-8 字符。</li>
+</ol>
+<p>定义一个字符串，输出字符串里面的字符：</p>
+<p>  <code>var str = &quot;This&quot;</code></p>
+<p>  <code>fmt.Printf(&quot;值：%v,类型：%T&quot;, str[1], str[1])</code></p>
+<p>取到了字符h，对应105。在golang中，一个字母(ASCII)占用一个字节的空间，一个汉字(UTF-8)占用三个字节的空间</p>
+<h3 id="查看字符串中占用存储空间"><a href="#查看字符串中占用存储空间" class="headerlink" title="查看字符串中占用存储空间"></a>查看字符串中占用存储空间</h3><p>前面介绍过unsafe,sizeof查看int，float类型等的大小，但是对于字符串来说，这是行不通的，无论我们的字符串有多长，都只会返回<strong>16</strong>：</p>
+<p>在 Go 里，<strong>字符串 (string)</strong> 本质上并不是直接存储字符数组，而是一个 <strong>结构体</strong>，它包含两个字段：</p>
+<p><code>type stringStruct struct &#123;</code><br>    <code>str unsafe.Pointer // 指向底层字节数组的指针</code><br>    <code>len int            // 字符串长度</code><br><code>&#125;</code></p>
+<ul>
+<li><code>str</code> 占 8 字节（64 位机器上指针大小 &#x3D; 8）</li>
+<li><code>len</code> 占 8 字节（64 位机器上 int &#x3D; 8）</li>
+</ul>
+<p>所以总共就是 <strong>16 字节</strong>。</p>
+<p>想获取字符串占用大小，可以用len直接获取字节数，这对于汉字也是可以用的，比如：</p>
+<p>  <code>var a = &quot;数据&quot;</code></p>
+<p>  <code>fmt.Println(len(a))</code></p>
+<p>返回的值为6</p>
+<h3 id="用字符定义一个汉字"><a href="#用字符定义一个汉字" class="headerlink" title="用字符定义一个汉字"></a>用字符定义一个汉字</h3><p>  <code>var a = &#39;数&#39;</code></p>
+<p>  <code>fmt.Printf(&quot;值：%v,类型：%T&quot;, a, a)</code></p>
+<p>得到的输出为 25968,类型：int32</p>
+<p>因为golang中使用UTF-8来进行编码，在UTF-8中编码后使用的就是该值</p>
+<h3 id="通过循环遍历字符串里的字符"><a href="#通过循环遍历字符串里的字符" class="headerlink" title="通过循环遍历字符串里的字符"></a>通过循环遍历字符串里的字符</h3><p>package main</p>
+<p>import (<br>	“fmt”<br>)</p>
+<p>func main() {<br>	s :&#x3D; “hello中国”</p>
+<pre><code>// 1. len -&gt; 字节数
+fmt.Println(&quot;len(s):&quot;, len(s)) // 11 (hello 5 + 中国 6)
+
+// 2. []byte -&gt; 按字节切分
+fmt.Println(&quot;[]byte(s):&quot;, []byte(s))
+
+// 3. []rune -&gt; 按 Unicode 码点切分
+fmt.Println(&quot;[]rune(s):&quot;, []rune(s))
+fmt.Println(&quot;len([]rune(s)):&quot;, len([]rune(s)))
+
+// 4. range -&gt; 按 rune 遍历
+for i, r := range s &#123;
+	fmt.Printf(&quot;index=%d, rune=%c, codepoint=%d\n&quot;, i, r, r)
+&#125;
+</code></pre>
+<p>}</p>
+<p>执行结果为：</p>
+<p>len(s): 11<br>[]byte(s): [104 101 108 108 111 228 184 173 229 155 189]<br>[]rune(s): [104 101 108 108 111 20013 22269]<br>len([]rune(s)): 7<br>index&#x3D;0, rune&#x3D;h, codepoint&#x3D;104<br>index&#x3D;1, rune&#x3D;e, codepoint&#x3D;101<br>index&#x3D;2, rune&#x3D;l, codepoint&#x3D;108<br>index&#x3D;3, rune&#x3D;l, codepoint&#x3D;108<br>index&#x3D;4, rune&#x3D;o, codepoint&#x3D;111<br>index&#x3D;5, rune&#x3D;中, codepoint&#x3D;20013<br>index&#x3D;8, rune&#x3D;国, codepoint&#x3D;22269</p>
+<p>注意，rune的功能更强大，因为ASCII码是UTF-8的子集</p>
+<h3 id="range和len的区别"><a href="#range和len的区别" class="headerlink" title="range和len的区别"></a>range和len的区别</h3><p>在用for循环打印字符串中的汉字时，打印出的根本不是其对应的UTF-8编码，为了彻底搞清楚这个问题，查阅了很多资料：</p>
+<p>首先是go的字符串储存的方式：Go 的字符串底层 <strong>统一用 UTF-8 编码存储</strong></p>
+<p>为什么用range能正常打印出汉字呢？</p>
+<p>因为range 数的是字符，而len数的是字节，以下是他们的区别：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>返回&#x2F;处理对象</th>
+<th>行为</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>len(s)</code></td>
+<td><strong>字节数</strong></td>
+<td>返回 UTF-8 编码后占用多少字节，不涉及字符概念</td>
+</tr>
+<tr>
+<td><code>s[i]</code></td>
+<td><strong>第 i 个字节</strong></td>
+<td>按字节取值，如果直接打印成 <code>%c</code>，可能显示“乱码”</td>
+</tr>
+<tr>
+<td><code>range s</code></td>
+<td><strong>rune（字符&#x2F;码点）</strong></td>
+<td>按 UTF-8 解码，逐个返回完整的字符（Unicode 码点）</td>
+</tr>
+</tbody></table>
+<p>此外，如果直接打印字符的值，得到的是一个五位数，而循环打印，得到的是三个三位数，这是为什么？</p>
+<p>比如：</p>
+<p>  <code>s := &quot;中&quot;</code></p>
+<p>  <code>s1 := &#39;中&#39;</code></p>
+<p>  <code>fmt.Printf(&quot;%v\n&quot;, s1)</code></p>
+<p>  <code>for i := 0; i &lt; len(s); i++ &#123;</code></p>
+<p>​    <code>fmt.Printf(&quot;%v &quot;, s[i])</code></p>
+<p>  <code>&#125;</code></p>
+<p>得到的输出是：</p>
+<p>20013<br>228 184 173 </p>
+<table>
+<thead>
+<tr>
+<th>打印方式</th>
+<th>访问对象</th>
+<th>输出</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>[]rune(s)</code> 或 <code>range</code></td>
+<td>Unicode 码点</td>
+<td>20013（五位数）</td>
+<td>rune 表示完整字符的码点值</td>
+</tr>
+<tr>
+<td>按字节循环 <code>s[i]</code></td>
+<td>UTF-8 字节</td>
+<td>228, 184, 173（三位数）</td>
+<td>UTF-8 把一个字符编码成多个字节，每个字节单独打印就是单个整数</td>
+</tr>
+</tbody></table>
+<p>每个字符都有一个唯一的 Unicode 码点，例如 <code>&quot;中&quot;</code> 的码点是 20013（十进制）。<br> 在 UTF-8 编码下，它占用 3 个字节 <code>[228 184 173]</code>（其他编码方式可能不同）。<br> 当使用 <code>range</code> 或转换成 <code>[]rune</code> 遍历字符串时，程序会把 UTF-8 字节序列解码成对应的码点，再用 <code>%c</code> 打印时显示对应字符。<br> 而如果用按字节循环（如 <code>for i := 0; i &lt; len(s); i++</code>）逐个打印，就只能看到 UTF-8 的原始字节值 <code>[228 184 173]</code>，所以看起来像“三个三位数”</p>
+<p>一句话而言：rune是按字符，而len是按字节</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/23/Day8/" data-id="cmfwow39u0000pwd11nk71t4i" data-title="GO语言教程Day8" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/09/22/Day7/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">GO语言教程Day7</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">九月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/09/23/Day8/">GO语言教程Day8</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/22/Day7/">GO语言教程Day7</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/21/Day6/">GO语言教程Day6</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/21/Day5/">GO语言教程Day5</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/19/day4/">GO语言教程Day4</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 reason<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
