@@ -247,6 +247,36 @@
 <p>  <code>str := strings.Join(arr, &quot;*&quot;)</code></p>
 <p>  <code>fmt.Printf(&quot;内容是%v,类型是%T&quot;, str, str)</code></p>
 <p>最后得到的输出为<code>内容是123*456*789,类型是string</code></p>
+<p>当然也可以直接定义一个切片(切片是一种复合数据类型），后面会介绍：</p>
+<p>  <code>arr := []string&#123;&quot;php&quot;, &quot;java&quot;, &quot;golang&quot;&#125;</code></p>
+<p>  <code>str := strings.Join(arr, &quot;*&quot;)</code></p>
+<p>  <code>fmt.Printf(&quot;结果是%v,类型是%T&quot;, str, str)</code></p>
+<p>用”*“号将切片连接起来，得到的输出是 结果是<code>php*java*golang,类型是string</code></p>
+<h3 id="判断字符串是否包含另一个字符串-contains"><a href="#判断字符串是否包含另一个字符串-contains" class="headerlink" title="判断字符串是否包含另一个字符串 contains"></a>判断字符串是否包含另一个字符串 contains</h3><p>contains是判断整个字符串是否包括后面位置的内容</p>
+<p>  <code>str1 := &quot;This is str&quot;</code></p>
+<p>  <code>str2 := &quot;This&quot;</code></p>
+<p>  <code>flag := strings.Contains(str1, str2)</code></p>
+<p>  <code>fmt.Println(flag)</code></p>
+<p>contains的语法是第一个位置为原语句，第二个位置为是否被包含的语句，运行如上代码，结果为true</p>
+<h3 id="前缀后缀判断-HasPrefix-HasSuffix"><a href="#前缀后缀判断-HasPrefix-HasSuffix" class="headerlink" title="前缀后缀判断 HasPrefix,HasSuffix"></a>前缀后缀判断 HasPrefix,HasSuffix</h3><p>看前端或后端是否有指定的字符串，HasPrefix,HasSuffix的用法和前面的contains相似</p>
+<p>  <code>str1 := &quot;This is str&quot;</code></p>
+<p>  <code>str2 := &quot;This&quot;</code></p>
+<p>  <code>flag := strings.HasPrefix(str1, str2)</code></p>
+<p>  <code>fmt.Println(flag)</code></p>
+<p>得到的输出为true</p>
+<h3 id="子串出现的位置-index和Lastindex"><a href="#子串出现的位置-index和Lastindex" class="headerlink" title="子串出现的位置 index和Lastindex"></a>子串出现的位置 index和Lastindex</h3><p>index计数方式是从前往后计数，查找字符串是否出现，如果出现，则返回位置：</p>
+<p>  <code>str1 := &quot;This is str&quot;</code></p>
+<p>  <code>str2 := &quot;is&quot;</code></p>
+<p>  <code>num := strings.Index(str1, str2)</code></p>
+<p>  <code>fmt.Println(num)</code></p>
+<p>得到的返回值为2，注意，这里找到的is是This里含有的is，而index同样是从0开始计数</p>
+<p>LastIndex同样是从前往后计数，但是是从后往前查找</p>
+<p>  <code>str1 := &quot;This is str&quot;</code></p>
+<p>  <code>str2 := &quot;is&quot;</code></p>
+<p>  <code>num := strings.LastIndex(str1, str2)</code></p>
+<p>  <code>fmt.Println(num)</code></p>
+<p>得到的返回值为5</p>
+<p>当index和Lastindex查找不到时，就会返回**-1**的值</p>
 
       
     </div>
