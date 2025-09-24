@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>GO语言教程Day5 | reason的学习记录</title>
+  <title>GO语言教程Day9 | reason的学习记录</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="1. Golang数据类型介绍Golang语言分为基本数据类型和复合数据类型 基本数据类型有： 整形，浮点型，布尔型，字符串 复合数据类型有： 数组，切片，结构体，函数，map，通道，接口等 2. 整形  var num int &#x3D; 10   fmt.Printf(&quot;类型是%T&quot;, num) 定义了int类型，赋值不能是其他形式 整形分为两大类，一类是有符号整型，一类是无符号整">
+  <meta name="description" content="1. 数值类型的转换1.1 int8与int16之间的转换1.2 float32和float64之间的转换1.3 整型和浮点型之间的转换建议将整型转化为浮点型 2. 其他类型转换为String类型2.1 Sprintf转换在前面的教程中，Sprintf用于分割，拼接等，在golang中 fmt.Sprintf也可以将其他类型转换为Strings类型 int类型转换为String类型  var a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GO语言教程Day5">
-<meta property="og:url" content="http://example.com/2025/09/21/Day5/index.html">
+<meta property="og:title" content="GO语言教程Day9">
+<meta property="og:url" content="http://example.com/2025/09/24/Day9/index.html">
 <meta property="og:site_name" content="reason的学习记录">
-<meta property="og:description" content="1. Golang数据类型介绍Golang语言分为基本数据类型和复合数据类型 基本数据类型有： 整形，浮点型，布尔型，字符串 复合数据类型有： 数组，切片，结构体，函数，map，通道，接口等 2. 整形  var num int &#x3D; 10   fmt.Printf(&quot;类型是%T&quot;, num) 定义了int类型，赋值不能是其他形式 整形分为两大类，一类是有符号整型，一类是无符号整">
+<meta property="og:description" content="1. 数值类型的转换1.1 int8与int16之间的转换1.2 float32和float64之间的转换1.3 整型和浮点型之间的转换建议将整型转化为浮点型 2. 其他类型转换为String类型2.1 Sprintf转换在前面的教程中，Sprintf用于分割，拼接等，在golang中 fmt.Sprintf也可以将其他类型转换为Strings类型 int类型转换为String类型  var a">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-09-21T11:47:20.000Z">
-<meta property="article:modified_time" content="2025-09-21T13:00:50.799Z">
+<meta property="article:published_time" content="2025-09-24T13:29:13.000Z">
+<meta property="article:modified_time" content="2025-09-24T14:39:48.399Z">
 <meta property="article:author" content="reason">
-<meta property="article:tag" content="语言基本数据类型">
+<meta property="article:tag" content="GOlang中基本数据类型之间的转换">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="reason的学习记录" type="application/atom+xml">
@@ -78,10 +78,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Day5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Day9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/09/21/Day5/" class="article-date">
-  <time class="dt-published" datetime="2025-09-21T11:47:20.000Z" itemprop="datePublished">2025-09-21</time>
+    <a href="/2025/09/24/Day9/" class="article-date">
+  <time class="dt-published" datetime="2025-09-24T13:29:13.000Z" itemprop="datePublished">2025-09-24</time>
 </a>
     
   </div>
@@ -92,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      GO语言教程Day5
+      GO语言教程Day9
     </h1>
   
 
@@ -100,124 +100,126 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="1-Golang数据类型介绍"><a href="#1-Golang数据类型介绍" class="headerlink" title="1. Golang数据类型介绍"></a>1. Golang数据类型介绍</h1><p>Golang语言分为基本数据类型和复合数据类型</p>
-<p>基本数据类型有：</p>
-<p>整形，浮点型，布尔型，字符串</p>
-<p>复合数据类型有：</p>
-<p>数组，切片，结构体，函数，map，通道，接口等</p>
-<h1 id="2-整形"><a href="#2-整形" class="headerlink" title="2. 整形"></a>2. 整形</h1><p>  <code>var num int = 10</code></p>
-<p>  <code>fmt.Printf(&quot;类型是%T&quot;, num)</code></p>
-<p>定义了int类型，赋值不能是其他形式</p>
-<p>整形分为两大类，一类是有符号整型，一类是无符号整型：</p>
-<p>有符号整型按长度分为：int8，int16，int32，int64</p>
-<p>对应的无符号整型为：uint8，uint16，uint32，uint64</p>
+        <h1 id="1-数值类型的转换"><a href="#1-数值类型的转换" class="headerlink" title="1. 数值类型的转换"></a>1. 数值类型的转换</h1><h2 id="1-1-int8与int16之间的转换"><a href="#1-1-int8与int16之间的转换" class="headerlink" title="1.1 int8与int16之间的转换"></a>1.1 int8与int16之间的转换</h2><h2 id="1-2-float32和float64之间的转换"><a href="#1-2-float32和float64之间的转换" class="headerlink" title="1.2 float32和float64之间的转换"></a>1.2 float32和float64之间的转换</h2><h2 id="1-3-整型和浮点型之间的转换"><a href="#1-3-整型和浮点型之间的转换" class="headerlink" title="1.3 整型和浮点型之间的转换"></a>1.3 整型和浮点型之间的转换</h2><p>建议将整型转化为浮点型</p>
+<h1 id="2-其他类型转换为String类型"><a href="#2-其他类型转换为String类型" class="headerlink" title="2. 其他类型转换为String类型"></a>2. 其他类型转换为String类型</h1><h2 id="2-1-Sprintf转换"><a href="#2-1-Sprintf转换" class="headerlink" title="2.1 Sprintf转换"></a>2.1 Sprintf转换</h2><p>在前面的教程中，Sprintf用于分割，拼接等，在golang中 fmt.Sprintf也可以将其他类型转换为Strings类型</p>
+<h3 id="int类型转换为String类型"><a href="#int类型转换为String类型" class="headerlink" title="int类型转换为String类型"></a>int类型转换为String类型</h3><p>  <code>var a int = 20</code></p>
+<p>  <code>str1 := fmt.Sprintf(&quot;%d&quot;, a)</code></p>
+<p>  <code>fmt.Printf(&quot;值%v 类型%T&quot;, str1, str1)</code></p>
+<p>%d表示将a以十进制输出，此时输出的是string类型的数据，输出为 值20 类型string</p>
+<h3 id="float类型转换为String类型"><a href="#float类型转换为String类型" class="headerlink" title="float类型转换为String类型"></a>float类型转换为String类型</h3><p>  <code>var b float64 = 12.123</code></p>
+<p>  <code>str2 := fmt.Sprintf(&quot;%f&quot;, b)</code></p>
+<p>  <code>fmt.Printf(&quot;值%v 类型%T&quot;, str2, str2)</code></p>
+<p>此时输出为 值12.123000 类型string</p>
+<p>类似的，bool类型转化为String类型是**%t**，得到的结果是字符串true</p>
+<p>字符转化为String类型是**%c**，原样输出，前面也有提到</p>
+<h2 id="2-2-使用strconv包里面的几种转换方法转换"><a href="#2-2-使用strconv包里面的几种转换方法转换" class="headerlink" title="2.2 使用strconv包里面的几种转换方法转换"></a>2.2 使用strconv包里面的几种转换方法转换</h2><p>  <code>var a int = 20</code></p>
+<p>  <code>var b float64 = 12.123</code></p>
+<p>  <code>var c bool = true</code></p>
+<p>  <code>var d byte = &#39;a&#39;</code></p>
+<p>  <code>str1 := strconv.FormatInt(int64(a), 10)</code></p>
+<p>  <code>str2 := strconv.FormatFloat(b, &#39;f&#39;, 2, 64)</code></p>
+<p>  <code>str3 := strconv.FormatBool(c)</code></p>
+<p>  <code>str4 := strconv.FormatUint(uint64(d), 10)</code></p>
+<p>  <code>fmt.Printf(&quot;%T %T %T %T&quot;, str1, str2, str3, str4)</code></p>
+<p>输出为 string string string string</p>
 <table>
 <thead>
 <tr>
 <th>类型</th>
-<th>范围（数值）</th>
-<th>数学表达</th>
-<th>占用空间</th>
-<th align="center">是否有符号</th>
+<th>函数</th>
+<th>功能</th>
+<th>参数说明</th>
+<th>返回值</th>
+<th></th>
 </tr>
 </thead>
 <tbody><tr>
-<td>int8</td>
-<td>-128 到 127</td>
-<td>-2^7 到 2^7-1</td>
-<td>1 个字节</td>
-<td align="center">有</td>
+<td><strong>整数</strong></td>
+<td><code>strconv.Itoa(i int) string</code></td>
+<td>整数 → 字符串</td>
+<td><code>i</code>：整型</td>
+<td><code>string</code></td>
+<td></td>
 </tr>
 <tr>
-<td>int16</td>
-<td>-32,768 到 32,767</td>
-<td>-2^15 到 2^15-1</td>
-<td>2 个字节</td>
-<td align="center">有</td>
+<td></td>
+<td><code>strconv.Atoi(s string) (int, error)</code></td>
+<td>字符串 → 整数</td>
+<td><code>s</code>：十进制字符串</td>
+<td><code>int</code>, <code>error</code></td>
+<td></td>
 </tr>
 <tr>
-<td>int32</td>
-<td>-2,147,483,648 到 2,147,483,647</td>
-<td>-2^31 到 2^31-1</td>
-<td>4 个字节</td>
-<td align="center">有</td>
+<td></td>
+<td><strong><code>strconv.FormatInt(i int64, base int) string</code></strong></td>
+<td>int64 → 指定进制字符串</td>
+<td><code>i</code>：整数<code>base</code>：进制(2~36)</td>
+<td><code>string</code></td>
+<td></td>
 </tr>
 <tr>
-<td>int64</td>
-<td>-9,223,372,036,854,775,808 到 9,223,372,036,854,775,807</td>
-<td>-2^63 到 2^63-1</td>
-<td>8 个字节</td>
-<td align="center">有</td>
+<td></td>
+<td><code>strconv.ParseInt(s string, base int, bitSize int) (int64, error)</code></td>
+<td>字符串 → int64</td>
+<td><code>s</code>：字符串<code>base</code>：进制<code>bitSize</code>：位数(0,8,16,32,64)</td>
+<td><code>int64</code>, <code>error</code></td>
+<td></td>
 </tr>
 <tr>
-<td>uint8</td>
-<td>0 到 255</td>
-<td>0 到 2^8-1</td>
-<td>1 个字节</td>
-<td align="center">无</td>
+<td><strong>浮点</strong></td>
+<td><strong><code>strconv.FormatFloat(f float64, fmt byte, prec, bitSize int) string</code></strong></td>
+<td>浮点数 → 字符串</td>
+<td><code>f</code>：浮点数<code>fmt</code>：格式(<code>b,e,f,g</code>)<code>prec</code>：精度（保留位数）<code>bitSize</code>：32或64</td>
+<td><code>string</code></td>
+<td></td>
 </tr>
 <tr>
-<td>uint16</td>
-<td>0 到 65,535</td>
-<td>0 到 2^16-1</td>
-<td>2 个字节</td>
-<td align="center">无</td>
+<td></td>
+<td><code>strconv.ParseFloat(s string, bitSize int) (float64, error)</code></td>
+<td>字符串 → 浮点数</td>
+<td><code>s</code>：字符串<code>bitSize</code>：32或64</td>
+<td><code>float64</code>, <code>error</code></td>
+<td></td>
 </tr>
 <tr>
-<td>uint32</td>
-<td>0 到 4,294,967,295</td>
-<td>0 到 2^32-1</td>
-<td>4 个字节</td>
-<td align="center">无</td>
+<td><strong>布尔</strong></td>
+<td><strong><code>strconv.FormatBool(b bool) string</code></strong></td>
+<td>布尔 → 字符串</td>
+<td><code>b</code>：布尔值</td>
+<td><code>&quot;true&quot;</code> 或 <code>&quot;false&quot;</code></td>
+<td></td>
 </tr>
 <tr>
-<td>uint64</td>
-<td>0 到 18,446,744,073,709,551,615</td>
-<td>0 到 2^64-1</td>
-<td>8 个字节</td>
-<td align="center">无</td>
+<td></td>
+<td><code>strconv.ParseBool(s string) (bool, error)</code></td>
+<td>字符串 → 布尔</td>
+<td><code>s</code>：可识别 <code>&quot;1&quot; &quot;t&quot; &quot;true&quot;</code> 等</td>
+<td><code>bool</code>, <code>error</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>字符</strong></td>
+<td><strong><code>strconv.FormatUint(i s) string</code></strong></td>
+<td>byte → 字符串</td>
+<td>&#96;i：单个字符 s: 进制</td>
+<td>例如 <code>&#39;你&#39;</code> → <code>&quot;你&quot;</code></td>
+<td></td>
 </tr>
 </tbody></table>
-<p>找一个合适的长度，避免溢出</p>
-<h4 id="关于字节："><a href="#关于字节：" class="headerlink" title="关于字节："></a>关于字节：</h4><p>字节也叫byte，是计算机数据的基本储存单位，8bit&#x3D;1Byte 1024Byte&#x3D;1KB, 在电脑里一个中文占两个字节。</p>
-<h3 id="unsafe-Sizeof包"><a href="#unsafe-Sizeof包" class="headerlink" title="unsafe.Sizeof包"></a>unsafe.Sizeof包</h3><p>查看不同长度类型的包</p>
-<p>  <code>var num1 int8 = 98</code></p>
-<p>  <code>var num2 int64 = 98</code></p>
-<p>  <code>fmt.Println(unsafe.Sizeof(num1))</code></p>
-<p>  <code>fmt.Println(unsafe.Sizeof(num2))</code></p>
-<p><code>unsafe.Sizeof()</code>结果是以字节计数，所以输出的结果为：1 8</p>
-<h3 id="int类型转换"><a href="#int类型转换" class="headerlink" title="int类型转换"></a>int类型转换</h3><p>  <code>var num1 int8 = 1</code></p>
-<p>  <code>var num2 int16 = 1</code></p>
-<p>  <code>fmt.Println(num1 + num2)</code></p>
-<p>同样长度的变量运算才能正常运行，因此上面的代码是运行不了的，可以对变量进行强制的转换，比如：</p>
-<p>  <code>var num1 int8 = 1</code></p>
-<p>  <code>var num2 int16 = 1</code></p>
-<p>  <code>fmt.Println(int16(num1) + num2)</code></p>
-<p>此时代码正常运行，可以得到输出： 2</p>
-<p>转换类型时候，尤其是高位数据向低位数据转换时，<strong>不要超过该类型的范围</strong></p>
-<p>  <code>var num1 int16 = 130</code></p>
-<p>  <code>fmt.Println(int8(num1))</code></p>
-<p>此时代码虽然能正常运行，但是得到的结果却是-126，很明显是130的补码</p>
-<h3 id="数字字面量语法"><a href="#数字字面量语法" class="headerlink" title="数字字面量语法"></a>数字字面量语法</h3><p>  <code>num := 30</code></p>
-<p>  <code>fmt.Printf(&quot;num等于%v,类型为%T\n&quot;, num, num)</code></p>
-<p>  <code>fmt.Println(unsafe.Sizeof(num))</code></p>
-<p>计算机默认以电脑的位数储存信息，比如我用的是64位电脑，因此使用int时，默认使用64位储存信息</p>
-<p>Go1.13 版本之后引入了数字字面量语法，这样便于开发者以二进制、八进制或十六进制浮点数的格式定义数字，例如：</p>
-<p>  <code>num := 30</code></p>
-<p>  <code>// fmt.Println(unsafe.Sizeof(num))</code></p>
-<p>  <code>fmt.Printf(&quot;num等于%b\n&quot;, num)</code></p>
-<p>  <code>fmt.Printf(&quot;num等于%o&quot;, num)</code></p>
-<p>可以输出：</p>
-<p>num等于11110<br>num等于36</p>
+<p>当然，你也可以用如下方法转换字符为字符串，这样可能会更加简单：</p>
+<p>  <code>var d byte = &#39;a&#39;</code></p>
+<p>  <code>e := string(d)</code></p>
+<p>  <code>fmt.Printf(&quot;类型是%T,数值是%v&quot;, e, e)</code></p>
+<p>输出的结果为 类型是string,数值是a</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/21/Day5/" data-id="cmftpc43c0000ewd120hb25ty" data-title="GO语言教程Day5" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2025/09/24/Day9/" data-id="cmfy3cefa0000ogd12riv14xe" data-title="GO语言教程Day9" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li></ul>
 
     </footer>
   </div>
@@ -225,19 +227,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2025/09/21/Day6/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">前一篇</strong>
-      <div class="article-nav-title">
-        
-          GO语言教程Day6
-        
-      </div>
-    </a>
   
-  
-    <a href="/2025/09/19/day4/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/09/23/Day8/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">GO语言教程Day4</div>
+      <div class="article-nav-title">GO语言教程Day8</div>
     </a>
   
 </nav>

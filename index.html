@@ -76,6 +76,157 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Day9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/24/Day9/" class="article-date">
+  <time class="dt-published" datetime="2025-09-24T13:29:13.000Z" itemprop="datePublished">2025-09-24</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/09/24/Day9/">GO语言教程Day9</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-数值类型的转换"><a href="#1-数值类型的转换" class="headerlink" title="1. 数值类型的转换"></a>1. 数值类型的转换</h1><h2 id="1-1-int8与int16之间的转换"><a href="#1-1-int8与int16之间的转换" class="headerlink" title="1.1 int8与int16之间的转换"></a>1.1 int8与int16之间的转换</h2><h2 id="1-2-float32和float64之间的转换"><a href="#1-2-float32和float64之间的转换" class="headerlink" title="1.2 float32和float64之间的转换"></a>1.2 float32和float64之间的转换</h2><h2 id="1-3-整型和浮点型之间的转换"><a href="#1-3-整型和浮点型之间的转换" class="headerlink" title="1.3 整型和浮点型之间的转换"></a>1.3 整型和浮点型之间的转换</h2><p>建议将整型转化为浮点型</p>
+<h1 id="2-其他类型转换为String类型"><a href="#2-其他类型转换为String类型" class="headerlink" title="2. 其他类型转换为String类型"></a>2. 其他类型转换为String类型</h1><h2 id="2-1-Sprintf转换"><a href="#2-1-Sprintf转换" class="headerlink" title="2.1 Sprintf转换"></a>2.1 Sprintf转换</h2><p>在前面的教程中，Sprintf用于分割，拼接等，在golang中 fmt.Sprintf也可以将其他类型转换为Strings类型</p>
+<h3 id="int类型转换为String类型"><a href="#int类型转换为String类型" class="headerlink" title="int类型转换为String类型"></a>int类型转换为String类型</h3><p>  <code>var a int = 20</code></p>
+<p>  <code>str1 := fmt.Sprintf(&quot;%d&quot;, a)</code></p>
+<p>  <code>fmt.Printf(&quot;值%v 类型%T&quot;, str1, str1)</code></p>
+<p>%d表示将a以十进制输出，此时输出的是string类型的数据，输出为 值20 类型string</p>
+<h3 id="float类型转换为String类型"><a href="#float类型转换为String类型" class="headerlink" title="float类型转换为String类型"></a>float类型转换为String类型</h3><p>  <code>var b float64 = 12.123</code></p>
+<p>  <code>str2 := fmt.Sprintf(&quot;%f&quot;, b)</code></p>
+<p>  <code>fmt.Printf(&quot;值%v 类型%T&quot;, str2, str2)</code></p>
+<p>此时输出为 值12.123000 类型string</p>
+<p>类似的，bool类型转化为String类型是**%t**，得到的结果是字符串true</p>
+<p>字符转化为String类型是**%c**，原样输出，前面也有提到</p>
+<h2 id="2-2-使用strconv包里面的几种转换方法转换"><a href="#2-2-使用strconv包里面的几种转换方法转换" class="headerlink" title="2.2 使用strconv包里面的几种转换方法转换"></a>2.2 使用strconv包里面的几种转换方法转换</h2><p>  <code>var a int = 20</code></p>
+<p>  <code>var b float64 = 12.123</code></p>
+<p>  <code>var c bool = true</code></p>
+<p>  <code>var d byte = &#39;a&#39;</code></p>
+<p>  <code>str1 := strconv.FormatInt(int64(a), 10)</code></p>
+<p>  <code>str2 := strconv.FormatFloat(b, &#39;f&#39;, 2, 64)</code></p>
+<p>  <code>str3 := strconv.FormatBool(c)</code></p>
+<p>  <code>str4 := strconv.FormatUint(uint64(d), 10)</code></p>
+<p>  <code>fmt.Printf(&quot;%T %T %T %T&quot;, str1, str2, str3, str4)</code></p>
+<p>输出为 string string string string</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>函数</th>
+<th>功能</th>
+<th>参数说明</th>
+<th>返回值</th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>整数</strong></td>
+<td><code>strconv.Itoa(i int) string</code></td>
+<td>整数 → 字符串</td>
+<td><code>i</code>：整型</td>
+<td><code>string</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>strconv.Atoi(s string) (int, error)</code></td>
+<td>字符串 → 整数</td>
+<td><code>s</code>：十进制字符串</td>
+<td><code>int</code>, <code>error</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><strong><code>strconv.FormatInt(i int64, base int) string</code></strong></td>
+<td>int64 → 指定进制字符串</td>
+<td><code>i</code>：整数<code>base</code>：进制(2~36)</td>
+<td><code>string</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>strconv.ParseInt(s string, base int, bitSize int) (int64, error)</code></td>
+<td>字符串 → int64</td>
+<td><code>s</code>：字符串<code>base</code>：进制<code>bitSize</code>：位数(0,8,16,32,64)</td>
+<td><code>int64</code>, <code>error</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>浮点</strong></td>
+<td><strong><code>strconv.FormatFloat(f float64, fmt byte, prec, bitSize int) string</code></strong></td>
+<td>浮点数 → 字符串</td>
+<td><code>f</code>：浮点数<code>fmt</code>：格式(<code>b,e,f,g</code>)<code>prec</code>：精度（保留位数）<code>bitSize</code>：32或64</td>
+<td><code>string</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>strconv.ParseFloat(s string, bitSize int) (float64, error)</code></td>
+<td>字符串 → 浮点数</td>
+<td><code>s</code>：字符串<code>bitSize</code>：32或64</td>
+<td><code>float64</code>, <code>error</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>布尔</strong></td>
+<td><strong><code>strconv.FormatBool(b bool) string</code></strong></td>
+<td>布尔 → 字符串</td>
+<td><code>b</code>：布尔值</td>
+<td><code>&quot;true&quot;</code> 或 <code>&quot;false&quot;</code></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td><code>strconv.ParseBool(s string) (bool, error)</code></td>
+<td>字符串 → 布尔</td>
+<td><code>s</code>：可识别 <code>&quot;1&quot; &quot;t&quot; &quot;true&quot;</code> 等</td>
+<td><code>bool</code>, <code>error</code></td>
+<td></td>
+</tr>
+<tr>
+<td><strong>字符</strong></td>
+<td><strong><code>strconv.FormatUint(i s) string</code></strong></td>
+<td>byte → 字符串</td>
+<td>&#96;i：单个字符 s: 进制</td>
+<td>例如 <code>&#39;你&#39;</code> → <code>&quot;你&quot;</code></td>
+<td></td>
+</tr>
+</tbody></table>
+<p>当然，你也可以用如下方法转换字符为字符串，这样可能会更加简单：</p>
+<p>  <code>var d byte = &#39;a&#39;</code></p>
+<p>  <code>e := string(d)</code></p>
+<p>  <code>fmt.Printf(&quot;类型是%T,数值是%v&quot;, e, e)</code></p>
+<p>输出的结果为 类型是string,数值是a</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/24/Day9/" data-id="cmfy3cefa0000ogd12riv14xe" data-title="GO语言教程Day9" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Day8" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/09/23/Day8/" class="article-date">
@@ -216,7 +367,36 @@ for i, r := range s &#123;
 </tr>
 </tbody></table>
 <p>每个字符都有一个唯一的 Unicode 码点，例如 <code>&quot;中&quot;</code> 的码点是 20013（十进制）。<br> 在 UTF-8 编码下，它占用 3 个字节 <code>[228 184 173]</code>（其他编码方式可能不同）。<br> 当使用 <code>range</code> 或转换成 <code>[]rune</code> 遍历字符串时，程序会把 UTF-8 字节序列解码成对应的码点，再用 <code>%c</code> 打印时显示对应字符。<br> 而如果用按字节循环（如 <code>for i := 0; i &lt; len(s); i++</code>）逐个打印，就只能看到 UTF-8 的原始字节值 <code>[228 184 173]</code>，所以看起来像“三个三位数”</p>
-<p>一句话而言：rune是按字符，而len是按字节</p>
+<p>一句话而言：range是按字符，而len是按字节</p>
+<h3 id="修改字符串"><a href="#修改字符串" class="headerlink" title="修改字符串"></a>修改字符串</h3><p>要修改字符串，需要先将其转换成[]rune 或[]byte，完成后再转换为 string。无论哪种转换，<br>都会重新分配内存，并复制字节数组。</p>
+<p>我们想要将big中的b改为p，想到用下面的方法</p>
+<p>  <code>s1 :=&quot;big&quot;</code></p>
+<p>  <code>s1[0] = &#39;p&#39;</code></p>
+<p>  <code>fmt.Println(s1)</code></p>
+<p>然而结果会直接报错，这是因为GO语言规定：<code>s1</code> 是 <strong>string</strong> 类型，本质上是一个不可变的字节序列</p>
+<p>这里有一些关于byte的小常识：</p>
+<p>byte只能处理单个字节，byte的本质是0-255的整数，是ASCII码的别名，  <strong>也就是当我们定义或者取字符的时候，实际上定义或者取的是0-255的一个数</strong>，所以只能接收字符常量或整数值，不能直接转换整个字符串。如果要处理字符串，要么取单个索引（<code>s[0]</code>），要么转成 <code>[]byte</code></p>
+<p><code>a := byte(&#39;a&#39;)</code></p>
+<p>  <code>fmt.Println(a)</code></p>
+<p>  <code>b := byte(255)</code></p>
+<p>  <code>fmt.Println(b)</code></p>
+<p>以上两种是可以直接用byte转化的例子，得到的结果为</p>
+<p>97<br>255</p>
+<p>我们想修改字符串，可以定义切片，修改切片，最后转化为string类型再输出，例如：</p>
+<p>  <code>str := &quot;big&quot;</code></p>
+<p>  <code>strChange := []byte(str)</code></p>
+<p>  <code>strChange[0] = &#39;p&#39;</code></p>
+<p>  <code>fmt.Println(string(strChange))</code></p>
+<p>这里我们有常识：<strong>切片里面的每个数字都对应一个字符</strong>，可以通过string来转化为字符串</p>
+<p>比如这个代码，它转化过程就是先把big转化为切片，取切片的第一个元素，用一个新的字符更改，最后再转化为字符串输出，如果最后一行没有string转换，输出的是[112 105 103]。</p>
+<h4 id="如果字符串中含有汉字呢？"><a href="#如果字符串中含有汉字呢？" class="headerlink" title="如果字符串中含有汉字呢？"></a>如果字符串中含有汉字呢？</h4><p>我们使用rune来转换：</p>
+<p>  <code>str := &quot;你 好,big&quot;</code></p>
+<p>  <code>strChange := []rune(str)</code></p>
+<p>  <code>strChange[0] = &#39;大&#39;</code></p>
+<p>  <code>strChange[1] = &#39;家&#39;</code></p>
+<p>  <code>fmt.Println(string(strChange))</code></p>
+<p>最后得到的输出为 大家好,big</p>
+<p>当然，如果全为字母，<strong>也可以直接使用rune转换</strong>，所以说rune比byte功能更强大</p>
 
       
     </div>
@@ -1315,7 +1495,7 @@ fmt.Println(&quot;周长:&quot;, p)
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li></ul>
     </div>
   </div>
 
@@ -1325,7 +1505,7 @@ fmt.Println(&quot;周长:&quot;, p)
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a>
+      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">GOlang中基本数据类型之间的转换</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a>
     </div>
   </div>
 
@@ -1347,6 +1527,10 @@ fmt.Println(&quot;周长:&quot;, p)
       <ul>
         
           <li>
+            <a href="/2025/09/24/Day9/">GO语言教程Day9</a>
+          </li>
+        
+          <li>
             <a href="/2025/09/23/Day8/">GO语言教程Day8</a>
           </li>
         
@@ -1360,10 +1544,6 @@ fmt.Println(&quot;周长:&quot;, p)
         
           <li>
             <a href="/2025/09/21/Day5/">GO语言教程Day5</a>
-          </li>
-        
-          <li>
-            <a href="/2025/09/19/day4/">GO语言教程Day4</a>
           </li>
         
       </ul>

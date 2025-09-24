@@ -14,7 +14,7 @@
 <meta property="og:description" content="1.byte和rune类型组成每个字符串的元素叫”字符“，可以通过便利字符串元素获得字符，字符用单引号(‘’)包裹 如何定义一个字符字符属于int类型 var a &#x3D;&#39;a&#39; 这么定义是正确的 var a &#x3D;&#39;aa&#39; 这么定义是错误的，byte类型只能含有一个元素   var a &#x3D; &#39;a&#39;   fmt.Printf(&quot;类型是%T,字符是%v">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2025-09-23T13:23:03.000Z">
-<meta property="article:modified_time" content="2025-09-23T15:07:03.572Z">
+<meta property="article:modified_time" content="2025-09-24T13:28:42.166Z">
 <meta property="article:author" content="reason">
 <meta property="article:tag" content="byte类型和rune类型">
 <meta name="twitter:card" content="summary">
@@ -218,7 +218,36 @@ for i, r := range s &#123;
 </tr>
 </tbody></table>
 <p>每个字符都有一个唯一的 Unicode 码点，例如 <code>&quot;中&quot;</code> 的码点是 20013（十进制）。<br> 在 UTF-8 编码下，它占用 3 个字节 <code>[228 184 173]</code>（其他编码方式可能不同）。<br> 当使用 <code>range</code> 或转换成 <code>[]rune</code> 遍历字符串时，程序会把 UTF-8 字节序列解码成对应的码点，再用 <code>%c</code> 打印时显示对应字符。<br> 而如果用按字节循环（如 <code>for i := 0; i &lt; len(s); i++</code>）逐个打印，就只能看到 UTF-8 的原始字节值 <code>[228 184 173]</code>，所以看起来像“三个三位数”</p>
-<p>一句话而言：rune是按字符，而len是按字节</p>
+<p>一句话而言：range是按字符，而len是按字节</p>
+<h3 id="修改字符串"><a href="#修改字符串" class="headerlink" title="修改字符串"></a>修改字符串</h3><p>要修改字符串，需要先将其转换成[]rune 或[]byte，完成后再转换为 string。无论哪种转换，<br>都会重新分配内存，并复制字节数组。</p>
+<p>我们想要将big中的b改为p，想到用下面的方法</p>
+<p>  <code>s1 :=&quot;big&quot;</code></p>
+<p>  <code>s1[0] = &#39;p&#39;</code></p>
+<p>  <code>fmt.Println(s1)</code></p>
+<p>然而结果会直接报错，这是因为GO语言规定：<code>s1</code> 是 <strong>string</strong> 类型，本质上是一个不可变的字节序列</p>
+<p>这里有一些关于byte的小常识：</p>
+<p>byte只能处理单个字节，byte的本质是0-255的整数，是ASCII码的别名，  <strong>也就是当我们定义或者取字符的时候，实际上定义或者取的是0-255的一个数</strong>，所以只能接收字符常量或整数值，不能直接转换整个字符串。如果要处理字符串，要么取单个索引（<code>s[0]</code>），要么转成 <code>[]byte</code></p>
+<p><code>a := byte(&#39;a&#39;)</code></p>
+<p>  <code>fmt.Println(a)</code></p>
+<p>  <code>b := byte(255)</code></p>
+<p>  <code>fmt.Println(b)</code></p>
+<p>以上两种是可以直接用byte转化的例子，得到的结果为</p>
+<p>97<br>255</p>
+<p>我们想修改字符串，可以定义切片，修改切片，最后转化为string类型再输出，例如：</p>
+<p>  <code>str := &quot;big&quot;</code></p>
+<p>  <code>strChange := []byte(str)</code></p>
+<p>  <code>strChange[0] = &#39;p&#39;</code></p>
+<p>  <code>fmt.Println(string(strChange))</code></p>
+<p>这里我们有常识：<strong>切片里面的每个数字都对应一个字符</strong>，可以通过string来转化为字符串</p>
+<p>比如这个代码，它转化过程就是先把big转化为切片，取切片的第一个元素，用一个新的字符更改，最后再转化为字符串输出，如果最后一行没有string转换，输出的是[112 105 103]。</p>
+<h4 id="如果字符串中含有汉字呢？"><a href="#如果字符串中含有汉字呢？" class="headerlink" title="如果字符串中含有汉字呢？"></a>如果字符串中含有汉字呢？</h4><p>我们使用rune来转换：</p>
+<p>  <code>str := &quot;你 好,big&quot;</code></p>
+<p>  <code>strChange := []rune(str)</code></p>
+<p>  <code>strChange[0] = &#39;大&#39;</code></p>
+<p>  <code>strChange[1] = &#39;家&#39;</code></p>
+<p>  <code>fmt.Println(string(strChange))</code></p>
+<p>最后得到的输出为 大家好,big</p>
+<p>当然，如果全为字母，<strong>也可以直接使用rune转换</strong>，所以说rune比byte功能更强大</p>
 
       
     </div>
@@ -234,6 +263,15 @@ for i, r := range s &#123;
   
     
 <nav id="article-nav">
+  
+    <a href="/2025/09/24/Day9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          GO语言教程Day9
+        
+      </div>
+    </a>
   
   
     <a href="/2025/09/22/Day7/" id="article-nav-older" class="article-nav-link-wrap">
@@ -258,7 +296,7 @@ for i, r := range s &#123;
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li></ul>
     </div>
   </div>
 
@@ -268,7 +306,7 @@ for i, r := range s &#123;
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a>
+      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">GOlang中基本数据类型之间的转换</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a>
     </div>
   </div>
 
@@ -290,6 +328,10 @@ for i, r := range s &#123;
       <ul>
         
           <li>
+            <a href="/2025/09/24/Day9/">GO语言教程Day9</a>
+          </li>
+        
+          <li>
             <a href="/2025/09/23/Day8/">GO语言教程Day8</a>
           </li>
         
@@ -303,10 +345,6 @@ for i, r := range s &#123;
         
           <li>
             <a href="/2025/09/21/Day5/">GO语言教程Day5</a>
-          </li>
-        
-          <li>
-            <a href="/2025/09/19/day4/">GO语言教程Day4</a>
           </li>
         
       </ul>
