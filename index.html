@@ -76,6 +76,44 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Day12" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/05/Day12/" class="article-date">
+  <time class="dt-published" datetime="2025-10-05T14:17:37.000Z" itemprop="datePublished">2025-10-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/05/Day12/">Day12</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/05/Day12/" data-id="cmgdsdu0n0000v0d1c0eb35rt" data-title="Day12" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Day11" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/10/05/Day11/" class="article-date">
@@ -98,7 +136,111 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        
+        <h1 id="1-运算符联系题"><a href="#1-运算符联系题" class="headerlink" title="1. 运算符联系题"></a>1. 运算符联系题</h1><p>练习1 ： 有两个变量，a和b，要求将其进行交换，最终打印结果</p>
+<p>  <code>var a = 10</code></p>
+<p>  <code>var b = 34</code></p>
+<p>  <code>t := a</code></p>
+<p>  <code>a = b</code></p>
+<p>  <code>b = t</code></p>
+<p>  <code>fmt.Println(a, b)</code></p>
+<p>结果为34 10</p>
+<p>定义一个中间变量t储存a的值</p>
+<p>练习2：依旧是上面问题，但是不能使用中间变量方法</p>
+<p>我的方法：</p>
+<p>直接对a,b同时赋值对方的值</p>
+<p>  <code>var a = 10</code></p>
+<p>  <code>var b = 34</code></p>
+<p>  <code>fmt.Println(a, b)</code></p>
+<p>  <code>a, b = b, a</code></p>
+<p>  <code>fmt.Println(a, b)</code></p>
+<p>示范方法：</p>
+<p>  <code>var a = 10</code></p>
+<p>  <code>var b = 34</code></p>
+<p>  <code>a = a + b</code></p>
+<p>  <code>b = a - b</code></p>
+<p>  <code>a = a - b</code></p>
+<p>  <code>fmt.Println(a, b)</code></p>
+<p>练习3： 假如还有100天放假，还剩多少个星期余多少天？</p>
+<p>(一个星期7天)</p>
+<p>  <code>var a = 100</code></p>
+<p>  <code>var b = 7</code></p>
+<p>  <code>c := a / b</code></p>
+<p>  <code>d := a % b</code></p>
+<p>  <code>fmt.Printf(&quot;还剩%v个星期%v天&quot;, c, d)</code></p>
+<p>结果为：还剩14个星期2天</p>
+<h1 id="2-位运算符-了解"><a href="#2-位运算符-了解" class="headerlink" title="2. 位运算符(了解)"></a>2. 位运算符(了解)</h1><p>位运算符对整数在内存中的二进制位进行操作</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>示例</th>
+<th>含义说明</th>
+<th>适用类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;</code></td>
+<td>按位与</td>
+<td><code>a &amp; b</code></td>
+<td>对应二进制位都为 1 时结果为 1</td>
+<td>整数类型</td>
+</tr>
+<tr>
+<td>|</td>
+<td>按位或</td>
+<td>a | b</td>
+<td>两数有一个为1时结果为1</td>
+<td>整数类型</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>按位异或</td>
+<td><code>a ^ b</code></td>
+<td>对应二进制位不同为 1，相同为 0</td>
+<td>整数类型</td>
+</tr>
+<tr>
+<td><code>&amp;^</code></td>
+<td>按位清零（AND NOT）</td>
+<td><code>a &amp;^ b</code></td>
+<td>将 <code>a</code> 中对应 <code>b</code> 为 1 的位清零，其余位保持不变</td>
+<td>整数类型</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>左移</td>
+<td><code>a &lt;&lt; 2</code></td>
+<td>将 <code>a</code> 的二进制位左移 2 位，高位丢弃，低位补 0</td>
+<td>整数类型</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>右移</td>
+<td><code>a &gt;&gt; 2</code></td>
+<td>将 <code>a</code> 的二进制位右移 2 位，符号位保持（有符号数）</td>
+<td>整数类型</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<pre><code>a := 6  // 0110
+b := 3  // 0011
+
+fmt.Println(&quot;a &amp; b =&quot;, a &amp; b)   // 2  -&gt; 0010
+fmt.Println(&quot;a | b =&quot;, a | b)   // 7  -&gt; 0111
+fmt.Println(&quot;a ^ b =&quot;, a ^ b)   // 5  -&gt; 0101
+fmt.Println(&quot;a &amp;^ b =&quot;, a &amp;^ b) // 4  -&gt; 010
+</code></pre>
+<p>也就是将十进制的数转化为二进制进行同位的运算</p>
+<p>左移</p>
+<p>  <code>a := 6 // 0110</code></p>
+<p>  <code>a = a &lt;&lt; 2</code></p>
+<p>  <code>fmt.Println(a)</code></p>
+<p>左移相当于乘以2的n次方，上面结果为24</p>
+<p>右移</p>
+<p>​    <code>a := 10      // 二进制 1010`   `fmt.Println(a &gt;&gt; 1) // 10 / 2 = 5`   `fmt.Println(a &gt;&gt; 2) // 10 / 4 = 2  （丢掉小数 0.5）`   `fmt.Println(a &gt;&gt; 3) // 10 / 8 = 1  （丢掉小数 0.25）</code></p>
+<p>右移代表整除2的n次方，即右移只保留商的整数部分</p>
+
       
     </div>
     <footer class="article-footer">
@@ -1472,287 +1614,6 @@ fmt.Println(&quot;周长:&quot;, p)
 
 
   
-    <article id="post-Day2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/17/Day2/" class="article-date">
-  <time class="dt-published" datetime="2025-09-17T10:44:11.000Z" itemprop="datePublished">2025-09-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/17/Day2/">GO语言学习记录Day2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="1-为什么在go语言中第一行一定要写package？"><a href="#1-为什么在go语言中第一行一定要写package？" class="headerlink" title="1.为什么在go语言中第一行一定要写package？"></a>1.为什么在go语言中第一行一定要写package？</h1><h3 id="1-程序是以-包（package）-为基本组织单位的"><a href="#1-程序是以-包（package）-为基本组织单位的" class="headerlink" title="1. 程序是以 包（package） 为基本组织单位的"></a>1. 程序是以 <strong>包（package）</strong> 为基本组织单位的</h3><ul>
-<li><p>Go 的所有源文件必须属于某个包，编译器才能识别。</p>
-</li>
-<li><p>每个 <code>.go</code> 文件都需要通过 <code>package 包名</code> 来声明自己属于哪个包</p>
-<p>比如</p>
-<p><code>package main</code>声明了此文件属于main包</p>
-<p>注意：package main表面这个文件是一个可执行程序，而如果package后面声明了其他的变量，则是一个库，给别的文件import，类似于python的库</p>
-<p>这里用<code>package main</code>示范</p>
-</li>
-</ul>
-<p><code>package main</code> 后面无脑接上<code>func main()&#123;&#125;</code></p>
-<p>类似于：</p>
-<p><code>package main</code></p>
-<p><code>func main() &#123;</code></p>
-<p>&#96;&#96;  </p>
-<p><code>&#125;</code></p>
-<h2 id="2-fmt包"><a href="#2-fmt包" class="headerlink" title="2.fmt包"></a>2.fmt包</h2><p>fmt 包是 <strong>Go 标准库</strong> 里非常常用的一个包，名字来自 <strong>format</strong>（格式化，fmt包主要用来 **格式化输入输出，就像 C 语言里的printf&#x2F;scanf，或者 Python 里的print()、input()</p>
-<h3 id="常用函数"><a href="#常用函数" class="headerlink" title="常用函数"></a>常用函数</h3><p>输出函数</p>
-<p><code>fmt.Print()</code> → 普通输出，不换行。</p>
-<p><code>fmt.Println()</code> → 输出并换行。</p>
-<p><code>fmt.Printf()</code> → 格式化输出，可以控制显示格式。</p>
-<h2 id="2-1-一次输出多句话"><a href="#2-1-一次输出多句话" class="headerlink" title="2.1 一次输出多句话"></a>2.1 一次输出多句话</h2><p>例如<code>fmt.Print(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)</code>，输出ABC不会有空格，而<code>fmt.Println(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;)</code>输出的A B C则会有空格</p>
-<h2 id="2-2-变量定义的两种方法"><a href="#2-2-变量定义的两种方法" class="headerlink" title="2.2 变量定义的两种方法"></a>2.2 变量定义的两种方法</h2><p>例如，我们可以用<code>var a=&quot;aaa&quot;</code>来定义一个字符串，或者也可以使用类型推导方法来定义，类似于<code>a := &quot;aaa&quot;</code>注意，在go语言中，定义了的变量必须使用，不使用的话甚至会<strong>报错</strong></p>
-<p>Println 和 Printf的区别</p>
-<p><code>fmt.Printf(&quot;%v&quot;, a)</code>运行这行代码一样会打印出aaa</p>
-<p>示例： 想要打印三个数字，定义如下</p>
-<p>  <code>var a int = 10</code></p>
-<p>  <code>var b int = 5</code></p>
-<p>  <code>var c int = 3</code></p>
-<p>用下面两种方式打印</p>
-<p>  <code>fmt.Println(&quot;a=&quot;, a, &quot;b=&quot;, b, &quot;c=&quot;, c)</code></p>
-<p>  <code>fmt.Printf(&quot;a=%v b=%v c=%v&quot;, a, b, c)</code></p>
-<p>得到结果如下：</p>
-<p>a&#x3D; 10 b&#x3D; 5 c&#x3D; 3<br>a&#x3D;10 b&#x3D;5 c&#x3D;3</p>
-<p>可以看出，%v相当于占位符，后面逗号的变量给占位符赋值，printf的适用性更好</p>
-<p>此外，Printf函数默认不换行，如果想要换行，可使用如下方法</p>
-<p><code>fmt.Printf(&quot;a=%v b=%v c=%v\n&quot;, a, b, c)</code></p>
-<h2 id="2-3-注释方法："><a href="#2-3-注释方法：" class="headerlink" title="2.3 注释方法："></a>2.3 注释方法：</h2><p><code>//</code>可用于注释一行，当需要注释多行时，用<code>/*接内容*/</code>，也可以使用快捷键ctrl+&#x2F;</p>
-<h2 id="2-4-关于import函数"><a href="#2-4-关于import函数" class="headerlink" title="2.4 关于import函数"></a>2.4 关于import函数</h2><p>示范代码：</p>
-<p><code>package main</code></p>
-<p><code>import &quot;fmt&quot;</code></p>
-<p><code>func main() &#123;</code></p>
-<p>  <code>fmt.Println(&quot;你好&quot;)</code></p>
-<p><code>&#125;</code></p>
-<p>在运行这个代码时突然报错# command-line-arguments .\main.go:6:1: syntax error: unexpected }, expected name or ( 有点莫名奇妙，我代码的第六行并没有多余的花括号，怀疑是复制粘贴的代码里有多余的符号，重新写了一遍代码成功运行，如果安装了go的插件，即使不写import函数，保存后也会自动加入</p>
-<h2 id="2-5-打印出变量类型"><a href="#2-5-打印出变量类型" class="headerlink" title="2.5 打印出变量类型"></a>2.5 打印出变量类型</h2><p>使用如下函数</p>
-<p><code>fmt.Printf(&quot;d的类型是%T&quot;, d)</code></p>
-<p>打印出结果为d的类型是string</p>
-<h2 id="2-6-GO语言常用占位符表"><a href="#2-6-GO语言常用占位符表" class="headerlink" title="2.6 GO语言常用占位符表"></a>2.6 GO语言常用占位符表</h2><table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>示例输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>%v</code></td>
-<td>默认格式（万能）</td>
-<td><code>42</code>, <code>3.14</code>, <code>true</code>, <code>[1 2 3]</code></td>
-</tr>
-<tr>
-<td><code>%+v</code></td>
-<td>结构体时显示字段名</td>
-<td><code>&#123;Name:Tom Age:20&#125;</code></td>
-</tr>
-<tr>
-<td><code>%#v</code></td>
-<td>Go 语法表示（带类型信息）</td>
-<td><code>main.Person&#123;Name:&quot;Tom&quot;, Age:20&#125;</code></td>
-</tr>
-<tr>
-<td><code>%T</code></td>
-<td>打印变量类型</td>
-<td><code>int</code>, <code>float64</code>, <code>[]string</code></td>
-</tr>
-<tr>
-<td><code>%%</code></td>
-<td>输出一个百分号 <code>%</code></td>
-<td><code>%</code></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>示例输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>%d</code></td>
-<td>十进制</td>
-<td><code>123</code></td>
-</tr>
-<tr>
-<td><code>%b</code></td>
-<td>二进制</td>
-<td><code>1111011</code></td>
-</tr>
-<tr>
-<td><code>%o</code></td>
-<td>八进制</td>
-<td><code>173</code></td>
-</tr>
-<tr>
-<td><code>%x</code></td>
-<td>十六进制（小写）</td>
-<td><code>7b</code></td>
-</tr>
-<tr>
-<td><code>%X</code></td>
-<td>十六进制（大写）</td>
-<td><code>7B</code></td>
-</tr>
-<tr>
-<td><code>%c</code></td>
-<td>Unicode 对应字符</td>
-<td><code>A</code> (65)</td>
-</tr>
-<tr>
-<td><code>%q</code></td>
-<td>单引号包裹的字符</td>
-<td><code>&#39;A&#39;</code></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>示例输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>%f</code></td>
-<td>小数形式</td>
-<td><code>3.141593</code></td>
-</tr>
-<tr>
-<td><code>%e</code></td>
-<td>科学计数法（小写 e）</td>
-<td><code>3.141593e+00</code></td>
-</tr>
-<tr>
-<td><code>%E</code></td>
-<td>科学计数法（大写 E）</td>
-<td><code>3.141593E+00</code></td>
-</tr>
-<tr>
-<td><code>%g</code></td>
-<td>根据情况用 <code>%f</code> 或 <code>%e</code></td>
-<td><code>3.14159</code></td>
-</tr>
-<tr>
-<td><code>%G</code></td>
-<td>根据情况用 <code>%f</code> 或 <code>%E</code></td>
-<td><code>3.14159</code></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>示例输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>%s</code></td>
-<td>字符串</td>
-<td><code>hello</code></td>
-</tr>
-<tr>
-<td><code>%q</code></td>
-<td>双引号包裹的字符串，带转义</td>
-<td><code>&quot;hello\n&quot;</code></td>
-</tr>
-<tr>
-<td><code>%x</code></td>
-<td>字符串或字节切片的十六进制</td>
-<td><code>68656c6c6f</code></td>
-</tr>
-<tr>
-<td><code>%X</code></td>
-<td>十六进制（大写）</td>
-<td><code>68656C6C6F</code></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>示例输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>%t</code></td>
-<td><code>true</code> 或 <code>false</code></td>
-<td><code>true</code></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>占位符</th>
-<th>说明</th>
-<th>示例输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>%p</code></td>
-<td>指针（十六进制地址）</td>
-<td><code>0xc000010090</code></td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th>示例</th>
-<th>说明</th>
-<th>输出</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>%6d</code></td>
-<td>宽度 6，右对齐</td>
-<td><code>   123</code></td>
-</tr>
-<tr>
-<td><code>%-6d</code></td>
-<td>宽度 6，左对齐</td>
-<td><code>123   </code></td>
-</tr>
-<tr>
-<td><code>%06d</code></td>
-<td>宽度 6，左侧补 0</td>
-<td><code>000123</code></td>
-</tr>
-</tbody></table>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/17/Day2/" data-id="cmfo1c4da000178d1e9484h8q" data-title="GO语言学习记录Day2" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1803,6 +1664,10 @@ fmt.Println(&quot;周长:&quot;, p)
       <ul>
         
           <li>
+            <a href="/2025/10/05/Day12/">Day12</a>
+          </li>
+        
+          <li>
             <a href="/2025/10/05/Day11/">GO语言教程Day11</a>
           </li>
         
@@ -1816,10 +1681,6 @@ fmt.Println(&quot;周长:&quot;, p)
         
           <li>
             <a href="/2025/09/23/Day8/">GO语言教程Day8</a>
-          </li>
-        
-          <li>
-            <a href="/2025/09/22/Day7/">GO语言教程Day7</a>
           </li>
         
       </ul>
