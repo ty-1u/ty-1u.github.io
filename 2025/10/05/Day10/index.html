@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>GO语言教程Day10 | reason的学习记录</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="1. go语言内置的运算符1.1 算数运算符加 减 乘 除 取余&#x2F;&#x2F; + - * &#x2F; %   var a, b &#x3D; 7, 3   fmt.Println(a+b, a-b, a*b, a&#x2F;b, a%b) 输出结果为 10 4 21 2 1 除法注意，如果运算的数都是整数。除后，去掉小数部分，只保留整数部分 当公式中出现常量的时候，系统会自动统一变量和常量的类型，如：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GO语言教程Day10">
+<meta property="og:url" content="http://example.com/2025/10/05/Day10/index.html">
+<meta property="og:site_name" content="reason的学习记录">
+<meta property="og:description" content="1. go语言内置的运算符1.1 算数运算符加 减 乘 除 取余&#x2F;&#x2F; + - * &#x2F; %   var a, b &#x3D; 7, 3   fmt.Println(a+b, a-b, a*b, a&#x2F;b, a%b) 输出结果为 10 4 21 2 1 除法注意，如果运算的数都是整数。除后，去掉小数部分，只保留整数部分 当公式中出现常量的时候，系统会自动统一变量和常量的类型，如：">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-10-05T09:56:24.000Z">
+<meta property="article:modified_time" content="2025-10-05T12:42:27.738Z">
+<meta property="article:author" content="reason">
+<meta property="article:tag" content="go语言的运算符">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="reason的学习记录" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">reason的学习记录</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle"> </a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Day10" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/05/Day10/" class="article-date">
+  <time class="dt-published" datetime="2025-10-05T09:56:24.000Z" itemprop="datePublished">2025-10-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      GO语言教程Day10
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-go语言内置的运算符"><a href="#1-go语言内置的运算符" class="headerlink" title="1. go语言内置的运算符"></a>1. go语言内置的运算符</h1><h3 id="1-1-算数运算符"><a href="#1-1-算数运算符" class="headerlink" title="1.1 算数运算符"></a>1.1 算数运算符</h3><p>加 减 乘 除 取余&#x2F;&#x2F; + - * &#x2F; %</p>
+<p>  <code>var a, b = 7, 3</code></p>
+<p>  <code>fmt.Println(a+b, a-b, a*b, a/b, a%b)</code></p>
+<p>输出结果为 10 4 21 2 1</p>
+<p>除法注意，如果运算的数都是整数。除后，去掉小数部分，<strong>只保留整数部分</strong></p>
+<p>当公式中出现常量的时候，<strong>系统会自动统一变量和常量的类型</strong>，如：</p>
+<p><code>fmt.Println(10.0/10)</code></p>
+<p>代码不会报错，而是统一为浮点数运行(10&#x2F;10.0一样结果为浮点数)</p>
+<p>如果运算变量都是浮点数(<strong>注意，浮点数只能和浮点数运算，否则会报错</strong>)，运算结果同样为浮点数，例如：</p>
+<p>  <code>var a, b = 7.0, 3.0</code></p>
+<p>  <code>fmt.Println(a / b)</code></p>
+<p>结果为 2.3333333333333335</p>
+<p><strong>go语言浮点数不能用取余计算</strong></p>
+<p>负数的取余计算：</p>
+<p>  <code>fmt.Println(-10 % 3)</code></p>
+<p>  <code>fmt.Println(10 % -3)</code></p>
+<p>输出结果为 -1 1  计算方法为 余数&#x3D;被除数- (被除数&#x2F;除数)*除数</p>
+<table>
+<thead>
+<tr>
+<th>被除数 (a)</th>
+<th>除数 (b)</th>
+<th>表达式</th>
+<th>结果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>+5</td>
+<td>+2</td>
+<td>5 % 2</td>
+<td><strong>+1</strong></td>
+<td>都是正数</td>
+</tr>
+<tr>
+<td>+5</td>
+<td>-2</td>
+<td>5 % -2</td>
+<td><strong>+1</strong></td>
+<td>结果跟被除数一样是正数</td>
+</tr>
+<tr>
+<td>-5</td>
+<td>+2</td>
+<td>-5 % 2</td>
+<td><strong>-1</strong></td>
+<td>结果跟被除数一样是负数</td>
+</tr>
+<tr>
+<td>-5</td>
+<td>-2</td>
+<td>-5 % -2</td>
+<td><strong>-1</strong></td>
+<td>结果跟被除数一样是负数</td>
+</tr>
+</tbody></table>
+<p>可以总结一个口诀： <strong>余数看左边，符号随被除</strong></p>
+<p>也就是把被除数和除数按照绝对值运算，最后， 被除数的符号和余数的符号一致，确定余数的符号</p>
+<h3 id="1-2-go的自增自减运算"><a href="#1-2-go的自增自减运算" class="headerlink" title="1.2 go的自增自减运算"></a>1.2 go的自增自减运算</h3><p>在go中，++ – 只能独立使用：</p>
+<p>  <code>var i = 8</code></p>
+<p>  <code>var a int</code> </p>
+<p>  <code>a := i++</code></p>
+<p>这是错误的写法，自增自减是单独的运算符，不能和赋值运算符一起运算(在其他语言可以)，上面语句对a进行赋值，在go语言里是不行的</p>
+<p>在go中，++ –只能放在后面，比如 a++ </p>
+<p>  <code>var a = 12</code></p>
+<p>  <code>a++</code></p>
+<p><code>//a--</code></p>
+<p>  <code>fmt.Println(a)</code></p>
+<p>结果为13， 在go语言里，自增自减只能<strong>单独使用</strong></p>
+<h3 id="1-3-go的关系运算符"><a href="#1-3-go的关系运算符" class="headerlink" title="1.3 go的关系运算符"></a>1.3 go的关系运算符</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>示例</th>
+<th>结果说明</th>
+<th>返回类型</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>==</code></td>
+<td>等于（Equal to）</td>
+<td><code>a == b</code></td>
+<td>若 <code>a</code> 等于 <code>b</code>，结果为 <code>true</code>，否则为 <code>false</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>不等于（Not equal to）</td>
+<td><code>a != b</code></td>
+<td>若 <code>a</code> 不等于 <code>b</code>，结果为 <code>true</code>，否则为 <code>false</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>大于（Greater than）</td>
+<td><code>a &gt; b</code></td>
+<td>若 <code>a</code> 大于 <code>b</code>，结果为 <code>true</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>小于（Less than）</td>
+<td><code>a &lt; b</code></td>
+<td>若 <code>a</code> 小于 <code>b</code>，结果为 <code>true</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>大于等于（Greater than or equal to）</td>
+<td><code>a &gt;= b</code></td>
+<td>若 <code>a</code> 大于或等于 <code>b</code>，结果为 <code>true</code></td>
+<td><code>bool</code></td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>小于等于（Less than or equal to）</td>
+<td><code>a &lt;= b</code></td>
+<td>若 <code>a</code> 小于或等于 <code>b</code>，结果为 <code>true</code></td>
+<td><code>bool</code></td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<p>  <code>var a = 9</code></p>
+<p>  <code>var b = 10</code></p>
+<p>  <code>fmt.Println(a &gt; b)</code></p>
+<p>结果为false，输出的结果为bool类型</p>
+<p>注意，我们依旧要保证 a b 数据类型保持一致</p>
+<p>主要用于条件判断的语句，例如：</p>
+<p>  <code>var a = 9</code></p>
+<p>  <code>var b = 10</code></p>
+<p>  <code>flag := a &lt; b</code></p>
+<p>  <code>if flag &#123;</code></p>
+<p>​    <code>fmt.Println(&quot;a&lt;b&quot;)</code></p>
+<p>  <code>&#125;</code></p>
+<p>判断结果为true，if语句运行，打印出a&lt;b，如果判断结果为false，if语句不会运行</p>
+<h3 id="1-4-go-中的逻辑运算符"><a href="#1-4-go-中的逻辑运算符" class="headerlink" title="1.4 go 中的逻辑运算符"></a>1.4 go 中的逻辑运算符</h3><h4 id="and-符号为"><a href="#and-符号为" class="headerlink" title="and 符号为 &amp;&amp;"></a>and 符号为 &amp;&amp;</h4><p>类似于 乘 ，只要有一方为false，输出的结果为false</p>
+<p>  <code>var a = 15</code></p>
+<p>  <code>var b = 10</code></p>
+<p>  <code>fmt.Println(a &lt; 20 &amp;&amp; b &gt; 20)</code></p>
+<p>结果为false</p>
+<h4 id="or-符号为"><a href="#or-符号为" class="headerlink" title="or 符号为 ||"></a>or 符号为 ||</h4><p>类似于加</p>
+<p>  <code>var a = 15</code></p>
+<p>  <code>var b = 10</code></p>
+<p>  <code>fmt.Println(a &lt; 20 || b &gt; 20)</code></p>
+<p>结果为true</p>
+<h4 id="not-符号为-！"><a href="#not-符号为-！" class="headerlink" title="not 符号为 ！"></a>not 符号为 ！</h4><p>取反</p>
+<p>  <code>var a = true</code></p>
+<p>  <code>fmt.Println(!a)</code></p>
+<p>结果为false</p>
+<h4 id="逻辑与和逻辑或-短路"><a href="#逻辑与和逻辑或-短路" class="headerlink" title="逻辑与和逻辑或 短路"></a>逻辑与和逻辑或 短路</h4><p>and前面为true，会继续执行后面</p>
+<p><code>func test() bool&#123;</code></p>
+<p>  <code>fmt.Println(&quot;test...&quot;)</code></p>
+<p>  <code>return true</code></p>
+<p><code>&#125;</code></p>
+<p>  <code>var a = 9</code></p>
+<p>  <code>if a&gt;8 &amp;&amp; test()&#123;</code></p>
+<p>​    <code>fmt.Println(&quot;执行&quot;)</code></p>
+<p>定义了 test方法， a&gt;8显然是true，代码先执行了test方法，然后执行了if的语句，结果为</p>
+<p>test…<br>执行</p>
+<p>如果将条件改为a&gt;10，则什么都不会运行，<strong>相当于前面的条件短路了test方法</strong></p>
+<p>or 与 and 有些不同：</p>
+<p>  var a &#x3D; 9</p>
+<p>  if a &gt; 10 || test() {</p>
+<p>​    fmt.Println(“执行”)</p>
+<p>可以看到，前面结果为false，依旧运行了后面的代码</p>
+<p>此时代码的运行结果为</p>
+<p>test…<br>执行</p>
+<p>我们可以这样分析上面代码：</p>
+<p>首先 a&gt;10，产生了false，由于逻辑运算符是or，必须运行test才能知道运不运行if语句，运行test后，返回true，此时or运算通过，再运行if</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>左边结果</th>
+<th>是否执行右边</th>
+<th>整体结果</th>
+<th>口诀</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>&amp;&amp;</code></td>
+<td>逻辑与（AND）</td>
+<td><code>false</code></td>
+<td>❌ 不执行右边</td>
+<td>一定 <code>false</code></td>
+<td>“与假短路” &#x2F; “左假右不看”</td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>逻辑与（AND）</td>
+<td><code>true</code></td>
+<td>✅ 执行右边</td>
+<td>看右边结果</td>
+<td>“都真才真”</td>
+</tr>
+<tr>
+<td>||</td>
+<td>逻辑或</td>
+<td>false</td>
+<td>✅ 执行右边</td>
+<td>看右边结果</td>
+<td>右边真则运行，假则不运行</td>
+</tr>
+<tr>
+<td>||</td>
+<td>逻辑或</td>
+<td>true</td>
+<td>❌ 不执行右边</td>
+<td>一定为true</td>
+<td>左真则运行</td>
+</tr>
+</tbody></table>
+<p>即 <strong>如果左边第一个判断可以直接导出整体结果，则不会运行右边判断，直接判断是否运行if语句</strong></p>
+<h3 id="1-5-赋值运算符"><a href="#1-5-赋值运算符" class="headerlink" title="1.5 赋值运算符"></a>1.5 赋值运算符</h3><table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>类型</th>
+<th>示例</th>
+<th>含义说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>=</code></td>
+<td>基本赋值</td>
+<td><code>a = b</code></td>
+<td>将右边的值赋给左边变量</td>
+</tr>
+<tr>
+<td><code>+=</code></td>
+<td>加并赋值</td>
+<td><code>a += b</code></td>
+<td>等同于 <code>a = a + b</code></td>
+</tr>
+<tr>
+<td><code>-=</code></td>
+<td>减并赋值</td>
+<td><code>a -= b</code></td>
+<td>等同于 <code>a = a - b</code></td>
+</tr>
+<tr>
+<td><code>*=</code></td>
+<td>乘并赋值</td>
+<td><code>a *= b</code></td>
+<td>等同于 <code>a = a * b</code></td>
+</tr>
+<tr>
+<td><code>/=</code></td>
+<td>除并赋值</td>
+<td><code>a /= b</code></td>
+<td>等同于 <code>a = a / b</code></td>
+</tr>
+<tr>
+<td><code>%=</code></td>
+<td>取余并赋值</td>
+<td><code>a %= b</code></td>
+<td>等同于 <code>a = a % b</code>（仅适用于整数）</td>
+</tr>
+</tbody></table>
+<p>  <code>var a = 20</code></p>
+<p>  <code>b := 20</code></p>
+<p>  <code>a += b</code></p>
+<p>  <code>fmt.Println(a, b)</code></p>
+<p>此时结果为 40 20</p>
+<p><code>var a = 23 + 2</code></p>
+<p>go语言会先运算+ - * &#x2F;，所以对a的赋值为25</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/05/Day10/" data-id="cmgdp1gwl0001zod18vn5gkyr" data-title="GO语言教程Day10" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">go语言的运算符</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2025/10/05/Day11/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          GO语言教程Day11
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2025/09/24/Day9/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">GO语言教程Day9</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">go语言的运算符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">运算符练习，位运算符</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">GOlang中基本数据类型之间的转换</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">go语言的运算符</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a> <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">运算符练习，位运算符</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/10/">十月 2025</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/09/">九月 2025</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2025/10/05/Day11/">GO语言教程Day11</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/05/Day10/">GO语言教程Day10</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/24/Day9/">GO语言教程Day9</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/23/Day8/">GO语言教程Day8</a>
+          </li>
+        
+          <li>
+            <a href="/2025/09/22/Day7/">GO语言教程Day7</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2025 reason<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
