@@ -98,7 +98,40 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>h</p>
+        <h1 id="1-数组是值类型"><a href="#1-数组是值类型" class="headerlink" title="1. 数组是值类型"></a>1. 数组是值类型</h1><p>在golang中，基本数据类型和数组都是<strong>值类型</strong></p>
+<p>什么是值类型？</p>
+<p><strong>定义：</strong><br> 当一个变量赋值给另一个变量时，会<strong>复制值本身</strong>，两个变量互不影响</p>
+<p>也就是说，<strong>每个变量都有自己独立的数据副本</strong></p>
+<p>如：</p>
+<pre><code>a := 10
+b := a  // 复制了 a 的值
+
+b = 20  // 改变 b，不会影响 a
+
+fmt.Println(&quot;a =&quot;, a)
+fmt.Println(&quot;b =&quot;, b)
+</code></pre>
+<p>对数组，也有这个结论</p>
+<h3 id="Go中常见值类型"><a href="#Go中常见值类型" class="headerlink" title="Go中常见值类型"></a>Go中常见值类型</h3><table>
+<thead>
+<tr>
+<th>类型分类</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>基本数据类型</strong></td>
+<td><code>int</code>, <code>float64</code>, <code>bool</code>, <code>string</code></td>
+</tr>
+<tr>
+<td><strong>数组</strong></td>
+<td><code>[5]int&#123;1, 2, 3, 4, 5&#125;</code></td>
+</tr>
+<tr>
+<td><strong>结构体</strong></td>
+<td><code>struct</code> 自定义类型</td>
+</tr>
+</tbody></table>
 
       
     </div>
