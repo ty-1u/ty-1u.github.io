@@ -4,19 +4,19 @@
   <meta charset="utf-8">
   
   
-  <title>GO语言教程Day9 | reason的学习记录</title>
+  <title>Day16 | reason的学习记录</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="1. 数值类型的转换1.1 int8与int16之间的转换1.2 float32和float64之间的转换1.3 整型和浮点型之间的转换建议将整型转化为浮点型 2. 其他类型转换为String类型2.1 Sprintf转换在前面的教程中，Sprintf用于分割，拼接等，在golang中 fmt.Sprintf也可以将其他类型转换为Strings类型 int类型转换为String类型  var a">
+  <meta name="description" content="1. Array（数组）的介绍数组是指一系列同一类型数据的集合。 数组的类型由 **基本数据类型 和 长度 **定义 2. 数组的定义var 数组名 [数组长度]数据类型   var arr1 [3]int   var arr2 [4]int   var str1 [3]string   fmt.Printf(&quot;arr1:%T,arr2:%T,str1:%T&quot;, arr1, a">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GO语言教程Day9">
-<meta property="og:url" content="http://example.com/2025/09/24/Day9/index.html">
+<meta property="og:title" content="Day16">
+<meta property="og:url" content="http://example.com/2025/10/14/Day16/index.html">
 <meta property="og:site_name" content="reason的学习记录">
-<meta property="og:description" content="1. 数值类型的转换1.1 int8与int16之间的转换1.2 float32和float64之间的转换1.3 整型和浮点型之间的转换建议将整型转化为浮点型 2. 其他类型转换为String类型2.1 Sprintf转换在前面的教程中，Sprintf用于分割，拼接等，在golang中 fmt.Sprintf也可以将其他类型转换为Strings类型 int类型转换为String类型  var a">
+<meta property="og:description" content="1. Array（数组）的介绍数组是指一系列同一类型数据的集合。 数组的类型由 **基本数据类型 和 长度 **定义 2. 数组的定义var 数组名 [数组长度]数据类型   var arr1 [3]int   var arr2 [4]int   var str1 [3]string   fmt.Printf(&quot;arr1:%T,arr2:%T,str1:%T&quot;, arr1, a">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-09-24T13:29:13.000Z">
-<meta property="article:modified_time" content="2025-10-05T09:55:07.322Z">
+<meta property="article:published_time" content="2025-10-14T12:44:51.000Z">
+<meta property="article:modified_time" content="2025-10-14T14:18:37.820Z">
 <meta property="article:author" content="reason">
-<meta property="article:tag" content="GOlang中基本数据类型之间的转换">
+<meta property="article:tag" content="Golang中的数组">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/atom.xml" title="reason的学习记录" type="application/atom+xml">
@@ -78,10 +78,10 @@
 </header>
 
       <div class="outer">
-        <section id="main"><article id="post-Day9" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-Day16" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2025/09/24/Day9/" class="article-date">
-  <time class="dt-published" datetime="2025-09-24T13:29:13.000Z" itemprop="datePublished">2025-09-24</time>
+    <a href="/2025/10/14/Day16/" class="article-date">
+  <time class="dt-published" datetime="2025-10-14T12:44:51.000Z" itemprop="datePublished">2025-10-14</time>
 </a>
     
   </div>
@@ -92,7 +92,7 @@
         
   
     <h1 class="p-name article-title" itemprop="headline name">
-      GO语言教程Day9
+      Day16
     </h1>
   
 
@@ -100,145 +100,129 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h1 id="1-数值类型的转换"><a href="#1-数值类型的转换" class="headerlink" title="1. 数值类型的转换"></a>1. 数值类型的转换</h1><h2 id="1-1-int8与int16之间的转换"><a href="#1-1-int8与int16之间的转换" class="headerlink" title="1.1 int8与int16之间的转换"></a>1.1 int8与int16之间的转换</h2><h2 id="1-2-float32和float64之间的转换"><a href="#1-2-float32和float64之间的转换" class="headerlink" title="1.2 float32和float64之间的转换"></a>1.2 float32和float64之间的转换</h2><h2 id="1-3-整型和浮点型之间的转换"><a href="#1-3-整型和浮点型之间的转换" class="headerlink" title="1.3 整型和浮点型之间的转换"></a>1.3 整型和浮点型之间的转换</h2><p>建议将整型转化为浮点型</p>
-<h1 id="2-其他类型转换为String类型"><a href="#2-其他类型转换为String类型" class="headerlink" title="2. 其他类型转换为String类型"></a>2. 其他类型转换为String类型</h1><h2 id="2-1-Sprintf转换"><a href="#2-1-Sprintf转换" class="headerlink" title="2.1 Sprintf转换"></a>2.1 Sprintf转换</h2><p>在前面的教程中，Sprintf用于分割，拼接等，在golang中 fmt.Sprintf也可以将其他类型转换为Strings类型</p>
-<h3 id="int类型转换为String类型"><a href="#int类型转换为String类型" class="headerlink" title="int类型转换为String类型"></a>int类型转换为String类型</h3><p>  <code>var a int = 20</code></p>
-<p>  <code>str1 := fmt.Sprintf(&quot;%d&quot;, a)</code></p>
-<p>  <code>fmt.Printf(&quot;值%v 类型%T&quot;, str1, str1)</code></p>
-<p>%d表示将a以十进制输出，此时输出的是string类型的数据，输出为 值20 类型string</p>
-<h3 id="float类型转换为String类型"><a href="#float类型转换为String类型" class="headerlink" title="float类型转换为String类型"></a>float类型转换为String类型</h3><p>  <code>var b float64 = 12.123</code></p>
-<p>  <code>str2 := fmt.Sprintf(&quot;%f&quot;, b)</code></p>
-<p>  <code>fmt.Printf(&quot;值%v 类型%T&quot;, str2, str2)</code></p>
-<p>此时输出为 值12.123000 类型string</p>
-<p>类似的，bool类型转化为String类型是**%t**，得到的结果是字符串true</p>
-<p>字符转化为String类型是**%c**，原样输出，前面也有提到</p>
-<h2 id="2-2-使用strconv包里面的几种转换方法转换"><a href="#2-2-使用strconv包里面的几种转换方法转换" class="headerlink" title="2.2 使用strconv包里面的几种转换方法转换"></a>2.2 使用strconv包里面的几种转换方法转换</h2><p>  <code>var a int = 20</code></p>
-<p>  <code>var b float64 = 12.123</code></p>
-<p>  <code>var c bool = true</code></p>
-<p>  <code>var d byte = &#39;a&#39;</code></p>
-<p>  <code>str1 := strconv.FormatInt(int64(a), 10)</code></p>
-<p>  <code>str2 := strconv.FormatFloat(b, &#39;f&#39;, 2, 64)</code></p>
-<p>  <code>str3 := strconv.FormatBool(c)</code></p>
-<p>  <code>str4 := strconv.FormatUint(uint64(d), 10)</code></p>
-<p>  <code>fmt.Printf(&quot;%T %T %T %T&quot;, str1, str2, str3, str4)</code></p>
-<p>输出为 string string string string</p>
-<table>
-<thead>
-<tr>
-<th>类型</th>
-<th>函数</th>
-<th>功能</th>
-<th>参数说明</th>
-<th>返回值</th>
-<th></th>
-</tr>
-</thead>
-<tbody><tr>
-<td><strong>整数</strong></td>
-<td><code>strconv.Itoa(i int) string</code></td>
-<td>整数 → 字符串</td>
-<td><code>i</code>：整型</td>
-<td><code>string</code></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td><code>strconv.Atoi(s string) (int, error)</code></td>
-<td>字符串 → 整数</td>
-<td><code>s</code>：十进制字符串</td>
-<td><code>int</code>, <code>error</code></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td><strong><code>strconv.FormatInt(i int64, base int) string</code></strong></td>
-<td>int64 → 指定进制字符串</td>
-<td><code>i</code>：整数<code>base</code>：进制(2~36)</td>
-<td><code>string</code></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td><code>strconv.ParseInt(s string, base int, bitSize int) (int64, error)</code></td>
-<td>字符串 → int64</td>
-<td><code>s</code>：字符串<code>base</code>：进制<code>bitSize</code>：位数(0,8,16,32,64)</td>
-<td><code>int64</code>, <code>error</code></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>浮点</strong></td>
-<td><strong><code>strconv.FormatFloat(f float64, fmt byte, prec, bitSize int) string</code></strong></td>
-<td>浮点数 → 字符串</td>
-<td><code>f</code>：浮点数<code>fmt</code>：格式(<code>b,e,f,g</code>)<code>prec</code>：精度（保留位数）<code>bitSize</code>：32或64</td>
-<td><code>string</code></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td><code>strconv.ParseFloat(s string, bitSize int) (float64, error)</code></td>
-<td>字符串 → 浮点数</td>
-<td><code>s</code>：字符串<code>bitSize</code>：32或64</td>
-<td><code>float64</code>, <code>error</code></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>布尔</strong></td>
-<td><strong><code>strconv.FormatBool(b bool) string</code></strong></td>
-<td>布尔 → 字符串</td>
-<td><code>b</code>：布尔值</td>
-<td><code>&quot;true&quot;</code> 或 <code>&quot;false&quot;</code></td>
-<td></td>
-</tr>
-<tr>
-<td></td>
-<td><code>strconv.ParseBool(s string) (bool, error)</code></td>
-<td>字符串 → 布尔</td>
-<td><code>s</code>：可识别 <code>&quot;1&quot; &quot;t&quot; &quot;true&quot;</code> 等</td>
-<td><code>bool</code>, <code>error</code></td>
-<td></td>
-</tr>
-<tr>
-<td><strong>字符</strong></td>
-<td><strong><code>strconv.FormatUint(i s) string</code></strong></td>
-<td>byte → 字符串</td>
-<td>&#96;i：单个字符 s: 进制</td>
-<td>例如 <code>&#39;你&#39;</code> → <code>&quot;你&quot;</code></td>
-<td></td>
-</tr>
-</tbody></table>
-<p>当然，你也可以用如下方法转换字符为字符串，这样可能会更加简单：</p>
-<p>  <code>var d byte = &#39;a&#39;</code></p>
-<p>  <code>e := string(d)</code></p>
-<p>  <code>fmt.Printf(&quot;类型是%T,数值是%v&quot;, e, e)</code></p>
-<p>输出的结果为 类型是string,数值是a</p>
-<h3 id="2-3-string类型转化为int类型"><a href="#2-3-string类型转化为int类型" class="headerlink" title="2.3 string类型转化为int类型"></a>2.3 string类型转化为int类型</h3><p>使用strconv.ParseInt() 有几个参数类型 第一个是转换的<strong>变量名称</strong>，第二是<strong>转化的进制</strong>，最后一位是转<strong>化成32位或者64位</strong></p>
-<p>  <code>var a = &quot;21&quot;</code></p>
-<p>  <code>b, _ := strconv.ParseInt(a, 10, 64)</code></p>
-<p>  <code>fmt.Println(b)</code></p>
-<p>注意，strconv.ParseInt输出了<strong>两个值</strong>，第一个是转化的数值，第二个是err是否转化错误，我们可以用匿名变量来输出，但不使用</p>
-<p>上面的输出为 21</p>
-<p>如果转化的字符串中不是数字(其中有其他字符），就会返回一个64位的<strong>0</strong>，此时err会返回一串报错的字符</p>
-<h3 id="2-4-string类型转化为float类型"><a href="#2-4-string类型转化为float类型" class="headerlink" title="2.4 string类型转化为float类型"></a>2.4 string类型转化为float类型</h3><p>使用strconv.ParseFloat 第一个是转换的<strong>变量名称</strong>，第二是<strong>转化的位数</strong> 32位或者64位</p>
-<p>  <code>var a = &quot;1.321321&quot;</code></p>
-<p>  <code>b, _ := strconv.ParseFloat(a, 64)</code></p>
-<p>  <code>fmt.Printf(&quot;%v,%T&quot;, b, b)</code></p>
-<p>输出结果为 1.321321,float64</p>
-<p>如果有无法转换的字符，同样会输出<strong>0</strong></p>
-<h3 id="2-5-数值类型和bool类型"><a href="#2-5-数值类型和bool类型" class="headerlink" title="2.5 数值类型和bool类型"></a>2.5 数值类型和bool类型</h3><p>数值类型无法转换为bool类型，bool类型也无法转化为数值类型，否则会发生报错</p>
-<h3 id="2-6-string类型转化为bool型"><a href="#2-6-string类型转化为bool型" class="headerlink" title="2.6 string类型转化为bool型"></a>2.6 string类型转化为bool型</h3><p>不建议，使用strconv.ParseBool，该代码只有一个参数</p>
-<p>  <code>b, _ := strconv.ParseBool(&quot;true&quot;)</code></p>
-<p>  <code>fmt.Printf(&quot;%v,%T&quot;, b, b)</code></p>
-<p>运行上面代码，结果为true，bool</p>
-<p><strong>如果定义的字符串，内容不是true 或者 false，则会返回false</strong></p>
+        <h1 id="1-Array（数组）的介绍"><a href="#1-Array（数组）的介绍" class="headerlink" title="1. Array（数组）的介绍"></a>1. Array（数组）的介绍</h1><p>数组是指一系列同一类型数据的集合。</p>
+<p>数组的类型由 **基本数据类型 和 长度 **定义</p>
+<h1 id="2-数组的定义"><a href="#2-数组的定义" class="headerlink" title="2. 数组的定义"></a>2. 数组的定义</h1><p><code>var 数组名 [数组长度]数据类型</code></p>
+<p>  <code>var arr1 [3]int</code></p>
+<p>  <code>var arr2 [4]int</code></p>
+<p>  <code>var str1 [3]string</code></p>
+<p>  <code>fmt.Printf(&quot;arr1:%T,arr2:%T,str1:%T&quot;, arr1, arr2, str1)</code></p>
+<p>打印<code>arr1,arr2,str1</code>三个数组的类型，结果为：</p>
+<p><code>arr1:[3]int,arr2:[4]int,str1:[3]string</code></p>
+<p>注意，<strong>数组的长度也是类型的一部分</strong></p>
+<h3 id="数组的初始化"><a href="#数组的初始化" class="headerlink" title="数组的初始化"></a>数组的初始化</h3><p>  <code>var arr1 [3]int</code></p>
+<p>  <code>fmt.Println(arr1)</code></p>
+<p>定义了一个[3]int的数组，直接打印，得到的结果为<code>[0 0 0]</code></p>
+<p>和基本数据类型保持一直，如果是int类型，结果是0，如果是string类型，结果是空</p>
+<h3 id="1-方法1：一一赋值"><a href="#1-方法1：一一赋值" class="headerlink" title="1. 方法1：一一赋值"></a>1. 方法1：一一赋值</h3><p>  <code>var arr1 [3]int</code></p>
+<p>  <code>arr1[0] = 1</code></p>
+<p>  <code>arr1[1] = 10</code></p>
+<p>  <code>arr1[2] = 24</code></p>
+<p>  <code>fmt.Println(arr1)</code></p>
+<p>结果为<code>[1 10 24]</code></p>
+<p>在golang中，数组长度指定之后，长度便不可再变</p>
+<h3 id="2-方法2：定义和赋值一起"><a href="#2-方法2：定义和赋值一起" class="headerlink" title="2. 方法2：定义和赋值一起"></a>2. 方法2：定义和赋值一起</h3><p>  <code>var arr1 = [3]int&#123;1, 10, 24&#125;</code></p>
+<p>  <code>fmt.Println(arr1)</code></p>
+<p>结果为<code>[1 10 24]</code></p>
+<h3 id="3-方法3：类型推导方式"><a href="#3-方法3：类型推导方式" class="headerlink" title="3. 方法3：类型推导方式"></a>3. 方法3：类型推导方式</h3><p>  <code>arr1 := [3]int&#123;1, 10, 24&#125;</code></p>
+<p>  <code>fmt.Println(arr1)</code></p>
+<p>结果为<code>[1 10 24]</code></p>
+<h3 id="4-方法4：让编译器自行推断数组长度"><a href="#4-方法4：让编译器自行推断数组长度" class="headerlink" title="4. 方法4：让编译器自行推断数组长度"></a>4. 方法4：让编译器自行推断数组长度</h3><p>  <code>var arr1 = [...]int&#123;1, 10, 24&#125;</code></p>
+<p>  <code>fmt.Println(arr1)</code></p>
+<p>利用[…]让编译器自行推断数组的长度</p>
+<p>打印的结果为<code>[1 10 24]</code></p>
+<p><strong>不能用于增加arr1的长度</strong>：</p>
+<p>  <code>var arr1 = [...]string&#123;&quot;php&quot;, &quot;nodejs&quot;, &quot;golang&quot;, &quot;js&quot;&#125;</code></p>
+<p>  <code>arr1[4] = &quot;cpp&quot;</code>&#x2F;&#x2F;增加第五个数据</p>
+<p>  <code>fmt.Println(arr1)</code></p>
+<p>此时代码直接报错</p>
+<h3 id="打印数组长度len"><a href="#打印数组长度len" class="headerlink" title="打印数组长度len()"></a>打印数组长度len()</h3><p>  <code>var arr1 = [...]int&#123;1, 10, 24&#125;</code></p>
+<p>  <code>fmt.Println(len(arr1))</code></p>
+<p>输出结果为3</p>
+<h3 id="5-方法5：注明索引值的初始化"><a href="#5-方法5：注明索引值的初始化" class="headerlink" title="5. 方法5：注明索引值的初始化"></a>5. 方法5：注明索引值的初始化</h3><p>  <code>arr1 := [...]int&#123;0: 1, 1: 10, 2: 20, 5: 50&#125;</code>&#x2F;&#x2F;在5处赋值50</p>
+<p>  <code>fmt.Println(len(arr1))</code></p>
+<p>在0处赋值1，在1处赋值10，在2处赋值20，在5处赋值50</p>
+<p>该代码的结果为6，表名这个数组中存储了6个int类型数字</p>
+<h1 id="3-数组的循环遍历-for-for-range"><a href="#3-数组的循环遍历-for-for-range" class="headerlink" title="3. 数组的循环遍历 for&#x2F;for range"></a>3. 数组的循环遍历 for&#x2F;for range</h1><p><strong>for循环</strong></p>
+<p>  <code>var arr1 = [...]string&#123;&quot;php&quot;, &quot;nodejs&quot;, &quot;golang&quot;, &quot;js&quot;&#125;</code></p>
+<p>  <code>for i := 0; i &lt; len(arr1); i++ &#123;</code></p>
+<p>​    <code>fmt.Println(arr1[i])</code></p>
+<p>  <code>&#125;</code></p>
+<p><strong>for range循环</strong></p>
+<p>  <code>var arr1 = [...]string&#123;&quot;php&quot;, &quot;nodejs&quot;, &quot;golang&quot;, &quot;js&quot;&#125;</code></p>
+<p>  <code>for _, v := range arr1 &#123;</code>&#x2F;&#x2F;第一个位置是下标，第二个位置是元素的值</p>
+<p>​    <code>fmt.Println(v)</code></p>
+<p>  <code>&#125;</code></p>
+<p>结果为</p>
+<p><code>php</code><br><code>nodejs</code><br><code>golang</code><br><code>js</code></p>
+<h1 id="练习"><a href="#练习" class="headerlink" title="练习"></a>练习</h1><p>1.求出数组里面的元素和以及平均值，用for 和 for range实现</p>
+<p>我的方法</p>
+<p>for循环</p>
+<p>  <code>nums := [...]int&#123;10, 20, 30, 40, 50&#125;</code></p>
+<p>  <code>sum := 0</code></p>
+<p>  <code>for i := 0; i &lt; len(nums); i++ &#123;</code></p>
+<p>​    <code>sum += nums[i]</code></p>
+<p>  <code>&#125;</code></p>
+<p>  <code>AveNum := sum / len(nums)</code></p>
+<p>  <code>fmt.Printf(&quot;和为%v,平均值为%v&quot;, sum, AveNum)</code></p>
+<p>for range循环</p>
+<p>  <code>nums := [...]int&#123;10, 20, 30, 40, 50&#125;</code></p>
+<p>  <code>sum := 0</code></p>
+<p>  <code>for _, v := range nums &#123;</code></p>
+<p>​    <code>sum += v</code></p>
+<p>  <code>&#125;</code></p>
+<p>  <code>AveNum := sum / len(nums)</code></p>
+<p>  <code>fmt.Printf(&quot;和为%v,平均值为%v&quot;, sum, AveNum)</code></p>
+<p>2.求出一个数组的最大值，并得到对应的下标</p>
+<p>我的方法：</p>
+<p><strong>for循环</strong></p>
+<p>将arr中的各个数据和max比较，更大的将被放入max</p>
+<p>  <code>var arr = [...]int&#123;27, -43, 81, 149, 3, -7, 120, 55&#125;</code></p>
+<p>  <code>var max = 0</code></p>
+<p>  <code>for i := 0; i &lt; len(arr); i++ &#123;</code></p>
+<p>​    <code>if arr[i] &gt; max &#123;</code></p>
+<p>​      <code>max = arr[i]</code></p>
+<p>​    <code>&#125;</code></p>
+<p>  <code>&#125;</code></p>
+<p>  <code>fmt.Println(max)</code></p>
+<p>结果为149</p>
+<p><strong>for range循环</strong></p>
+<p>  <code>var max = 0</code></p>
+<p>  <code>var index = 0</code></p>
+<p>  <code>for k, v := range arr &#123;</code></p>
+<p>​    <code>if v &gt; max &#123;</code></p>
+<p>​      <code>max = v</code></p>
+<p>​      <code>index = k</code></p>
+<p>​    <code>&#125;</code></p>
+<p>  <code>&#125;</code></p>
+<p>  <code>fmt.Println(max, index)</code></p>
+<p>结果为149 3</p>
+<p><strong>遇到一个小错误</strong></p>
+<p>在golang中，我定义的<code>index</code> 变量虽然被赋值，但<strong>从来没有被打印或参与其他运算</strong>，也就是说，只对index这个变量赋值是会报错的，这个变量需要被打印或者参与计算才不会报错</p>
+<p>3.从数组[1 ,3 ,5 , 7, 8]中找到和为8的两个元素，打印他们的下标，用()表示</p>
+<p>首先定义两个变量储存下标，第一次循环取出所有值，第二次循环<strong>取出+1号的值</strong>，将它们分别相加，得到符合要求的下标值</p>
+<p>我的代码：</p>
+<p>  <code>var num = [...]int&#123;1, 3, 5, 7, 8&#125;</code></p>
+<p>  <code>index1 := 0</code></p>
+<p>  <code>index2 := 0</code></p>
+<p>  <code>for i := 0; i &lt; len(num); i++ &#123;</code></p>
+<p>​    <code>for j := i + 1; j &lt; len(num); j++ &#123;</code></p>
+<p>​      <code>if num[i]+num[j] == 8 &#123;</code></p>
+<p>​        <code>index1, index2 = i, j</code></p>
+<p>​        <code>fmt.Printf(&quot;(%v,%v)&quot;, index1, index2)</code></p>
+<p>​      <code>&#125;</code></p>
+<p>​    <code>&#125;</code></p>
+<p>  <code>&#125;</code></p>
+<p>结果为<code>(0,3)(1,2)</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/24/Day9/" data-id="cmfy3cefa0000ogd12riv14xe" data-title="GO语言教程Day9" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="http://example.com/2025/10/14/Day16/" data-id="cmgqng5k5000034d18x2m3ymw" data-title="Day16" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Golang%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/" rel="tag">Golang中的数组</a></li></ul>
 
     </footer>
   </div>
@@ -246,19 +230,19 @@
     
 <nav id="article-nav">
   
-    <a href="/2025/10/05/Day10/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2025/10/14/Day17/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">前一篇</strong>
       <div class="article-nav-title">
         
-          GO语言教程Day10
+          Day17
         
       </div>
     </a>
   
   
-    <a href="/2025/09/23/Day8/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2025/10/13/Day15/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">后一篇</strong>
-      <div class="article-nav-title">GO语言教程Day8</div>
+      <div class="article-nav-title">Day15</div>
     </a>
   
 </nav>

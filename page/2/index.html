@@ -76,6 +76,321 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Day7" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/22/Day7/" class="article-date">
+  <time class="dt-published" datetime="2025-09-22T13:05:51.000Z" itemprop="datePublished">2025-09-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/09/22/Day7/">GO语言教程Day7</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-字符串"><a href="#1-字符串" class="headerlink" title="1.字符串"></a>1.字符串</h1><p>字符串的值<br>为双引号(“)中的内容，可以在 Go 语言的源码中直接添加非 ASCII 码字符</p>
+<h2 id="字符串转义符"><a href="#字符串转义符" class="headerlink" title="字符串转义符"></a>字符串转义符</h2><table>
+<thead>
+<tr>
+<th>符号</th>
+<th>名称</th>
+<th>作用说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>\r</code></td>
+<td>回车符 (Carriage Return)</td>
+<td>光标返回行首，不换行</td>
+</tr>
+<tr>
+<td><code>\n</code></td>
+<td>换行符 (Line Feed)</td>
+<td>光标移到下一行同一列</td>
+</tr>
+<tr>
+<td><code>\t</code></td>
+<td>制表符 (Tab)</td>
+<td>插入水平制表位，相当于若干空格</td>
+</tr>
+<tr>
+<td><code>\&#39;</code></td>
+<td>单引号 (Single Quote)</td>
+<td>表示字符 <code>&#39;</code></td>
+</tr>
+<tr>
+<td><code>\&quot;</code></td>
+<td>双引号 (Double Quote)</td>
+<td>表示字符 <code>&quot;</code></td>
+</tr>
+<tr>
+<td><code>\\</code></td>
+<td>反斜杠 (Backslash)</td>
+<td>表示字符 <code>\</code> 本身</td>
+</tr>
+</tbody></table>
+<p>在GO语言中，\是关键词，如果想输出\，<strong>比如输出路径时</strong>，可以选择两个斜杠来表示一个斜杠，比如：</p>
+<p>  <code>str2 := &quot;D:\\blog\\myblog\\source\\_posts&quot;</code></p>
+<p>  <code>fmt.Println(str2)</code></p>
+<p>得到的输出结果为：D:\blog\myblog\source_posts</p>
+<p>此结果只把双斜杠输出成了单斜杠</p>
+<p>如果想输出的内容中带有引号，由于引号也是关键词，可以采用如下方法：</p>
+<p><strong>我们想要输出c:go “1”</strong></p>
+<p>  <code>str := &quot;c:go \&quot;1\&quot;&quot;</code>  </p>
+<p>  <code>fmt.Println(str)</code></p>
+<p>得到的输出结果为 c:go “1”，不含有斜杠</p>
+<p>在关键符号前面加一个斜杠\用于转义</p>
+<h3 id="一次定义多行字符串字符串"><a href="#一次定义多行字符串字符串" class="headerlink" title="一次定义多行字符串字符串"></a>一次定义多行字符串字符串</h3><p>双引号一次只能定义一行的字符串，如果字符串是多行，就必须使用反引号字符：</p>
+<p>  <code>str1 := </code>This is&#96; </p>
+<p>  <code>a str</code></p>
+<p>  <code>fmt.Println(str1)</code></p>
+<p>可以正常输出This is<br>        a str</p>
+<p>使用tab键上面的键，即反引号来定义多行字符串</p>
+<h3 id="字符串的常用操作"><a href="#字符串的常用操作" class="headerlink" title="字符串的常用操作"></a>字符串的常用操作</h3><table>
+<thead>
+<tr>
+<th>函数&#x2F;用法</th>
+<th>功能说明</th>
+<th>示例</th>
+<th>返回值&#x2F;结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>len(str)</code></td>
+<td>获取字符串长度（字节数）</td>
+<td><code>len(&quot;hello&quot;)</code></td>
+<td><code>5</code></td>
+</tr>
+<tr>
+<td><code>+</code> 或 <code>fmt.Sprintf</code></td>
+<td>字符串拼接</td>
+<td><code>&quot;Go&quot; + &quot;Lang&quot;</code> &#x2F; <code>fmt.Sprintf(&quot;%s-%s&quot;, &quot;Go&quot;, &quot;Lang&quot;)</code></td>
+<td><code>&quot;GoLang&quot;</code> &#x2F; <code>&quot;Go-Lang&quot;</code></td>
+</tr>
+<tr>
+<td><code>strings.Split(s, sep)</code></td>
+<td>按分隔符切分字符串，返回切片</td>
+<td><code>strings.Split(&quot;a,b,c&quot;, &quot;,&quot;)</code></td>
+<td><code>[]string&#123;&quot;a&quot;,&quot;b&quot;,&quot;c&quot;&#125;</code></td>
+</tr>
+<tr>
+<td><code>strings.Contains(s, substr)</code></td>
+<td>判断是否包含子串</td>
+<td><code>strings.Contains(&quot;hello&quot;, &quot;he&quot;)</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>strings.HasPrefix(s, prefix)</code></td>
+<td>判断是否有指定前缀</td>
+<td><code>strings.HasPrefix(&quot;golang&quot;, &quot;go&quot;)</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>strings.HasSuffix(s, suffix)</code></td>
+<td>判断是否有指定后缀</td>
+<td><code>strings.HasSuffix(&quot;test.txt&quot;, &quot;.txt&quot;)</code></td>
+<td><code>true</code></td>
+</tr>
+<tr>
+<td><code>strings.Index(s, substr)</code></td>
+<td>子串首次出现的位置（找不到返回 <code>-1</code>）</td>
+<td><code>strings.Index(&quot;banana&quot;, &quot;na&quot;)</code></td>
+<td><code>2</code></td>
+</tr>
+<tr>
+<td><code>strings.LastIndex(s, substr)</code></td>
+<td>子串最后出现的位置</td>
+<td><code>strings.LastIndex(&quot;banana&quot;, &quot;na&quot;)</code></td>
+<td><code>4</code></td>
+</tr>
+<tr>
+<td><code>strings.Join(a []string, sep string)</code></td>
+<td>将切片用分隔符拼接成字符串</td>
+<td><code>strings.Join([]string&#123;&quot;a&quot;,&quot;b&quot;,&quot;c&quot;&#125;, &quot;-&quot;)</code></td>
+<td><code>&quot;a-b-c&quot;</code></td>
+</tr>
+</tbody></table>
+<h3 id="求字符串的长度-len"><a href="#求字符串的长度-len" class="headerlink" title="求字符串的长度 len"></a>求字符串的长度 len</h3><p>  <code>str1 := &quot;你好&quot;</code></p>
+<p>  <code>fmt.Println(len(str1))</code></p>
+<p>运行以上代码，输出结果6。由于<strong>一个汉字占用3个字节</strong>，所以输出结果为6，如果str:&#x3D;”aaaa”，则输出结果会变为4，因为一个英语单词只占用1个字节。</p>
+<h3 id="拼接字符串-fmt-sprintf"><a href="#拼接字符串-fmt-sprintf" class="headerlink" title="拼接字符串 +&#x2F;fmt.sprintf"></a>拼接字符串 +&#x2F;fmt.sprintf</h3><p>  <code>str1 := &quot;你&quot; + &quot;好&quot;</code></p>
+<p>  <code>fmt.Println(str1)</code></p>
+<p>+号在字符串中表示拼接操作，而在数值运算中表示加法相加</p>
+<p>当进行多行的拼接操作时，+号跟在字符串的后面，此时打印也在同一行，例如：</p>
+<p>  <code>str := &quot;反引号间换行将被作为字符串中的换行&quot; +</code></p>
+<p><code>&quot;，但是所有的转义字符均无效&quot; +</code></p>
+<p><code>&quot;，文本将会原样输出。&quot;</code></p>
+<p>  <code>fmt.Println(str)</code></p>
+<p>此时代码可以正常输出反引号间换行将被作为字符串中的换行，但是所有的转义字符均无效，文本将会原样输出。</p>
+<p>  <code>str1 := &quot;你好&quot;</code></p>
+<p>  <code>str2 := &quot;golang&quot;</code></p>
+<p>  <code>str3 := fmt.Sprintf(&quot;%v %v&quot;, str1, str2)</code></p>
+<p>  <code>fmt.Println(str3)</code></p>
+<p>注意，str定义时不使用printf因为printf是一个打印的操作，而sprintf用来定义时候使用</p>
+<h3 id="字符串的分割-Split"><a href="#字符串的分割-Split" class="headerlink" title="字符串的分割 Split"></a>字符串的分割 Split</h3><p>使用split前，需要引入strings包。运行如下代码</p>
+<p>  <code>var a = &quot;123-456-789&quot;</code></p>
+<p>  <code>arr := strings.Split(a, &quot;-&quot;)</code></p>
+<p>  <code>fmt.Println(arr)</code></p>
+<p>运行结果为[123 456 789]，split语法为，第一个位置表示要切个的字符串名称，第二个空格二表示按什么元素来切割，最后的结果实则是一个切片，但可以简单理解为得到了一个数组</p>
+<h3 id="字符串的装引-join"><a href="#字符串的装引-join" class="headerlink" title="字符串的装引 join"></a>字符串的装引 join</h3><p>可以把一个切片连接为字符串，join的语法为第一个位置表示要装引的切片，第二个位置为用什么来连接，例如：</p>
+<p>  <code>var a = &quot;123-456-789&quot;</code></p>
+<p>  <code>arr := strings.Split(a, &quot;-&quot;)</code></p>
+<p>  <code>str := strings.Join(arr, &quot;*&quot;)</code></p>
+<p>  <code>fmt.Printf(&quot;内容是%v,类型是%T&quot;, str, str)</code></p>
+<p>最后得到的输出为<code>内容是123*456*789,类型是string</code></p>
+<p>当然也可以直接定义一个切片(切片是一种复合数据类型），后面会介绍：</p>
+<p>  <code>arr := []string&#123;&quot;php&quot;, &quot;java&quot;, &quot;golang&quot;&#125;</code></p>
+<p>  <code>str := strings.Join(arr, &quot;*&quot;)</code></p>
+<p>  <code>fmt.Printf(&quot;结果是%v,类型是%T&quot;, str, str)</code></p>
+<p>用”*“号将切片连接起来，得到的输出是 结果是<code>php*java*golang,类型是string</code></p>
+<h3 id="判断字符串是否包含另一个字符串-contains"><a href="#判断字符串是否包含另一个字符串-contains" class="headerlink" title="判断字符串是否包含另一个字符串 contains"></a>判断字符串是否包含另一个字符串 contains</h3><p>contains是判断整个字符串是否包括后面位置的内容</p>
+<p>  <code>str1 := &quot;This is str&quot;</code></p>
+<p>  <code>str2 := &quot;This&quot;</code></p>
+<p>  <code>flag := strings.Contains(str1, str2)</code></p>
+<p>  <code>fmt.Println(flag)</code></p>
+<p>contains的语法是第一个位置为原语句，第二个位置为是否被包含的语句，运行如上代码，结果为true</p>
+<h3 id="前缀后缀判断-HasPrefix-HasSuffix"><a href="#前缀后缀判断-HasPrefix-HasSuffix" class="headerlink" title="前缀后缀判断 HasPrefix,HasSuffix"></a>前缀后缀判断 HasPrefix,HasSuffix</h3><p>看前端或后端是否有指定的字符串，HasPrefix,HasSuffix的用法和前面的contains相似</p>
+<p>  <code>str1 := &quot;This is str&quot;</code></p>
+<p>  <code>str2 := &quot;This&quot;</code></p>
+<p>  <code>flag := strings.HasPrefix(str1, str2)</code></p>
+<p>  <code>fmt.Println(flag)</code></p>
+<p>得到的输出为true</p>
+<h3 id="子串出现的位置-index和Lastindex"><a href="#子串出现的位置-index和Lastindex" class="headerlink" title="子串出现的位置 index和Lastindex"></a>子串出现的位置 index和Lastindex</h3><p>index计数方式是从前往后计数，查找字符串是否出现，如果出现，则返回位置：</p>
+<p>  <code>str1 := &quot;This is str&quot;</code></p>
+<p>  <code>str2 := &quot;is&quot;</code></p>
+<p>  <code>num := strings.Index(str1, str2)</code></p>
+<p>  <code>fmt.Println(num)</code></p>
+<p>得到的返回值为2，注意，这里找到的is是This里含有的is，而index同样是从0开始计数</p>
+<p>LastIndex同样是从前往后计数，但是是从后往前查找</p>
+<p>  <code>str1 := &quot;This is str&quot;</code></p>
+<p>  <code>str2 := &quot;is&quot;</code></p>
+<p>  <code>num := strings.LastIndex(str1, str2)</code></p>
+<p>  <code>fmt.Println(num)</code></p>
+<p>得到的返回值为5</p>
+<p>当index和Lastindex查找不到时，就会返回**-1**的值</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/22/Day7/" data-id="cmfv7fx3h0000xkd16ohm857b" data-title="GO语言教程Day7" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-Day6" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/09/21/Day6/" class="article-date">
+  <time class="dt-published" datetime="2025-09-21T12:57:27.000Z" itemprop="datePublished">2025-09-21</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/09/21/Day6/">GO语言教程Day6</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-浮点型"><a href="#1-浮点型" class="headerlink" title="1. 浮点型"></a>1. 浮点型</h1><p>Go 语言支持两种浮点型数：float32 和 float64。这两种浮点型数据格式遵循 IEEE 754 标准：<br>float32 的浮点数的最大范围约为 3.4e38，可以使用常量定义：math.MaxFloat32。 float64 的<br>浮点数的最大范围约为 1.8e308，可以使用一个常量定义：math.MaxFloat64。</p>
+<p>  <code>var num float32 = 3.14</code></p>
+<p>  <code>fmt.Printf(&quot;num的值是%v----%f,num的类型是%T\n&quot;, num, num, num)</code></p>
+<p>  <code>fmt.Println(unsafe.Sizeof(num))</code></p>
+<p>%f默认保留六位小数，并且进行四舍五入，根据输出结果可知。float32占用4个字节</p>
+<p>  <code>var num float64 = 3.14</code></p>
+<p>  <code>fmt.Printf(&quot;num的值是%v----%f,num的类型是%T\n&quot;, num, num, num)</code></p>
+<p>  <code>fmt.Println(unsafe.Sizeof(num))</code></p>
+<p>运行此代码可知，float64占用了8个字节</p>
+<p>  <code>var num float32 = 3.1415926</code></p>
+<p>  <code>fmt.Printf(&quot;%.4f&quot;, num)</code></p>
+<p>%.nf也可用类似的方法保留任意n位的小数</p>
+<h3 id="Go-语言中浮点数默认是-float64"><a href="#Go-语言中浮点数默认是-float64" class="headerlink" title="Go 语言中浮点数默认是 float64"></a>Go 语言中浮点数默认是 float64</h3><p><code>num := 1.1</code></p>
+<p><code>fmt.Printf(&quot;值：%v--类型:%T&quot;, num, num) //值：1.1--类型:float64</code></p>
+<p>和操作系统的位数同样相关</p>
+<h3 id="科学计数法表示浮点类型"><a href="#科学计数法表示浮点类型" class="headerlink" title="科学计数法表示浮点类型"></a>科学计数法表示浮点类型</h3><p>  <code>var num float32 = 3.14e2</code></p>
+<p>  <code>fmt.Println(num)</code></p>
+<p>表示3.14乘以10的平方，当然，e的后面同样可以接负数次方</p>
+<h3 id="Golang中精度丢失的问题"><a href="#Golang中精度丢失的问题" class="headerlink" title="Golang中精度丢失的问题"></a>Golang中精度丢失的问题</h3><p>几乎所有的编程语言都有精度丢失这个问题，这是典型的二进制浮点数精度损失问题，在定<br>长条件下，二进制小数和十进制小数互转可能有精度丢失。</p>
+<p>  <code>var num float64 = 1129.6</code></p>
+<p>  <code>fmt.Println(num * 100)</code></p>
+<p>输出结果为：112959.99999999999</p>
+<p>解决方法：使用第三方包来解决精度问题</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/shopspring/decimal">https://github.com/shopspring/decimal</a></p>
+<h3 id="int类型转换为float类型"><a href="#int类型转换为float类型" class="headerlink" title="int类型转换为float类型"></a>int类型转换为float类型</h3><p>  <code>a := 10</code></p>
+<p>  <code>b := float64(a)</code></p>
+<p>  <code>fmt.Printf(&quot;b的类型是%T&quot;, b)</code></p>
+<p>运行这个代码，将a转化为float类型，但是转化过程中可能会产生精度的丢失</p>
+<h3 id="float类型转换为int类型"><a href="#float类型转换为int类型" class="headerlink" title="float类型转换为int类型"></a>float类型转换为int类型</h3><p>  <code>var a float32 = 12.34</code></p>
+<p>  <code>b := int(a)</code></p>
+<p>  <code>fmt.Printf(&quot;b的类型是%T,数值是%v&quot;, b, b)</code></p>
+<p>运行上面代码，得到的输出是 b的类型是int,数值是<strong>12</strong>。可以看到，转化的过程相当于一个截取的过程，只取到整数部分，因此不建议将float转化为int</p>
+<h1 id="2-布尔数据"><a href="#2-布尔数据" class="headerlink" title="2. 布尔数据"></a>2. 布尔数据</h1><p>GO语言中以bool类型进行声明布尔型数据，布尔型数据只有True和false两个值</p>
+<p>注意：</p>
+<p>1.布尔类型变量的默认值为false</p>
+<p>2.GO语言中不允许将整型强制转换为布尔型</p>
+<p>3.布尔型<strong>无法</strong>参与数值运算，也<strong>无法</strong>于其他类型进行转换</p>
+<p>  <code>var flag bool = true</code></p>
+<p>  <code>fmt.Printf(&quot;flag的数值是%v,flag的类型是%T&quot;, flag, flag)</code></p>
+<p>可以的到其输出结果为flag的数值是true,flag的类型是bool</p>
+<p>也可运行如下代码：</p>
+<p>  <code>var b bool</code></p>
+<p>  <code>fmt.Printf(&quot;b的类型是%T&quot;, b)</code></p>
+<p>得到的结果为b的类型是bool，由此可知，bool的默认值为false。与此相关，string的默认值为空，int的默认值为0，float类型数据默认值同样是0，只是位数不同。</p>
+<p><strong>GO语言不允许将整型转化为布尔型，下面演示</strong>：</p>
+<p>  <code>var b int = 1</code></p>
+<p>  <code>if b &#123;</code></p>
+<p>​    <code>fmt.Println(&quot;True&quot;)</code></p>
+<p><code>&#125;</code></p>
+<p>此时输出会报错 non-boolean condition in if statement</p>
+<p>如果改为</p>
+<p>  <code>var b = true</code></p>
+<p>  <code>if b &#123;</code></p>
+<p>​    <code>fmt.Println(&quot;True&quot;)</code></p>
+<p>  <code>&#125;</code></p>
+<p>则输出正常打印出True</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/09/21/Day6/" data-id="cmftphbk6000034d190dea98z" data-title="GO语言教程Day6" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Day5" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/09/21/Day5/" class="article-date">
@@ -846,7 +1161,7 @@ fmt.Println(&quot;周长:&quot;, p)
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/continue-break-goto/" rel="tag">continue break goto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/for-range-swirch-case/" rel="tag">for range swirch case</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/for%E5%BE%AA%E7%8E%AF%E7%BB%83%E4%B9%A0-for%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF/" rel="tag">for循环练习 for嵌套循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">go语言的运算符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-if-else-for-%E4%B8%8A/" rel="tag">流程控制 if else for(上)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">运算符练习，位运算符</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/" rel="tag">Golang中的数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/continue-break-goto/" rel="tag">continue break goto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/for-range-swirch-case/" rel="tag">for range swirch case</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/for%E5%BE%AA%E7%8E%AF%E7%BB%83%E4%B9%A0-for%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF/" rel="tag">for循环练习 for嵌套循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">go语言的运算符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%BC%E7%B1%BB%E5%9E%8B-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" rel="tag">值类型 引用类型 多维数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-if-else-for-%E4%B8%8A/" rel="tag">流程控制 if else for(上)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">运算符练习，位运算符</a></li></ul>
     </div>
   </div>
 
@@ -856,7 +1171,7 @@ fmt.Println(&quot;周长:&quot;, p)
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">GOlang中基本数据类型之间的转换</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/continue-break-goto/" style="font-size: 10px;">continue break goto</a> <a href="/tags/for-range-swirch-case/" style="font-size: 10px;">for range swirch case</a> <a href="/tags/for%E5%BE%AA%E7%8E%AF%E7%BB%83%E4%B9%A0-for%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">for循环练习 for嵌套循环</a> <a href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">go语言的运算符</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-if-else-for-%E4%B8%8A/" style="font-size: 10px;">流程控制 if else for(上)</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a> <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">运算符练习，位运算符</a>
+      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">GOlang中基本数据类型之间的转换</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Golang%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/" style="font-size: 10px;">Golang中的数组</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/continue-break-goto/" style="font-size: 10px;">continue break goto</a> <a href="/tags/for-range-swirch-case/" style="font-size: 10px;">for range swirch case</a> <a href="/tags/for%E5%BE%AA%E7%8E%AF%E7%BB%83%E4%B9%A0-for%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">for循环练习 for嵌套循环</a> <a href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">go语言的运算符</a> <a href="/tags/%E5%80%BC%E7%B1%BB%E5%9E%8B-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" style="font-size: 10px;">值类型 引用类型 多维数组</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-if-else-for-%E4%B8%8A/" style="font-size: 10px;">流程控制 if else for(上)</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a> <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">运算符练习，位运算符</a>
     </div>
   </div>
 
@@ -878,6 +1193,14 @@ fmt.Println(&quot;周长:&quot;, p)
       <ul>
         
           <li>
+            <a href="/2025/10/14/Day17/">Day17</a>
+          </li>
+        
+          <li>
+            <a href="/2025/10/14/Day16/">Day16</a>
+          </li>
+        
+          <li>
             <a href="/2025/10/13/Day15/">Day15</a>
           </li>
         
@@ -887,14 +1210,6 @@ fmt.Println(&quot;周长:&quot;, p)
         
           <li>
             <a href="/2025/10/11/Day13/">Day13</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/05/Day12/">Day12</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/05/Day11/">GO语言教程Day11</a>
           </li>
         
       </ul>
