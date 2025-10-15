@@ -4,16 +4,23 @@
   <meta charset="utf-8">
   
   
-  <title>归档: 2025 | reason的学习记录</title>
+  <title>Day18 | reason的学习记录</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="reason的学习记录">
-<meta property="og:url" content="http://example.com/archives/2025/page/2/index.html">
+  <meta name="description" content="1. 切片(slice)的定义切片是一个拥有相同类型元素的可变长度的序列。它是基于数据类型做的一层封装。非常灵活，支持自动扩容 切片是一个引用类型，它的内容包含地址，长度和容量 切片的声明切片的定义和数组类似，但是中括号[]中不放任何值   var arr []int   fmt.Printf(&quot;值是%v,类型是%T,长度是%v&quot;, arr, arr, len(arr)) 结果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Day18">
+<meta property="og:url" content="http://example.com/2025/10/15/Day18/index.html">
 <meta property="og:site_name" content="reason的学习记录">
+<meta property="og:description" content="1. 切片(slice)的定义切片是一个拥有相同类型元素的可变长度的序列。它是基于数据类型做的一层封装。非常灵活，支持自动扩容 切片是一个引用类型，它的内容包含地址，长度和容量 切片的声明切片的定义和数组类似，但是中括号[]中不放任何值   var arr []int   fmt.Printf(&quot;值是%v,类型是%T,长度是%v&quot;, arr, arr, len(arr)) 结果">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251015221303_63_5.png">
+<meta property="og:image" content="http://example.com/image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251015221314_64_5.png">
+<meta property="article:published_time" content="2025-10-15T12:58:58.000Z">
+<meta property="article:modified_time" content="2025-10-15T14:29:18.907Z">
 <meta property="article:author" content="reason">
-<meta property="article:tag" content="三维点云 前端开发">
+<meta property="article:tag" content="Go中的切片">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251015221303_63_5.png">
   
     <link rel="alternate" href="/atom.xml" title="reason的学习记录" type="application/atom+xml">
   
@@ -74,178 +81,151 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2025" class="archive-year">2025</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/09/23/Day8/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-09-23T13:23:03.000Z" itemprop="datePublished">9月 23</time>
+        <section id="main"><article id="post-Day18" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/Day18/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T12:58:58.000Z" itemprop="datePublished">2025-10-15</time>
 </a>
-      
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/09/23/Day8/">GO语言教程Day8</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Day18
     </h1>
   
 
-    </header>
-  </div>
-</article>
-  
+      </header>
     
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/09/22/Day7/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-09-22T13:05:51.000Z" itemprop="datePublished">9月 22</time>
-</a>
+    <div class="e-content article-entry" itemprop="articleBody">
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/09/22/Day7/">GO语言教程Day7</a>
-    </h1>
-  
+        <h1 id="1-切片-slice-的定义"><a href="#1-切片-slice-的定义" class="headerlink" title="1. 切片(slice)的定义"></a>1. 切片(slice)的定义</h1><p>切片是一个拥有相同类型元素的<strong>可变长度</strong>的序列。它是基于数据类型做的一层封装。非常灵活，支持自动扩容</p>
+<p>切片是一个<strong>引用类型</strong>，它的内容包含地址，长度和容量</p>
+<h4 id="切片的声明"><a href="#切片的声明" class="headerlink" title="切片的声明"></a>切片的声明</h4><p>切片的定义和数组类似，但是中括号[]中不放任何值</p>
+<p>  <code>var arr []int</code></p>
+<p>  <code>fmt.Printf(&quot;值是%v,类型是%T,长度是%v&quot;, arr, arr, len(arr))</code></p>
+<p>结果为：<code>值是[],类型是[]int,长度是0</code></p>
+<p>可以看到，声明一个int类型的切片，它的值为<strong>nil</strong>，长度是0</p>
+<h3 id="声明并赋值"><a href="#声明并赋值" class="headerlink" title="声明并赋值"></a>声明并赋值</h3><p>  <code>var arr = []int&#123;1, 3, 54, 6, 7, 8&#125;</code></p>
+<p>切片可以包含任意数量的元素</p>
+<h3 id="切片的遍历"><a href="#切片的遍历" class="headerlink" title="切片的遍历"></a>切片的遍历</h3><p>for range遍历</p>
+<p>  <code>var arr = []int&#123;1, 3, 54, 6, 7, 8&#125;</code></p>
+<p>  <code>for _, v := range arr &#123;</code></p>
+<p>​    <code>fmt.Println(v)</code></p>
+<p>  <code>&#125;</code></p>
+<p>for 遍历</p>
+<p>  <code>for i := 0; i &lt; len(arr); i++ &#123;</code></p>
+<p>​    <code>fmt.Println(arr[i])</code></p>
+<p>  <code>&#125;</code></p>
+<p>结果为：</p>
+<p><code>1</code><br><code>3</code><br><code>54</code><br><code>6</code><br><code>7</code><br><code>8</code></p>
+<h3 id="基于数组定义切片"><a href="#基于数组定义切片" class="headerlink" title="基于数组定义切片"></a>基于数组定义切片</h3><p>切片的底层是一个数组，所以我们基于数组定义切片</p>
+<p>  <code>var arr = [6]int&#123;1, 3, 54, 6, 7, 8&#125;</code></p>
+<p>  <code>b := arr[:] //获取数组内的所有值</code></p>
+<p>  <code>fmt.Printf(&quot;值为%v,类型为%T\n&quot;, b, b)</code></p>
+<p>我们可以使用 &#96;&#96;b :&#x3D; arr[:]&#96;的方法由数组定义一个切片，此时的b就是一个切片了，代码的结果为：</p>
+<p><code>值为[1 3 54 6 7 8],类型为[]int</code></p>
+<h3 id="从一个数组截取一部分作为切片"><a href="#从一个数组截取一部分作为切片" class="headerlink" title="从一个数组截取一部分作为切片"></a>从一个数组截取一部分作为切片</h3><p>  <code>c := arr[1:4]</code></p>
+<p>  <code>fmt.Printf(&quot;值为%v,类型为%T&quot;, c, c)</code></p>
+<p>利用上面方法可以从数组中截取一部分作为切片，如：  <code>c := arr[1:4]</code>表示截取<strong>1到3</strong>位置的切片，这种表达方式是<strong>左边包括而右边不包括</strong></p>
+<p>同理，还可以获取<strong>第一个到某一个</strong>和<strong>某一个到最后一个</strong>的切片</p>
+<p>例如：  <code>c := arr[:4]   c := arr[1:]</code>的定义方法</p>
+<h3 id="切片的再切片"><a href="#切片的再切片" class="headerlink" title="切片的再切片"></a>切片的再切片</h3><p>和基于数组的切片类似</p>
+<p>  <code>var slice1 = []int&#123;1, 2, 3, 4, 5, 6, 7, 8&#125;</code></p>
+<p>  <code>slice2 := slice1[1:]</code></p>
+<p>  <code>fmt.Println(slice1, slice2)</code></p>
+<p>结果为：<code>[1 2 3 4 5 6 7 8] [2 3 4 5 6 7 8]</code></p>
+<p>可以看到，切片的切片也可以由上面的方法得到</p>
+<h3 id="切片的长度和容量"><a href="#切片的长度和容量" class="headerlink" title="切片的长度和容量"></a>切片的长度和容量</h3><p>切片拥有自己的长度和容量，我们可以通过使用内置的len()函数求长度，使用<strong>内置的cap()函数</strong>求切片的容量</p>
+<p>注意：切片的长度是它包含的元素的个数</p>
+<p>切片的容量是<strong>从第一个元素数，到其底层数组元素末尾的个数</strong></p>
+<p>  <code>var slice1 = []int&#123;11, 21, 3, 4, 5, 6, 7, 8&#125;</code></p>
+<p>  <code>fmt.Println(&quot;长度&quot;,len(slice1),&quot;容量&quot;, cap(slice1))</code></p>
+<p>结果为 8 8</p>
+<p>  <code>slice3 := slice1[1:3]</code>&#x2F;&#x2F;即切片容量从第一个数21计数，到8一共是7个数</p>
+<p>  <code>fmt.Println(len(slice3), cap(slice3))</code></p>
+<p>结果为2 7</p>
+<p>  <code>slice4 := slice1[:3]</code></p>
+<p>  <code>fmt.Println(cap(slice4))</code></p>
+<p>结果为8，可见容量是从给的第一个数开始计数，到底层数组的末尾，之间的元素的个数</p>
+<h3 id="切片的本质"><a href="#切片的本质" class="headerlink" title="切片的本质"></a>切片的本质</h3><p>切片的本质就是对底层数组的封装，它包含了三个信息：底层数组的指针，切片的长度和切片的容量</p>
+<p>例如：</p>
+<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251015221303_63_5.png" alt="微信图片_20251015221303_63_5"></p>
+<p>由于取到了第一个数据，再一直取完整个底层的数组a，总共是8个</p>
+<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251015221314_64_5.png" alt="微信图片_20251015221314_64_5"></p>
+<p>相似的，这里指针指到了数字3，继续向后面数到最后一个元素7，总共是5个，所以容量是5</p>
+<p>补充说明：</p>
+<p>go语言的指针和微机原理中cpu的指针有所不同，go的指针更像一个<strong>虚拟</strong>的，而不是物理上存在的指针，它也不会直接操作硬件中的寄存器</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>Go 的“指针”</th>
+<th>8086 CPU 的“指针”</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>存在层面</strong></td>
+<td>语言层抽象（运行在虚拟内存空间中）</td>
+<td>硬件层真实寄存器</td>
+</tr>
+<tr>
+<td><strong>控制权</strong></td>
+<td>由 Go runtime + OS 控制</td>
+<td>由 CPU 直接操作</td>
+</tr>
+<tr>
+<td><strong>地址类型</strong></td>
+<td>虚拟地址（逻辑地址）</td>
+<td>段寄存器 * 16 + 偏移地址（物理地址）</td>
+</tr>
+<tr>
+<td><strong>安全性</strong></td>
+<td>受类型系统保护（不能乱改）</td>
+<td>无保护，可直接越界访问</td>
+</tr>
+<tr>
+<td><strong>指针运算</strong></td>
+<td>限制极多，除非用 <code>unsafe</code> 包</td>
+<td>任意加减偏移，自由寻址</td>
+</tr>
+<tr>
+<td><strong>示例结构</strong></td>
+<td><code>*int</code>, <code>*float64</code> 等类型安全指针</td>
+<td><code>SI</code>, <code>DI</code>, <code>SP</code>, <code>BP</code> 等寄存器</td>
+</tr>
+</tbody></table>
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/09/21/Day6/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-09-21T12:57:27.000Z" itemprop="datePublished">9月 21</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/09/21/Day6/">GO语言教程Day6</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/09/21/Day5/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-09-21T11:47:20.000Z" itemprop="datePublished">9月 21</time>
-</a>
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/Day18/" data-id="cmgs3888i0000qwd1glslgc3q" data-title="Day18" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/09/21/Day5/">GO语言教程Day5</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/09/19/day4/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-09-19T14:46:41.000Z" itemprop="datePublished">9月 19</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/09/19/day4/">GO语言教程Day4</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/09/17/Day3/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-09-17T12:22:43.000Z" itemprop="datePublished">9月 17</time>
-</a>
       
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/09/17/Day3/">GO语言学习记录Day3</a>
-    </h1>
-  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go%E4%B8%AD%E7%9A%84%E5%88%87%E7%89%87/" rel="tag">Go中的切片</a></li></ul>
 
-    </header>
+    </footer>
   </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2025/10/14/Day17/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">Day17</div>
+    </a>
+  
+</nav>
+
+  
 </article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/09/17/Day2/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-09-17T10:44:11.000Z" itemprop="datePublished">9月 17</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/09/17/Day2/">GO语言学习记录Day2</a>
-    </h1>
-  
 
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/2025/09/16/Day1/" class="archive-article-date">
-  <time class="dt-published" datetime="2025-09-16T15:00:47.000Z" itemprop="datePublished">9月 16</time>
-</a>
-      
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2025/09/16/Day1/">Go语言学习记录Day1</a>
-    </h1>
-  
-
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-
-  <nav id="page-nav">
-    
-    <a class="extend prev" rel="prev" href="/archives/2025/">&laquo; 上一页</a><a class="page-number" href="/archives/2025/">1</a><span class="page-number current">2</span>
-  </nav>
 
 </section>
         

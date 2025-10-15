@@ -76,6 +76,142 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Day18" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2025/10/15/Day18/" class="article-date">
+  <time class="dt-published" datetime="2025-10-15T12:58:58.000Z" itemprop="datePublished">2025-10-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2025/10/15/Day18/">Day18</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h1 id="1-切片-slice-的定义"><a href="#1-切片-slice-的定义" class="headerlink" title="1. 切片(slice)的定义"></a>1. 切片(slice)的定义</h1><p>切片是一个拥有相同类型元素的<strong>可变长度</strong>的序列。它是基于数据类型做的一层封装。非常灵活，支持自动扩容</p>
+<p>切片是一个<strong>引用类型</strong>，它的内容包含地址，长度和容量</p>
+<h4 id="切片的声明"><a href="#切片的声明" class="headerlink" title="切片的声明"></a>切片的声明</h4><p>切片的定义和数组类似，但是中括号[]中不放任何值</p>
+<p>  <code>var arr []int</code></p>
+<p>  <code>fmt.Printf(&quot;值是%v,类型是%T,长度是%v&quot;, arr, arr, len(arr))</code></p>
+<p>结果为：<code>值是[],类型是[]int,长度是0</code></p>
+<p>可以看到，声明一个int类型的切片，它的值为<strong>nil</strong>，长度是0</p>
+<h3 id="声明并赋值"><a href="#声明并赋值" class="headerlink" title="声明并赋值"></a>声明并赋值</h3><p>  <code>var arr = []int&#123;1, 3, 54, 6, 7, 8&#125;</code></p>
+<p>切片可以包含任意数量的元素</p>
+<h3 id="切片的遍历"><a href="#切片的遍历" class="headerlink" title="切片的遍历"></a>切片的遍历</h3><p>for range遍历</p>
+<p>  <code>var arr = []int&#123;1, 3, 54, 6, 7, 8&#125;</code></p>
+<p>  <code>for _, v := range arr &#123;</code></p>
+<p>​    <code>fmt.Println(v)</code></p>
+<p>  <code>&#125;</code></p>
+<p>for 遍历</p>
+<p>  <code>for i := 0; i &lt; len(arr); i++ &#123;</code></p>
+<p>​    <code>fmt.Println(arr[i])</code></p>
+<p>  <code>&#125;</code></p>
+<p>结果为：</p>
+<p><code>1</code><br><code>3</code><br><code>54</code><br><code>6</code><br><code>7</code><br><code>8</code></p>
+<h3 id="基于数组定义切片"><a href="#基于数组定义切片" class="headerlink" title="基于数组定义切片"></a>基于数组定义切片</h3><p>切片的底层是一个数组，所以我们基于数组定义切片</p>
+<p>  <code>var arr = [6]int&#123;1, 3, 54, 6, 7, 8&#125;</code></p>
+<p>  <code>b := arr[:] //获取数组内的所有值</code></p>
+<p>  <code>fmt.Printf(&quot;值为%v,类型为%T\n&quot;, b, b)</code></p>
+<p>我们可以使用 &#96;&#96;b :&#x3D; arr[:]&#96;的方法由数组定义一个切片，此时的b就是一个切片了，代码的结果为：</p>
+<p><code>值为[1 3 54 6 7 8],类型为[]int</code></p>
+<h3 id="从一个数组截取一部分作为切片"><a href="#从一个数组截取一部分作为切片" class="headerlink" title="从一个数组截取一部分作为切片"></a>从一个数组截取一部分作为切片</h3><p>  <code>c := arr[1:4]</code></p>
+<p>  <code>fmt.Printf(&quot;值为%v,类型为%T&quot;, c, c)</code></p>
+<p>利用上面方法可以从数组中截取一部分作为切片，如：  <code>c := arr[1:4]</code>表示截取<strong>1到3</strong>位置的切片，这种表达方式是<strong>左边包括而右边不包括</strong></p>
+<p>同理，还可以获取<strong>第一个到某一个</strong>和<strong>某一个到最后一个</strong>的切片</p>
+<p>例如：  <code>c := arr[:4]   c := arr[1:]</code>的定义方法</p>
+<h3 id="切片的再切片"><a href="#切片的再切片" class="headerlink" title="切片的再切片"></a>切片的再切片</h3><p>和基于数组的切片类似</p>
+<p>  <code>var slice1 = []int&#123;1, 2, 3, 4, 5, 6, 7, 8&#125;</code></p>
+<p>  <code>slice2 := slice1[1:]</code></p>
+<p>  <code>fmt.Println(slice1, slice2)</code></p>
+<p>结果为：<code>[1 2 3 4 5 6 7 8] [2 3 4 5 6 7 8]</code></p>
+<p>可以看到，切片的切片也可以由上面的方法得到</p>
+<h3 id="切片的长度和容量"><a href="#切片的长度和容量" class="headerlink" title="切片的长度和容量"></a>切片的长度和容量</h3><p>切片拥有自己的长度和容量，我们可以通过使用内置的len()函数求长度，使用<strong>内置的cap()函数</strong>求切片的容量</p>
+<p>注意：切片的长度是它包含的元素的个数</p>
+<p>切片的容量是<strong>从第一个元素数，到其底层数组元素末尾的个数</strong></p>
+<p>  <code>var slice1 = []int&#123;11, 21, 3, 4, 5, 6, 7, 8&#125;</code></p>
+<p>  <code>fmt.Println(&quot;长度&quot;,len(slice1),&quot;容量&quot;, cap(slice1))</code></p>
+<p>结果为 8 8</p>
+<p>  <code>slice3 := slice1[1:3]</code>&#x2F;&#x2F;即切片容量从第一个数21计数，到8一共是7个数</p>
+<p>  <code>fmt.Println(len(slice3), cap(slice3))</code></p>
+<p>结果为2 7</p>
+<p>  <code>slice4 := slice1[:3]</code></p>
+<p>  <code>fmt.Println(cap(slice4))</code></p>
+<p>结果为8，可见容量是从给的第一个数开始计数，到底层数组的末尾，之间的元素的个数</p>
+<h3 id="切片的本质"><a href="#切片的本质" class="headerlink" title="切片的本质"></a>切片的本质</h3><p>切片的本质就是对底层数组的封装，它包含了三个信息：底层数组的指针，切片的长度和切片的容量</p>
+<p>例如：</p>
+<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251015221303_63_5.png" alt="微信图片_20251015221303_63_5"></p>
+<p>由于取到了第一个数据，再一直取完整个底层的数组a，总共是8个</p>
+<p><img src="/../image/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20251015221314_64_5.png" alt="微信图片_20251015221314_64_5"></p>
+<p>相似的，这里指针指到了数字3，继续向后面数到最后一个元素7，总共是5个，所以容量是5</p>
+<p>补充说明：</p>
+<p>go语言的指针和微机原理中cpu的指针有所不同，go的指针更像一个<strong>虚拟</strong>的，而不是物理上存在的指针，它也不会直接操作硬件中的寄存器</p>
+<table>
+<thead>
+<tr>
+<th>层次</th>
+<th>Go 的“指针”</th>
+<th>8086 CPU 的“指针”</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>存在层面</strong></td>
+<td>语言层抽象（运行在虚拟内存空间中）</td>
+<td>硬件层真实寄存器</td>
+</tr>
+<tr>
+<td><strong>控制权</strong></td>
+<td>由 Go runtime + OS 控制</td>
+<td>由 CPU 直接操作</td>
+</tr>
+<tr>
+<td><strong>地址类型</strong></td>
+<td>虚拟地址（逻辑地址）</td>
+<td>段寄存器 * 16 + 偏移地址（物理地址）</td>
+</tr>
+<tr>
+<td><strong>安全性</strong></td>
+<td>受类型系统保护（不能乱改）</td>
+<td>无保护，可直接越界访问</td>
+</tr>
+<tr>
+<td><strong>指针运算</strong></td>
+<td>限制极多，除非用 <code>unsafe</code> 包</td>
+<td>任意加减偏移，自由寻址</td>
+</tr>
+<tr>
+<td><strong>示例结构</strong></td>
+<td><code>*int</code>, <code>*float64</code> 等类型安全指针</td>
+<td><code>SI</code>, <code>DI</code>, <code>SP</code>, <code>BP</code> 等寄存器</td>
+</tr>
+</tbody></table>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2025/10/15/Day18/" data-id="cmgs3888i0000qwd1glslgc3q" data-title="Day18" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Go%E4%B8%AD%E7%9A%84%E5%88%87%E7%89%87/" rel="tag">Go中的切片</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-Day17" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/10/14/Day17/" class="article-date">
@@ -102,6 +238,7 @@
 <p>什么是值类型？</p>
 <p><strong>定义：</strong><br> 当一个变量赋值给另一个变量时，会<strong>复制值本身</strong>，两个变量互不影响</p>
 <p>也就是说，<strong>每个变量都有自己独立的数据副本</strong></p>
+<p>改变变量副本的值，不会改变本身的值</p>
 <p>如：</p>
 <pre><code>a := 10
 b := a  // 复制了 a 的值
@@ -132,6 +269,50 @@ fmt.Println(&quot;b =&quot;, b)
 <td><code>struct</code> 自定义类型</td>
 </tr>
 </tbody></table>
+<h3 id="引用数据类型"><a href="#引用数据类型" class="headerlink" title="引用数据类型"></a>引用数据类型</h3><p>改变变量副本的值，<strong>会改变变量本身的值</strong></p>
+<h1 id="2-多维数组"><a href="#2-多维数组" class="headerlink" title="2. 多维数组"></a>2. 多维数组</h1><p>以二维数组为例：</p>
+<p><strong>定义方法</strong>：</p>
+<p><code>var 数组变量名称 [元素数量] [元素数量] T//类型</code> 第一个位置表示<strong>数组个数</strong>，第二个位置表示<strong>每个数组包含的元素个数</strong></p>
+<p>  <code>// var arr1 = [2]int&#123;1, 2&#125;</code></p>
+<p>  <code>var arr2 = [3][2]string&#123;</code></p>
+<p>​    <code>&#123;&quot;北京&quot;, &quot;上海&quot;&#125;, &#123;&quot;广州&quot;, &quot;深圳&quot;&#125;, &#123;&quot;成都&quot;, &quot;重庆&quot;&#125;,</code></p>
+<p>  <code>&#125;</code></p>
+<p>  <code>fmt.Println(arr2[0])</code></p>
+<p>  <code>fmt.Println(arr2[0][0])</code></p>
+<p>  <code>fmt.Printf(&quot;类型是%T,长度是%v&quot;, arr2, len(arr2))</code></p>
+<p>结果为：</p>
+<p><code>[北京 上海]</code><br><code>北京</code><br><code>类型是[3][2]string,长度是3</code></p>
+<p>arr1是我们定义一维数组的方法，在arr2中定义了二维数组，可以看到，每个数组都用花括号包裹起来，每个花括号之间用<strong>逗号间隔</strong>。</p>
+<p><strong>用len打印多维数组时，输出的是多维数组的个数</strong></p>
+<h3 id="循环遍历多维数组的值"><a href="#循环遍历多维数组的值" class="headerlink" title="循环遍历多维数组的值"></a>循环遍历多维数组的值</h3><p>使用for range方法嵌套，循环遍历多维数组</p>
+<p>  <code>var arr2 = [3][2]string&#123;</code></p>
+<p>​    <code>&#123;&quot;北京&quot;, &quot;上海&quot;&#125;, &#123;&quot;广州&quot;, &quot;深圳&quot;&#125;, &#123;&quot;成都&quot;, &quot;重庆&quot;&#125;,</code></p>
+<p>  <code>&#125;</code></p>
+<p>  <code>for _, v1 := range arr2 &#123;</code></p>
+<p>​    <code>for _, v2 := range v1 &#123;</code></p>
+<p>​      <code>fmt.Println(v2)</code></p>
+<p>​    <code>&#125;</code></p>
+<p>  <code>&#125;</code></p>
+<p>使用for循环方法嵌套，遍历多维数组</p>
+<p>  <code>var arr2 = [3][2]string&#123;</code></p>
+<p>​    <code>&#123;&quot;北京&quot;, &quot;上海&quot;&#125;, &#123;&quot;广州&quot;, &quot;深圳&quot;&#125;, &#123;&quot;成都&quot;, &quot;重庆&quot;&#125;,</code></p>
+<p>  <code>&#125;</code></p>
+<p>  <code>for i := 0; i &lt; len(arr2); i++ &#123;</code> &#x2F;&#x2F;<code>len()</code>方法只打印<code>arr2</code>中的数组个数</p>
+<p>​    <code>for j := 0; j &lt; len(arr2[i]); j++ &#123;</code> </p>
+<p>​      <code>fmt.Println(arr2[i][j])</code></p>
+<p>​    <code>&#125;</code></p>
+<p>  <code>&#125;</code></p>
+<p>结果为：</p>
+<p><code>北京</code><br><code>上海</code><br><code>广州</code><br><code>深圳</code><br><code>成都</code><br><code>重庆</code></p>
+<h3 id="多维数组的长度推导方式"><a href="#多维数组的长度推导方式" class="headerlink" title="多维数组的长度推导方式"></a>多维数组的长度推导方式</h3><p>注意：多维数组只有<strong>第一层</strong>可以使用…来让编译器推导数组长度</p>
+<p>例如：</p>
+<p>  <code>var arr = [...][3]int&#123;</code></p>
+<p>​    <code>&#123;1, 1, 1&#125;, &#123;1, 1, 1&#125;, &#123;1, 1, 1&#125;, &#123;1, 1, 1&#125;,</code></p>
+<p>  <code>&#125;</code></p>
+<p>  <code>fmt.Printf(&quot;arr的类型是%T,arr的长度是%v&quot;, arr, len(arr))</code></p>
+<p><code>&#125;</code></p>
+<p>使用类型推导确定数组的个数，但是<strong>不能使用类型推导得到多维数组每个数组的元素个数</strong></p>
+<p>结果为：<code>arr的类型是[4][3]int,arr的长度是4</code></p>
 
       
     </div>
@@ -1445,194 +1626,6 @@ fmt.Println(&quot;a &amp;^ b =&quot;, a &amp;^ b) // 4  -&gt; 010
 
 
   
-    <article id="post-Day8" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/09/23/Day8/" class="article-date">
-  <time class="dt-published" datetime="2025-09-23T13:23:03.000Z" itemprop="datePublished">2025-09-23</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/09/23/Day8/">GO语言教程Day8</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="1-byte和rune类型"><a href="#1-byte和rune类型" class="headerlink" title="1.byte和rune类型"></a>1.byte和rune类型</h1><p>组成每个字符串的元素叫”字符“，可以通过便利字符串元素获得字符，字符用单引号(‘’)包裹</p>
-<h3 id="如何定义一个字符"><a href="#如何定义一个字符" class="headerlink" title="如何定义一个字符"></a>如何定义一个字符</h3><p>字符属于int类型</p>
-<p><code>var a =&#39;a&#39;</code> 这么定义是正确的</p>
-<p><code>var a =&#39;aa&#39;</code> 这么定义是错误的，byte类型只能含有一个元素</p>
-<p>  <code>var a = &#39;a&#39;</code></p>
-<p>  <code>fmt.Printf(&quot;类型是%T,字符是%v&quot;, a, a)</code></p>
-<p>得到的结果是类型是int32,字符是97</p>
-<p>可见，默认输出的结果是a对应的ASCII码的值，类型是int32</p>
-<h4 id="如何原样输出a"><a href="#如何原样输出a" class="headerlink" title="如何原样输出a?"></a>如何原样输出a?</h4><p>使用%c来原样输出a：</p>
-<p>  var a &#x3D; ‘a’</p>
-<p>  fmt.Printf(“类型是%T,字符是%c”, a, a)</p>
-<h4 id="Go-语言的字符有以下两种："><a href="#Go-语言的字符有以下两种：" class="headerlink" title="Go 语言的字符有以下两种："></a>Go 语言的字符有以下两种：</h4><ol>
-<li>uint8 类型，或者叫 byte 型，代表了 ASCII 码的一个字符。</li>
-<li>rune 类型，代表一个 UTF-8 字符。</li>
-</ol>
-<p>定义一个字符串，输出字符串里面的字符：</p>
-<p>  <code>var str = &quot;This&quot;</code></p>
-<p>  <code>fmt.Printf(&quot;值：%v,类型：%T&quot;, str[1], str[1])</code></p>
-<p>取到了字符h，对应105。在golang中，一个字母(ASCII)占用一个字节的空间，一个汉字(UTF-8)占用三个字节的空间</p>
-<h3 id="查看字符串中占用存储空间"><a href="#查看字符串中占用存储空间" class="headerlink" title="查看字符串中占用存储空间"></a>查看字符串中占用存储空间</h3><p>前面介绍过unsafe,sizeof查看int，float类型等的大小，但是对于字符串来说，这是行不通的，无论我们的字符串有多长，都只会返回<strong>16</strong>：</p>
-<p>在 Go 里，<strong>字符串 (string)</strong> 本质上并不是直接存储字符数组，而是一个 <strong>结构体</strong>，它包含两个字段：</p>
-<p><code>type stringStruct struct &#123;</code><br>    <code>str unsafe.Pointer // 指向底层字节数组的指针</code><br>    <code>len int            // 字符串长度</code><br><code>&#125;</code></p>
-<ul>
-<li><code>str</code> 占 8 字节（64 位机器上指针大小 &#x3D; 8）</li>
-<li><code>len</code> 占 8 字节（64 位机器上 int &#x3D; 8）</li>
-</ul>
-<p>所以总共就是 <strong>16 字节</strong>。</p>
-<p>想获取字符串占用大小，可以用len直接获取字节数，这对于汉字也是可以用的，比如：</p>
-<p>  <code>var a = &quot;数据&quot;</code></p>
-<p>  <code>fmt.Println(len(a))</code></p>
-<p>返回的值为6</p>
-<h3 id="用字符定义一个汉字"><a href="#用字符定义一个汉字" class="headerlink" title="用字符定义一个汉字"></a>用字符定义一个汉字</h3><p>  <code>var a = &#39;数&#39;</code></p>
-<p>  <code>fmt.Printf(&quot;值：%v,类型：%T&quot;, a, a)</code></p>
-<p>得到的输出为 25968,类型：int32</p>
-<p>因为golang中使用UTF-8来进行编码，在UTF-8中编码后使用的就是该值</p>
-<h3 id="通过循环遍历字符串里的字符"><a href="#通过循环遍历字符串里的字符" class="headerlink" title="通过循环遍历字符串里的字符"></a>通过循环遍历字符串里的字符</h3><p>package main</p>
-<p>import (<br>	“fmt”<br>)</p>
-<p>func main() {<br>	s :&#x3D; “hello中国”</p>
-<pre><code>// 1. len -&gt; 字节数
-fmt.Println(&quot;len(s):&quot;, len(s)) // 11 (hello 5 + 中国 6)
-
-// 2. []byte -&gt; 按字节切分
-fmt.Println(&quot;[]byte(s):&quot;, []byte(s))
-
-// 3. []rune -&gt; 按 Unicode 码点切分
-fmt.Println(&quot;[]rune(s):&quot;, []rune(s))
-fmt.Println(&quot;len([]rune(s)):&quot;, len([]rune(s)))
-
-// 4. range -&gt; 按 rune 遍历
-for i, r := range s &#123;
-	fmt.Printf(&quot;index=%d, rune=%c, codepoint=%d\n&quot;, i, r, r)
-&#125;
-</code></pre>
-<p>}</p>
-<p>执行结果为：</p>
-<p>len(s): 11<br>[]byte(s): [104 101 108 108 111 228 184 173 229 155 189]<br>[]rune(s): [104 101 108 108 111 20013 22269]<br>len([]rune(s)): 7<br>index&#x3D;0, rune&#x3D;h, codepoint&#x3D;104<br>index&#x3D;1, rune&#x3D;e, codepoint&#x3D;101<br>index&#x3D;2, rune&#x3D;l, codepoint&#x3D;108<br>index&#x3D;3, rune&#x3D;l, codepoint&#x3D;108<br>index&#x3D;4, rune&#x3D;o, codepoint&#x3D;111<br>index&#x3D;5, rune&#x3D;中, codepoint&#x3D;20013<br>index&#x3D;8, rune&#x3D;国, codepoint&#x3D;22269</p>
-<p>注意，rune的功能更强大，因为ASCII码是UTF-8的子集</p>
-<h3 id="range和len的区别"><a href="#range和len的区别" class="headerlink" title="range和len的区别"></a>range和len的区别</h3><p>在用for循环打印字符串中的汉字时，打印出的根本不是其对应的UTF-8编码，为了彻底搞清楚这个问题，查阅了很多资料：</p>
-<p>首先是go的字符串储存的方式：Go 的字符串底层 <strong>统一用 UTF-8 编码存储</strong></p>
-<p>为什么用range能正常打印出汉字呢？</p>
-<p>因为range 数的是字符，而len数的是字节，以下是他们的区别：</p>
-<table>
-<thead>
-<tr>
-<th>操作</th>
-<th>返回&#x2F;处理对象</th>
-<th>行为</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>len(s)</code></td>
-<td><strong>字节数</strong></td>
-<td>返回 UTF-8 编码后占用多少字节，不涉及字符概念</td>
-</tr>
-<tr>
-<td><code>s[i]</code></td>
-<td><strong>第 i 个字节</strong></td>
-<td>按字节取值，如果直接打印成 <code>%c</code>，可能显示“乱码”</td>
-</tr>
-<tr>
-<td><code>range s</code></td>
-<td><strong>rune（字符&#x2F;码点）</strong></td>
-<td>按 UTF-8 解码，逐个返回完整的字符（Unicode 码点）</td>
-</tr>
-</tbody></table>
-<p>此外，如果直接打印字符的值，得到的是一个五位数，而循环打印，得到的是三个三位数，这是为什么？</p>
-<p>比如：</p>
-<p>  <code>s := &quot;中&quot;</code></p>
-<p>  <code>s1 := &#39;中&#39;</code></p>
-<p>  <code>fmt.Printf(&quot;%v\n&quot;, s1)</code></p>
-<p>  <code>for i := 0; i &lt; len(s); i++ &#123;</code></p>
-<p>​    <code>fmt.Printf(&quot;%v &quot;, s[i])</code></p>
-<p>  <code>&#125;</code></p>
-<p>得到的输出是：</p>
-<p>20013<br>228 184 173 </p>
-<table>
-<thead>
-<tr>
-<th>打印方式</th>
-<th>访问对象</th>
-<th>输出</th>
-<th>为什么</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><code>[]rune(s)</code> 或 <code>range</code></td>
-<td>Unicode 码点</td>
-<td>20013（五位数）</td>
-<td>rune 表示完整字符的码点值</td>
-</tr>
-<tr>
-<td>按字节循环 <code>s[i]</code></td>
-<td>UTF-8 字节</td>
-<td>228, 184, 173（三位数）</td>
-<td>UTF-8 把一个字符编码成多个字节，每个字节单独打印就是单个整数</td>
-</tr>
-</tbody></table>
-<p>每个字符都有一个唯一的 Unicode 码点，例如 <code>&quot;中&quot;</code> 的码点是 20013（十进制）。<br> 在 UTF-8 编码下，它占用 3 个字节 <code>[228 184 173]</code>（其他编码方式可能不同）。<br> 当使用 <code>range</code> 或转换成 <code>[]rune</code> 遍历字符串时，程序会把 UTF-8 字节序列解码成对应的码点，再用 <code>%c</code> 打印时显示对应字符。<br> 而如果用按字节循环（如 <code>for i := 0; i &lt; len(s); i++</code>）逐个打印，就只能看到 UTF-8 的原始字节值 <code>[228 184 173]</code>，所以看起来像“三个三位数”</p>
-<p>一句话而言：range是按字符，而len是按字节</p>
-<h3 id="修改字符串"><a href="#修改字符串" class="headerlink" title="修改字符串"></a>修改字符串</h3><p>要修改字符串，需要先将其转换成[]rune 或[]byte，完成后再转换为 string。无论哪种转换，<br>都会重新分配内存，并复制字节数组。</p>
-<p>我们想要将big中的b改为p，想到用下面的方法</p>
-<p>  <code>s1 :=&quot;big&quot;</code></p>
-<p>  <code>s1[0] = &#39;p&#39;</code></p>
-<p>  <code>fmt.Println(s1)</code></p>
-<p>然而结果会直接报错，这是因为GO语言规定：<code>s1</code> 是 <strong>string</strong> 类型，本质上是一个不可变的字节序列</p>
-<p>这里有一些关于byte的小常识：</p>
-<p>byte只能处理单个字节，byte的本质是0-255的整数，是ASCII码的别名，  <strong>也就是当我们定义或者取字符的时候，实际上定义或者取的是0-255的一个数</strong>，所以只能接收字符常量或整数值，不能直接转换整个字符串。如果要处理字符串，要么取单个索引（<code>s[0]</code>），要么转成 <code>[]byte</code></p>
-<p><code>a := byte(&#39;a&#39;)</code></p>
-<p>  <code>fmt.Println(a)</code></p>
-<p>  <code>b := byte(255)</code></p>
-<p>  <code>fmt.Println(b)</code></p>
-<p>以上两种是可以直接用byte转化的例子，得到的结果为</p>
-<p>97<br>255</p>
-<p>我们想修改字符串，可以定义切片，修改切片，最后转化为string类型再输出，例如：</p>
-<p>  <code>str := &quot;big&quot;</code></p>
-<p>  <code>strChange := []byte(str)</code></p>
-<p>  <code>strChange[0] = &#39;p&#39;</code></p>
-<p>  <code>fmt.Println(string(strChange))</code></p>
-<p>这里我们有常识：<strong>切片里面的每个数字都对应一个字符</strong>，可以通过string来转化为字符串</p>
-<p>比如这个代码，它转化过程就是先把big转化为切片，取切片的第一个元素，用一个新的字符更改，最后再转化为字符串输出，如果最后一行没有string转换，输出的是[112 105 103]。</p>
-<h4 id="如果字符串中含有汉字呢？"><a href="#如果字符串中含有汉字呢？" class="headerlink" title="如果字符串中含有汉字呢？"></a>如果字符串中含有汉字呢？</h4><p>我们使用rune来转换：</p>
-<p>  <code>str := &quot;你 好,big&quot;</code></p>
-<p>  <code>strChange := []rune(str)</code></p>
-<p>  <code>strChange[0] = &#39;大&#39;</code></p>
-<p>  <code>strChange[1] = &#39;家&#39;</code></p>
-<p>  <code>fmt.Println(string(strChange))</code></p>
-<p>最后得到的输出为 大家好,big</p>
-<p>当然，如果全为字母，<strong>也可以直接使用rune转换</strong>，所以说rune比byte功能更强大</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/09/23/Day8/" data-id="cmfwow39u0000pwd11nk71t4i" data-title="GO语言教程Day8" class="article-share-link"><span class="fa fa-share">分享</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
@@ -1651,7 +1644,7 @@ for i, r := range s &#123;
   <div class="widget-wrap">
     <h3 class="widget-title">标签</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/" rel="tag">Golang中的数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/continue-break-goto/" rel="tag">continue break goto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/for-range-swirch-case/" rel="tag">for range swirch case</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/for%E5%BE%AA%E7%8E%AF%E7%BB%83%E4%B9%A0-for%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF/" rel="tag">for循环练习 for嵌套循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">go语言的运算符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%BC%E7%B1%BB%E5%9E%8B-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" rel="tag">值类型 引用类型 多维数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-if-else-for-%E4%B8%8A/" rel="tag">流程控制 if else for(上)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">运算符练习，位运算符</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Day1/" rel="tag">Day1</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" rel="tag">GOlang中基本数据类型之间的转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" rel="tag">GO语言基本数据类型 浮点型 布尔型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Golang%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/" rel="tag">Golang中的数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E4%B8%AD%E7%9A%84%E5%88%87%E7%89%87/" rel="tag">Go中的切片</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（上）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" rel="tag">Go变量，常量，变量命名规则（下）</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" rel="tag">byte类型和rune类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/continue-break-goto/" rel="tag">continue break goto</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/for-range-swirch-case/" rel="tag">for range swirch case</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/for%E5%BE%AA%E7%8E%AF%E7%BB%83%E4%B9%A0-for%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF/" rel="tag">for循环练习 for嵌套循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">go语言的运算符</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%80%BC%E7%B1%BB%E5%9E%8B-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" rel="tag">值类型 引用类型 多维数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" rel="tag">字符串 字符串里面的方法详解</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" rel="tag">定义变量，fmt包，println等.</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-if-else-for-%E4%B8%8A/" rel="tag">流程控制 if else for(上)</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="tag">语言基本数据类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" rel="tag">运算符练习，位运算符</a></li></ul>
     </div>
   </div>
 
@@ -1661,7 +1654,7 @@ for i, r := range s &#123;
   <div class="widget-wrap">
     <h3 class="widget-title">标签云</h3>
     <div class="widget tagcloud">
-      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">GOlang中基本数据类型之间的转换</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Golang%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/" style="font-size: 10px;">Golang中的数组</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/continue-break-goto/" style="font-size: 10px;">continue break goto</a> <a href="/tags/for-range-swirch-case/" style="font-size: 10px;">for range swirch case</a> <a href="/tags/for%E5%BE%AA%E7%8E%AF%E7%BB%83%E4%B9%A0-for%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">for循环练习 for嵌套循环</a> <a href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">go语言的运算符</a> <a href="/tags/%E5%80%BC%E7%B1%BB%E5%9E%8B-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" style="font-size: 10px;">值类型 引用类型 多维数组</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-if-else-for-%E4%B8%8A/" style="font-size: 10px;">流程控制 if else for(上)</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a> <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">运算符练习，位运算符</a>
+      <a href="/tags/Day1/" style="font-size: 10px;">Day1</a> <a href="/tags/GOlang%E4%B8%AD%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" style="font-size: 10px;">GOlang中基本数据类型之间的转换</a> <a href="/tags/GO%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B-%E6%B5%AE%E7%82%B9%E5%9E%8B-%E5%B8%83%E5%B0%94%E5%9E%8B/" style="font-size: 10px;">GO语言基本数据类型 浮点型 布尔型</a> <a href="/tags/Golang%E4%B8%AD%E7%9A%84%E6%95%B0%E7%BB%84/" style="font-size: 10px;">Golang中的数组</a> <a href="/tags/Go%E4%B8%AD%E7%9A%84%E5%88%87%E7%89%87/" style="font-size: 10px;">Go中的切片</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8A%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（上）</a> <a href="/tags/Go%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E5%8F%98%E9%87%8F%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99%EF%BC%88%E4%B8%8B%EF%BC%89/" style="font-size: 10px;">Go变量，常量，变量命名规则（下）</a> <a href="/tags/byte%E7%B1%BB%E5%9E%8B%E5%92%8Crune%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">byte类型和rune类型</a> <a href="/tags/continue-break-goto/" style="font-size: 10px;">continue break goto</a> <a href="/tags/for-range-swirch-case/" style="font-size: 10px;">for range swirch case</a> <a href="/tags/for%E5%BE%AA%E7%8E%AF%E7%BB%83%E4%B9%A0-for%E5%B5%8C%E5%A5%97%E5%BE%AA%E7%8E%AF/" style="font-size: 10px;">for循环练习 for嵌套循环</a> <a href="/tags/go%E8%AF%AD%E8%A8%80%E7%9A%84%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">go语言的运算符</a> <a href="/tags/%E5%80%BC%E7%B1%BB%E5%9E%8B-%E5%BC%95%E7%94%A8%E7%B1%BB%E5%9E%8B-%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/" style="font-size: 10px;">值类型 引用类型 多维数组</a> <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2-%E5%AD%97%E7%AC%A6%E4%B8%B2%E9%87%8C%E9%9D%A2%E7%9A%84%E6%96%B9%E6%B3%95%E8%AF%A6%E8%A7%A3/" style="font-size: 10px;">字符串 字符串里面的方法详解</a> <a href="/tags/%E5%AE%9A%E4%B9%89%E5%8F%98%E9%87%8F%EF%BC%8Cfmt%E5%8C%85%EF%BC%8Cprintln%E7%AD%89/" style="font-size: 10px;">定义变量，fmt包，println等.</a> <a href="/tags/%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6-if-else-for-%E4%B8%8A/" style="font-size: 10px;">流程控制 if else for(上)</a> <a href="/tags/%E8%AF%AD%E8%A8%80%E5%9F%BA%E6%9C%AC%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" style="font-size: 10px;">语言基本数据类型</a> <a href="/tags/%E8%BF%90%E7%AE%97%E7%AC%A6%E7%BB%83%E4%B9%A0%EF%BC%8C%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/" style="font-size: 10px;">运算符练习，位运算符</a>
     </div>
   </div>
 
@@ -1683,6 +1676,10 @@ for i, r := range s &#123;
       <ul>
         
           <li>
+            <a href="/2025/10/15/Day18/">Day18</a>
+          </li>
+        
+          <li>
             <a href="/2025/10/14/Day17/">Day17</a>
           </li>
         
@@ -1696,10 +1693,6 @@ for i, r := range s &#123;
         
           <li>
             <a href="/2025/10/13/Day14/">Day14</a>
-          </li>
-        
-          <li>
-            <a href="/2025/10/11/Day13/">Day13</a>
           </li>
         
       </ul>
